@@ -9,7 +9,8 @@ export type Product = {
   subtitle: string;
   price: string;
   image: string;
-  badge: ProductBadge;
+  imageAlt: string;
+  badge?: ProductBadge;
 };
 
 const productDetails = {
@@ -17,6 +18,7 @@ const productDetails = {
   subtitle: "Florida Soft Footbed Birko-Flor",
   price: "₹6,293.00",
   image: "/assets/images/florida-soft-footbed.png",
+  imageAlt: "Florida Soft Footbed sandals in taupe",
 } as const;
 
 export const TRENDING_PRODUCTS: readonly Product[] = [

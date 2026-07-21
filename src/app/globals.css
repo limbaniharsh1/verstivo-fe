@@ -1,15 +1,25 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Monument Extended";
+  src: url("/assets/fonts/MonumentExtended-Regular.otf") format("opentype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --brand-primary: #0900d9;
+  --brand-primary: #0000C9;
   --brand-primary-hover: #0600b8;
   --brand-primary-contrast: #ffffff;
+  --brand-primary-border: rgb(255 255 255 / 28%);
   --surface: #ffffff;
   --surface-muted: #f5f5f5;
   --surface-soft: #f4f4ff;
   --text-primary: #0a0a0a;
   --text-muted: #5d5d5d;
   --text-on-dark-muted: #a8a8a8;
+  --text-on-primary-muted: #d9d8ff;
   --border: #d8d8d8;
   --hero-background: #526145;
   --hero-background-soft: rgb(82 97 69 / 82%);
@@ -17,21 +27,25 @@
   --promo-overlay-start: rgb(0 0 0 / 58%);
   --promo-overlay-middle: rgb(0 0 0 / 12%);
   --font-reyhan: "Reyhan", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  --font-monument: "Monument Extended", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
 }
 
 @theme inline {
   --color-primary: var(--brand-primary);
   --color-primary-hover: var(--brand-primary-hover);
   --color-primary-contrast: var(--brand-primary-contrast);
+  --color-primary-border: var(--brand-primary-border);
   --color-surface: var(--surface);
   --color-surface-muted: var(--surface-muted);
   --color-soft-surface: var(--surface-soft);
   --color-foreground: var(--text-primary);
   --color-muted: var(--text-muted);
   --color-dark-muted: var(--text-on-dark-muted);
+  --color-on-primary-muted: var(--text-on-primary-muted);
   --color-border: var(--border);
   --color-hero: var(--hero-background);
   --font-sans: var(--font-reyhan);
+  --font-monument: var(--font-monument);
 }
 
 * {
@@ -40,15 +54,20 @@
 
 html {
   scroll-behavior: smooth;
+  overscroll-behavior-y: none;
 }
 
 body {
   min-height: 100vh;
   margin: 0;
+  padding: 0;
   background: var(--surface);
   color: var(--text-primary);
   font-family: var(--font-reyhan);
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  max-width: 100%;
+  overscroll-behavior-y: none;
 }
 
 button,
@@ -67,8 +86,8 @@ a {
 }
 
 .site-header-grid {
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  height: 80px;
+  grid-template-columns: auto auto 1fr;
+  height: 70px;
 }
 
 .scrollbar-hidden {
@@ -77,6 +96,33 @@ a {
 
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;
+}
+
+.product-card {
+  display: grid;
+  width: 100%;
+  aspect-ratio: 0.76;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto auto auto;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.product-card::before {
+  content: "";
+  z-index: 0;
+  grid-row: 1;
+  grid-column: 1;
+  background: var(--surface-muted);
+}
+
+.product-title,
+.product-price {
+  font-size: 18px;
+}
+
+.product-subtitle {
+  font-size: 14px;
 }
 
 .promo-overlay {
@@ -94,6 +140,19 @@ a {
 
 .primary-cta {
   color: var(--brand-primary-contrast);
+}
+
+.footer-email-input {
+  color: var(--brand-primary-contrast);
+  caret-color: var(--brand-primary-contrast);
+}
+
+.footer-email-input:-webkit-autofill,
+.footer-email-input:-webkit-autofill:hover,
+.footer-email-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--brand-primary-contrast);
+  box-shadow: 0 0 0 1000px var(--brand-primary) inset;
+  caret-color: var(--brand-primary-contrast);
 }
 
 .bg-hero-overlay {

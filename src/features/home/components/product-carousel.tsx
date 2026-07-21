@@ -14,7 +14,7 @@ type ProductCarouselProps = {
 };
 
 const scrollButtonClassName =
-  "absolute top-[132px] z-20 hidden size-9 place-items-center rounded-full bg-surface shadow-md transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-primary sm:grid";
+  "absolute top-[37%] z-20 hidden size-9 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-surface shadow-md transition-colors hover:bg-foreground hover:text-primary-contrast active:bg-foreground active:text-primary-contrast focus-visible:bg-foreground focus-visible:text-primary-contrast focus-visible:outline-2 focus-visible:outline-primary sm:grid";
 
 export function ProductCarousel({
   heading,
@@ -89,12 +89,12 @@ export function ProductCarousel({
 
           <ul
             ref={productListRef}
-            className="scrollbar-hidden flex snap-x snap-mandatory gap-0.5 overflow-x-auto"
+            className="scrollbar-hidden flex snap-x snap-mandatory gap-4 overflow-x-auto"
           >
             {products.map((product) => (
               <li
                 key={product.id}
-                className="min-w-0 shrink-0 basis-[82%] snap-start sm:basis-[48%] lg:basis-[27%] xl:basis-[24%]"
+                className="shrink-0 basis-[82%] snap-start sm:basis-[48%] lg:basis-[calc(27.027%_-_12.973px)]"
               >
                 <ProductCard product={product} />
               </li>
