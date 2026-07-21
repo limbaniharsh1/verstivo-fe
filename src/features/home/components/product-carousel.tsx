@@ -89,12 +89,12 @@ export function ProductCarousel({
 
           <ul
             ref={productListRef}
-            className="scrollbar-hidden flex snap-x snap-mandatory gap-4 overflow-x-auto"
+            className="scrollbar-hidden flex snap-x snap-mandatory gap-1 overflow-x-auto"
           >
             {products.map((product) => (
               <li
                 key={product.id}
-                className="shrink-0 basis-[82%] snap-start sm:basis-[48%] lg:basis-[calc(27.027%_-_12.973px)]"
+                className="shrink-0 basis-[82%] snap-start sm:basis-[48%] lg:basis-[calc(27.027%_-_3.243px)]"
               >
                 <ProductCard product={product} />
               </li>

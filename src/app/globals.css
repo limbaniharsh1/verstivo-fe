@@ -54,7 +54,7 @@
 
 html {
   scroll-behavior: smooth;
-  overscroll-behavior-y: none;
+  overscroll-behavior: none;
 }
 
 body {
@@ -67,7 +67,7 @@ body {
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
   max-width: 100%;
-  overscroll-behavior-y: none;
+  overscroll-behavior: none;
 }
 
 button,
@@ -126,12 +126,10 @@ a {
 }
 
 .promo-overlay {
-  background: linear-gradient(
-    to top,
-    var(--promo-overlay-start) 0%,
-    var(--promo-overlay-middle) 42%,
-    transparent 72%
-  );
+  background: linear-gradient(to top,
+      var(--promo-overlay-start) 0%,
+      var(--promo-overlay-middle) 42%,
+      transparent 72%);
 }
 
 .promo-cta {
@@ -161,13 +159,10 @@ a {
 
 @media (min-width: 640px) {
   .bg-hero-overlay {
-    background: linear-gradient(
-      90deg,
-      var(--hero-background) 0%,
-      var(--hero-background) 17%,
-      var(--hero-background-soft) 42%,
-      transparent 72%
-    );
+    background: linear-gradient(90deg,
+        var(--hero-background) 0%,
+        var(--hero-background) 17%,
+        var(--hero-background-soft) 42%,
+        transparent 72%);
   }
 }
-

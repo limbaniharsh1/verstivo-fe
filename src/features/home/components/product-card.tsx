@@ -37,7 +37,7 @@ export function ProductCard({ product }: ProductCardProps) {
         width={440}
         height={290}
         sizes="(max-width: 639px) 82vw, (max-width: 1023px) 48vw, 27vw"
-        className="col-start-1 row-start-1 h-full w-full object-contain px-4 py-12"
+        className="z-[1] col-start-1 row-start-1 h-full w-full object-contain px-4 py-12"
       />
 
       <button

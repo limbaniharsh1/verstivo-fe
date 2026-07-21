@@ -59,7 +59,7 @@ export function SiteHeader() {
 
         <Link
           href="/"
-          className="flex h-full w-[240px] items-center justify-center border-x border-border px-2 text-center text-[20px] font-semibold tracking-normal sm:w-[360px] lg:w-[460px] lg:text-[34px] 2xl:w-[580px] 2xl:text-[28px]"
+          className="flex h-full w-[160px] min-[375px]:w-[200px] min-[420px]:w-[240px] sm:w-[280px] md:w-[320px] lg:w-[320px] xl:w-[420px] 2xl:w-[580px] items-center justify-center border-x border-border px-2 text-center text-[14px] min-[375px]:text-[17px] min-[420px]:text-[20px] sm:text-[22px] lg:text-[24px] xl:text-[34px] 2xl:text-[28px]"
           style={{ fontFamily: "var(--font-monument)" }}
           aria-label="Verstivo home"
         >{"VERSTIVO"}</Link>

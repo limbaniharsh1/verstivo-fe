@@ -4,7 +4,7 @@ import Link from "next/link";
 export function HeroBanner() {
   return (
     <section className="relative isolate min-h-[450px] overflow-hidden bg-hero sm:min-h-[540px] lg:min-h-[620px]">
-      <div className="absolute -top-[115px] left-0 right-0 -z-20 h-[calc(100%+115px)] w-full">
+      <div className="absolute -top-[40px] sm:-top-[115px] left-0 right-0 -z-20 h-[calc(100%+40px)] sm:h-[calc(100%+115px)] w-full">
         <Image
           src="/image 4.png"
           alt="Two people relaxing at home while wearing Verstivo footwear"
