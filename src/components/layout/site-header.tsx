@@ -20,7 +20,7 @@ export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white border-b border-border">
+    <header className="sticky top-0 z-50 w-full bg-white">
       <div className="site-header-grid mx-auto grid w-full max-w-[1585px] min-w-0 items-center px-1 sm:px-2">
         <div className="flex h-full min-w-0 items-center">
           <button
@@ -59,7 +59,7 @@ export function SiteHeader() {
 
         <Link
           href="/"
-          className="flex h-full min-w-0 max-w-full items-center justify-center border-x-0 xl:border-x xl:border-border px-1 text-center text-[15px] min-[375px]:text-[17px] min-[420px]:text-[20px] sm:text-[22px] lg:text-[24px] xl:text-[34px] 2xl:text-[28px]"
+          className="flex h-full min-w-0 max-w-full items-center justify-center border-x-0 xl:border-x xl:border-border px-[70px] text-center text-[15px] min-[375px]:text-[17px] min-[420px]:text-[20px] sm:text-[22px] lg:text-[24px] xl:text-[34px] 2xl:text-[28px]"
           style={{ fontFamily: "var(--font-monument)" }}
           aria-label="Verstivo home"
         >
