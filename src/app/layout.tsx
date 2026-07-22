@@ -22,8 +22,10 @@ type RootLayoutProps = Readonly<{
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" className="overflow-x-clip">
+      <body className="antialiased bg-surface text-foreground overflow-x-clip">
+        {children}
+      </body>
     </html>
   );
 }

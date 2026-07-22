@@ -14,23 +14,23 @@ import { AnnouncementBar } from "@/components/common/announcement-bar";
 import { PRIMARY_NAVIGATION } from "@/constants/navigation";
 
 const iconButtonClassName =
-  "grid h-full shrink-0 place-items-center border-l border-border transition-colors hover:bg-surface-muted focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary";
+  "h-full shrink-0 place-items-center border-l-0 xl:border-l xl:border-border transition-colors hover:bg-surface-muted focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary";
 
 export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-t border-border bg-white">
-      <div className="site-header-grid mx-auto grid w-full max-w-[1585px] items-center">
+    <header className="sticky top-0 z-50 w-full bg-white border-b border-border">
+      <div className="site-header-grid mx-auto grid w-full max-w-[1585px] min-w-0 items-center px-1 sm:px-2">
         <div className="flex h-full min-w-0 items-center">
           <button
             type="button"
-            className="grid size-12 place-items-center lg:hidden"
+            className="grid size-12 place-items-center transition-colors hover:bg-surface-muted lg:hidden"
             aria-label={isMenuOpen ? "Close navigation" : "Open navigation"}
             aria-expanded={isMenuOpen}
             onClick={() => setIsMenuOpen((currentValue) => !currentValue)}
           >
-            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
 
           <nav
@@ -59,10 +59,12 @@ export function SiteHeader() {
 
         <Link
           href="/"
-          className="flex h-full w-[160px] min-[375px]:w-[200px] min-[420px]:w-[240px] sm:w-[280px] md:w-[320px] lg:w-[320px] xl:w-[420px] 2xl:w-[580px] items-center justify-center border-x border-border px-2 text-center text-[14px] min-[375px]:text-[17px] min-[420px]:text-[20px] sm:text-[22px] lg:text-[24px] xl:text-[34px] 2xl:text-[28px]"
+          className="flex h-full min-w-0 max-w-full items-center justify-center border-x-0 xl:border-x xl:border-border px-1 text-center text-[15px] min-[375px]:text-[17px] min-[420px]:text-[20px] sm:text-[22px] lg:text-[24px] xl:text-[34px] 2xl:text-[28px]"
           style={{ fontFamily: "var(--font-monument)" }}
           aria-label="Verstivo home"
-        >{"VERSTIVO"}</Link>
+        >
+          <span className="truncate">VERSTIVO</span>
+        </Link>
 
         <div className="flex h-full min-w-0 items-center justify-end">
           <label className="hidden h-full min-w-0 flex-1 items-center justify-center border-l border-border px-6 xl:flex 2xl:px-6">
@@ -91,7 +93,7 @@ export function SiteHeader() {
           >
             <Heart className="size-5 2xl:size-6" strokeWidth={1.5} />
           </button>
-          <div className="flex h-full w-[74px] shrink-0 items-center justify-center border-l border-border lg:w-[112px] 2xl:w-[155px]">
+          <div className="flex h-full w-[74px] shrink-0 items-center justify-center border-l-0 xl:border-l xl:border-border lg:w-[112px] 2xl:w-[155px]">
             <button
               type="button"
               className="flex h-9 items-center gap-2 rounded-full bg-primary px-3 text-[12px] font-semibold text-primary-contrast transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary lg:h-11 lg:text-[14px] 2xl:h-[52px] 2xl:gap-3 2xl:px-6 2xl:text-[16px]"
@@ -104,29 +106,83 @@ export function SiteHeader() {
             </button>
           </div>
         </div>
-
-        {isMenuOpen ? (
-          <nav className="absolute inset-x-0 top-full border-b border-border bg-surface p-5 shadow-lg lg:hidden">
-            <ul className="space-y-1">
-              {PRIMARY_NAVIGATION.map(({ badge, href, label }) => (
-                <li key={href}>
-                  <Link
-                    href={href}
-                    className="flex items-center justify-between rounded-md px-3 py-2.5 text-sm hover:bg-surface-muted"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {label}
-                    {badge ? (
-                      <span className="text-[9px] font-semibold text-primary">{badge}</span>
-                    ) : null}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        ) : null}
       </div>
+
       <AnnouncementBar />
+
+      {/* Backdrop dimmed layer when menu is open */}
+      {isMenuOpen ? (
+        <div
+          className="fixed inset-0 top-[95px] z-40 bg-black/40 backdrop-blur-xs transition-opacity duration-300 lg:hidden"
+          onClick={() => setIsMenuOpen(false)}
+          aria-hidden="true"
+        />
+      ) : null}
+
+      {/* Mobile Navigation Drawer Overlay with Smooth Slide/Fade Animation */}
+      <div
+        className={`absolute top-full inset-x-0 z-50 grid transition-[grid-template-rows,opacity] duration-300 ease-in-out lg:hidden ${
+          isMenuOpen
+            ? "grid-rows-[1fr] opacity-100 border-b border-border shadow-2xl bg-white"
+            : "grid-rows-[0fr] opacity-0 pointer-events-none"
+        }`}
+      >
+        <div className="overflow-hidden">
+          <div className="p-5 space-y-4 bg-white">
+            {/* Mobile Search Bar */}
+            <div className="flex h-10 items-center gap-2.5 rounded-full border border-border px-4 transition-colors focus-within:border-primary">
+              <Search size={16} className="text-muted shrink-0" strokeWidth={1.5} />
+              <input
+                type="search"
+                placeholder="Search Products..."
+                className="w-full bg-transparent text-[13px] outline-none placeholder:text-muted"
+              />
+            </div>
+
+            {/* Mobile Navigation Links */}
+            <nav aria-label="Mobile navigation">
+              <ul className="space-y-1">
+                {PRIMARY_NAVIGATION.map(({ badge, href, label }) => (
+                  <li key={href}>
+                    <Link
+                      href={href}
+                      className="flex items-center justify-between rounded-lg px-3.5 py-3 text-[15px] font-medium text-foreground transition-colors hover:bg-surface-muted active:bg-surface-muted"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <span>{label}</span>
+                      {badge ? (
+                        <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">
+                          {badge}
+                        </span>
+                      ) : null}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            {/* Quick Action Links for Mobile */}
+            <div className="pt-3 border-t border-border flex items-center justify-around">
+              <Link
+                href="/account"
+                className="flex items-center gap-2 text-xs font-semibold py-2 px-4 rounded-full text-foreground hover:bg-surface-muted transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <UserRound size={18} strokeWidth={1.5} />
+                <span>Account</span>
+              </Link>
+              <Link
+                href="/wishlist"
+                className="flex items-center gap-2 text-xs font-semibold py-2 px-4 rounded-full text-foreground hover:bg-surface-muted transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Heart size={18} strokeWidth={1.5} />
+                <span>Wishlist</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
     </header>
   );
 }

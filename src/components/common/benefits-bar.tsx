@@ -20,7 +20,7 @@ const BENEFITS = [
 
 export function BenefitsBar() {
   return (
-    <section className="border-y border-border bg-surface" aria-label="Shopping benefits">
+    <section className="w-full max-w-full overflow-hidden border-y border-border bg-surface" aria-label="Shopping benefits">
       <div className="mx-auto grid max-w-[1585px] grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         <div className="flex min-h-18 items-center justify-center border-b border-border px-3 text-center text-[22px] font-medium sm:border-r lg:border-b-0">
           Only at verstivo.in

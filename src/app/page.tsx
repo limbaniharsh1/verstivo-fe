@@ -13,7 +13,7 @@ export default function HomePage() {
   return (
     <>
       <SiteHeader />
-      <main className="overflow-x-hidden">
+      <main className="overflow-x-clip">
         <HeroBanner />
         <TrendingProducts />
         <PromotionalSplit />

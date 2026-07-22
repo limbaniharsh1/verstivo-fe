@@ -40,7 +40,7 @@ export function ProductCarousel({
 
   return (
     <section
-      className="bg-surface px-5 py-10 sm:px-8 lg:px-11 lg:py-12"
+      className="bg-surface px-5 py-10 w-full max-w-full overflow-hidden sm:px-8 lg:px-11 lg:py-12"
       aria-labelledby={headingId}
     >
       <div className="mx-auto max-w-[1440px]">
@@ -80,7 +80,7 @@ export function ProductCarousel({
         <div className="relative">
           <button
             type="button"
-            className={`${scrollButtonClassName} -left-4`}
+            className={`${scrollButtonClassName} left-0 sm:-left-4`}
             aria-label="View previous products"
             onClick={() => scrollProducts("previous")}
           >
@@ -103,7 +103,7 @@ export function ProductCarousel({
 
           <button
             type="button"
-            className={`${scrollButtonClassName} -right-4`}
+            className={`${scrollButtonClassName} right-0 sm:-right-4`}
             aria-label="View next products"
             onClick={() => scrollProducts("next")}
           >
