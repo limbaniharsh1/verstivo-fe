@@ -20,7 +20,7 @@ export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-t border-border bg-surface">
+    <header className="sticky top-0 z-50 border-t border-border bg-white">
       <div className="site-header-grid mx-auto grid w-full max-w-[1585px] items-center">
         <div className="flex h-full min-w-0 items-center">
           <button

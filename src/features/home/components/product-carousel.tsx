@@ -47,7 +47,7 @@ export function ProductCarousel({
         <div className="mb-6 flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
           <h2
             id={headingId}
-            className="text-[24px] leading-tight font-semibold tracking-[-0.03em] sm:text-[28px]"
+            className="text-[24px] leading-tight font-medium tracking-[-0.03em] sm:text-[34px]"
           >
             {heading}
           </h2>

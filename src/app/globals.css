@@ -20,7 +20,7 @@
   --text-muted: #5d5d5d;
   --text-on-dark-muted: #a8a8a8;
   --text-on-primary-muted: #d9d8ff;
-  --border: #d8d8d8;
+  --border: #D0D0D0;
   --hero-background: #526145;
   --hero-background-soft: rgb(82 97 69 / 82%);
   --hero-background-mobile: rgb(23 28 19 / 68%);
@@ -118,11 +118,11 @@ a {
 
 .product-title,
 .product-price {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .product-subtitle {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .promo-overlay {
