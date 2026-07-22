@@ -38,7 +38,7 @@ export function SiteFooter() {
       <div className="border-b border-primary-border py-5 text-center min-[400px]:py-7">
         <Link
           href="/"
-          className="inline-block text-[26px] font-black tracking-[-0.07em] min-[360px]:text-[30px] min-[400px]:text-[36px] sm:text-[44px]"
+          className="inline-block text-[26px] font-black tracking-[0.06em] min-[360px]:text-[30px] min-[400px]:text-[36px] sm:text-[44px]"
           style={{ fontFamily: "var(--font-monument)" }}
           aria-label="Verstivo home"
         >
@@ -99,7 +99,7 @@ export function SiteFooter() {
         </nav>
       </div>
 
-      <div className="flex flex-col items-center justify-center gap-5 px-5 py-7 text-center min-[400px]:px-7 sm:px-8 xl:px-10 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between lg:gap-x-6 lg:gap-y-3 lg:text-left">
+      <div className="flex flex-col items-center justify-center gap-5 px-5 pt-7 pb-14 text-center min-[400px]:px-7 sm:px-8 sm:pt-8 sm:pb-16 xl:px-10 lg:pb-20 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between lg:gap-x-6 lg:gap-y-3 lg:text-left">
         <div className="flex flex-wrap items-center justify-center gap-1.5" aria-label="Accepted payment methods">
           {PAYMENT_METHODS.map((method) => (
             <span

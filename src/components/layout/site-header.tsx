@@ -76,9 +76,9 @@ export function SiteHeader() {
             className="hidden h-full min-w-0 flex-1 items-center justify-center border-l border-border px-6 xl:flex 2xl:px-6 cursor-pointer"
             aria-label="Open product search"
           >
-            <span className="flex h-11 w-full max-w-[240px] min-w-0 items-center gap-2 rounded-full border border-border px-4 transition-colors hover:border-neutral-400 xl:max-w-[280px] 2xl:h-[52px] 2xl:max-w-[320px] 2xl:gap-3 2xl:px-5">
-              <Search className="size-4 shrink-0 text-muted 2xl:size-[22px]" strokeWidth={1.5} aria-hidden="true" />
-              <span className="min-w-0 flex-1 text-left text-[12px] text-muted xl:text-[15px] 2xl:text-[18px]">
+            <span className="flex h-11 w-full max-w-[240px] min-w-0 items-center gap-2 rounded-full border border-black px-4 transition-colors xl:max-w-[280px] 2xl:h-[52px] 2xl:max-w-[320px] 2xl:gap-3 2xl:px-5">
+              <Search className="size-4 shrink-0 text-black 2xl:size-[22px]" strokeWidth={1.5} aria-hidden="true" />
+              <span className="min-w-0 flex-1 text-left text-[10px] text-black xl:text-[14px] 2xl:text-[14px]">
                 Search Products
               </span>
             </span>
@@ -96,14 +96,14 @@ export function SiteHeader() {
 
           <button
             type="button"
-            className={`${iconButtonClassName} hidden w-16 sm:grid 2xl:w-[100px]`}
+            className={`${iconButtonClassName} hidden w-[85px] sm:grid 2xl:w-[100px]`}
             aria-label="Account"
           >
             <UserRound className="size-5 2xl:size-6" strokeWidth={1.5} />
           </button>
           <button
             type="button"
-            className={`${iconButtonClassName} hidden w-16 md:grid 2xl:w-[100px]`}
+            className={`${iconButtonClassName} hidden w-[85px] md:grid 2xl:w-[100px]`}
             aria-label="Wishlist"
           >
             <Heart className="size-5 2xl:size-6" strokeWidth={1.5} />
@@ -151,10 +151,10 @@ export function SiteHeader() {
                 setIsMenuOpen(false);
                 setIsSearchOpen(true);
               }}
-              className="flex h-10 w-full items-center gap-2.5 rounded-full border border-border px-4 transition-colors hover:border-primary text-left cursor-pointer"
+              className="flex h-10 w-full items-center gap-2.5 rounded-full border border-black px-4 transition-colors text-left cursor-pointer"
             >
-              <Search size={16} className="text-muted shrink-0" strokeWidth={1.5} />
-              <span className="text-[13px] text-muted">Search Products...</span>
+              <Search size={16} className="text-black shrink-0" strokeWidth={1.5} />
+              <span className="text-[13px] text-black">Search Products...</span>
             </button>
 
             {/* Mobile Navigation Links */}

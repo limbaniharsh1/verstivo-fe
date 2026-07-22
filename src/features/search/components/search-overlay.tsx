@@ -16,7 +16,7 @@ type SearchOverlayProps = {
 
 export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedTag, setSelectedTag] = useState<string>("Most searched");
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -100,11 +100,12 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
   };
 
   const handleTagClick = (tag: string) => {
-    setSelectedTag(tag);
-    if (tag === "Most searched") {
+    if (selectedTag === tag) {
+      setSelectedTag(null);
       setSearchQuery("");
     } else {
-      setSearchQuery(tag);
+      setSelectedTag(tag);
+      setSearchQuery(tag === "Most searched" ? "" : tag);
     }
   };
 
@@ -144,7 +145,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
         <div className="mx-auto w-full max-w-[1585px] px-4 py-4 sm:px-6 sm:py-6 lg:px-10">
           {/* Top Search Input Bar */}
           <div className="flex items-center gap-3 sm:gap-6">
-            <div className="relative flex h-10 sm:h-12 w-full min-w-0 items-center rounded-full border border-neutral-300 bg-white px-4 transition-colors focus-within:border-primary focus-within:ring-1 focus-within:ring-primary">
+            <div className="relative flex h-10 sm:h-12 w-full min-w-0 items-center rounded-lg border border-black bg-white px-4 transition-colors focus-within:border-black focus-within:ring-1 focus-within:ring-black">
               <Search className="size-4 sm:size-5 shrink-0 text-muted" strokeWidth={1.6} />
               <input
                 ref={inputRef}
@@ -152,8 +153,8 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
-                  if (selectedTag !== "Most searched") {
-                    setSelectedTag("Most searched");
+                  if (selectedTag !== null) {
+                    setSelectedTag(null);
                   }
                 }}
                 placeholder="Search"
@@ -162,7 +163,10 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
               {searchQuery ? (
                 <button
                   type="button"
-                  onClick={() => setSearchQuery("")}
+                  onClick={() => {
+                    setSearchQuery("");
+                    setSelectedTag(null);
+                  }}
                   className="grid size-6 place-items-center rounded-full text-muted hover:text-foreground transition-colors cursor-pointer"
                   aria-label="Clear search"
                 >
@@ -188,10 +192,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
 
             <div className="scrollbar-hidden flex flex-1 items-center gap-2 overflow-x-auto py-1">
               {MOST_SEARCHED_TAGS.map((tag) => {
-                const isActive =
-                  selectedTag === tag ||
-                  (tag !== "Most searched" &&
-                    searchQuery.toLowerCase() === tag.toLowerCase());
+                const isActive = selectedTag === tag;
                 return (
                   <button
                     key={tag}
@@ -256,7 +257,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                         image: product.image,
                         imageAlt: product.imageAlt,
                         badge: product.badge
-                          ? { label: product.badge, tone: "surface" }
+                          ? { label: product.badge, tone: "neutral" }
                           : undefined,
                       }}
                     />
@@ -272,7 +273,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                   type="button"
                   onClick={() => {
                     setSearchQuery("");
-                    setSelectedTag("Most searched");
+                    setSelectedTag(null);
                   }}
                   className="mt-3 text-xs sm:text-sm font-medium text-primary hover:underline cursor-pointer"
                 >
