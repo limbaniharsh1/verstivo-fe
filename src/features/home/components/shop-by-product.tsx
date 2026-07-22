@@ -29,7 +29,7 @@ export function ShopByProduct() {
       className="bg-surface px-5 py-10 text-foreground sm:px-8 lg:px-11 lg:py-12"
       aria-labelledby="shop-by-product-heading"
     >
-      <div className="mx-auto max-w-[1440px]">
+      <div className="w-full">
         <h2
           id="shop-by-product-heading"
           className="mb-6 text-[26px] leading-tight font-medium tracking-[-0.03em] text-foreground sm:text-[34px]"

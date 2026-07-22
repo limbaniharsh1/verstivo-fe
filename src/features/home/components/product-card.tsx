@@ -1,4 +1,4 @@
-import { Heart, Handbag } from "lucide-react";
+import { Heart } from "lucide-react";
 import Image from "next/image";
 
 import type { Product } from "@/features/home/data/trending-products";
@@ -42,10 +42,9 @@ export function ProductCard({ product }: ProductCardProps) {
 
       <button
         type="button"
-        className="z-10 col-start-1 row-start-1 m-2 min-[400px]:m-2.5 lg:m-2.5 xl:m-3 flex h-7 min-[400px]:h-7.5 lg:h-7.5 xl:h-8.5 cursor-pointer items-center gap-1 min-[400px]:gap-1.5 self-end justify-self-end rounded-full bg-foreground px-2.5 min-[400px]:px-3 xl:px-3.5 text-[10px] min-[400px]:text-[11px] xl:text-[12px] font-medium text-primary-contrast shadow-sm transition-transform active:scale-95 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        className="z-10 col-start-1 row-start-1 m-2 min-[400px]:m-2.5 lg:m-2.5 xl:m-3 flex h-7 min-[400px]:h-7.5 lg:h-7.5 xl:h-8.5 cursor-pointer items-center justify-center self-end justify-self-end rounded-full bg-foreground px-3 min-[400px]:px-3.5 xl:px-4 text-[10px] min-[400px]:text-[11px] xl:text-[12px] font-medium text-primary-contrast shadow-sm transition-transform active:scale-95 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         aria-label={`Add ${product.name} to cart`}
       >
-        <Handbag className="size-3 min-[400px]:size-3.5 xl:size-4" />
         Add
       </button>
 

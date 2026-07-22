@@ -12,12 +12,14 @@ import { useState } from "react";
 
 import { AnnouncementBar } from "@/components/common/announcement-bar";
 import { PRIMARY_NAVIGATION } from "@/constants/navigation";
+import { SearchOverlay } from "@/features/search";
 
 const iconButtonClassName =
-  "h-full shrink-0 place-items-center border-l-0 xl:border-l xl:border-border transition-colors hover:bg-surface-muted focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary";
+  "h-full shrink-0 place-items-center border-l-0 xl:border-l xl:border-border transition-colors hover:bg-surface-muted focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary cursor-pointer";
 
 export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white">
@@ -25,7 +27,7 @@ export function SiteHeader() {
         <div className="flex h-full min-w-0 items-center">
           <button
             type="button"
-            className="grid size-12 place-items-center transition-colors hover:bg-surface-muted lg:hidden"
+            className="grid size-12 place-items-center transition-colors hover:bg-surface-muted lg:hidden cursor-pointer"
             aria-label={isMenuOpen ? "Close navigation" : "Open navigation"}
             aria-expanded={isMenuOpen}
             onClick={() => setIsMenuOpen((currentValue) => !currentValue)}
@@ -67,17 +69,30 @@ export function SiteHeader() {
         </Link>
 
         <div className="flex h-full min-w-0 items-center justify-end">
-          <label className="hidden h-full min-w-0 flex-1 items-center justify-center border-l border-border px-6 xl:flex 2xl:px-6">
-            <span className="flex h-11 w-full max-w-[240px] min-w-0 items-center gap-2 rounded-full border border-border px-4 transition-colors hover:border-neutral-400 focus-within:border-primary xl:max-w-[280px] 2xl:h-[52px] 2xl:max-w-[320px] 2xl:gap-3 2xl:px-5">
+          {/* Desktop Search Button Trigger */}
+          <button
+            type="button"
+            onClick={() => setIsSearchOpen(true)}
+            className="hidden h-full min-w-0 flex-1 items-center justify-center border-l border-border px-6 xl:flex 2xl:px-6 cursor-pointer"
+            aria-label="Open product search"
+          >
+            <span className="flex h-11 w-full max-w-[240px] min-w-0 items-center gap-2 rounded-full border border-border px-4 transition-colors hover:border-neutral-400 xl:max-w-[280px] 2xl:h-[52px] 2xl:max-w-[320px] 2xl:gap-3 2xl:px-5">
               <Search className="size-4 shrink-0 text-muted 2xl:size-[22px]" strokeWidth={1.5} aria-hidden="true" />
-              <span className="sr-only">Search products</span>
-              <input
-                type="search"
-                placeholder="Search Products"
-                className="min-w-0 flex-1 appearance-none bg-transparent text-[12px] outline-none placeholder:text-muted xl:text-[15px] 2xl:text-[18px]"
-              />
+              <span className="min-w-0 flex-1 text-left text-[12px] text-muted xl:text-[15px] 2xl:text-[18px]">
+                Search Products
+              </span>
             </span>
-          </label>
+          </button>
+
+          {/* Mobile Search Icon Button */}
+          <button
+            type="button"
+            onClick={() => setIsSearchOpen(true)}
+            className={`${iconButtonClassName} flex sm:hidden w-12`}
+            aria-label="Search products"
+          >
+            <Search className="size-5" strokeWidth={1.5} />
+          </button>
 
           <button
             type="button"
@@ -96,7 +111,7 @@ export function SiteHeader() {
           <div className="flex h-full w-[74px] shrink-0 items-center justify-center border-l-0 xl:border-l xl:border-border lg:w-[112px] 2xl:w-[155px]">
             <button
               type="button"
-              className="flex h-9 items-center gap-2 rounded-full bg-primary px-3 text-[12px] font-semibold text-primary-contrast transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary lg:h-11 lg:text-[14px] 2xl:h-[52px] 2xl:gap-3 2xl:px-6 2xl:text-[16px]"
+              className="flex h-9 items-center gap-2 rounded-full bg-primary px-3 text-[12px] font-semibold text-primary-contrast transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary lg:h-11 lg:text-[14px] 2xl:h-[52px] 2xl:gap-3 2xl:px-6 2xl:text-[16px] cursor-pointer"
               aria-label="Cart with 0 items"
             >
               <span className="text-[16px]">Cart</span>
@@ -129,15 +144,18 @@ export function SiteHeader() {
       >
         <div className="overflow-hidden">
           <div className="p-5 space-y-4 bg-white">
-            {/* Mobile Search Bar */}
-            <div className="flex h-10 items-center gap-2.5 rounded-full border border-border px-4 transition-colors focus-within:border-primary">
+            {/* Mobile Search Bar Trigger */}
+            <button
+              type="button"
+              onClick={() => {
+                setIsMenuOpen(false);
+                setIsSearchOpen(true);
+              }}
+              className="flex h-10 w-full items-center gap-2.5 rounded-full border border-border px-4 transition-colors hover:border-primary text-left cursor-pointer"
+            >
               <Search size={16} className="text-muted shrink-0" strokeWidth={1.5} />
-              <input
-                type="search"
-                placeholder="Search Products..."
-                className="w-full bg-transparent text-[13px] outline-none placeholder:text-muted"
-              />
-            </div>
+              <span className="text-[13px] text-muted">Search Products...</span>
+            </button>
 
             {/* Mobile Navigation Links */}
             <nav aria-label="Mobile navigation">
@@ -183,6 +201,9 @@ export function SiteHeader() {
           </div>
         </div>
       </div>
+
+      {/* Global Interactive Search Overlay */}
+      <SearchOverlay isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </header>
   );
 }

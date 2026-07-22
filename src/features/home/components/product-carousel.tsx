@@ -40,10 +40,10 @@ export function ProductCarousel({
 
   return (
     <section
-      className="bg-surface px-5 py-10 w-full max-w-full overflow-hidden sm:px-8 lg:px-11 lg:py-12"
+      className="bg-surface py-10 pl-5 pr-0 w-full overflow-hidden sm:pl-8 lg:pl-11 lg:py-12"
       aria-labelledby={headingId}
     >
-      <div className="mx-auto max-w-[1440px]">
+      <div className="w-full pr-5 sm:pr-8 lg:pr-11">
         <div className="mb-6 flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
           <h2
             id={headingId}
@@ -76,40 +76,40 @@ export function ProductCarousel({
             </div>
           ) : null}
         </div>
+      </div>
 
-        <div className="relative">
-          <button
-            type="button"
-            className={`${scrollButtonClassName} left-0 sm:-left-4`}
-            aria-label="View previous products"
-            onClick={() => scrollProducts("previous")}
-          >
-            <ChevronLeft size={20} />
-          </button>
+      <div className="relative w-full">
+        <button
+          type="button"
+          className={`${scrollButtonClassName} left-0 sm:-left-4`}
+          aria-label="View previous products"
+          onClick={() => scrollProducts("previous")}
+        >
+          <ChevronLeft size={20} />
+        </button>
 
-          <ul
-            ref={productListRef}
-            className="scrollbar-hidden flex snap-x snap-mandatory gap-1 overflow-x-auto"
-          >
-            {products.map((product) => (
-              <li
-                key={product.id}
-                className="shrink-0 basis-[82%] snap-start sm:basis-[48%] lg:basis-[calc(27.027%_-_3.243px)]"
-              >
-                <ProductCard product={product} />
-              </li>
-            ))}
-          </ul>
+        <ul
+          ref={productListRef}
+          className="scrollbar-hidden flex snap-x snap-mandatory gap-1 overflow-x-auto pr-0"
+        >
+          {products.map((product) => (
+            <li
+              key={product.id}
+              className="min-w-0 shrink-0 basis-[82%] snap-start sm:basis-[48%] lg:basis-[calc(27.027%_-_3px)]"
+            >
+              <ProductCard product={product} />
+            </li>
+          ))}
+        </ul>
 
-          <button
-            type="button"
-            className={`${scrollButtonClassName} right-0 sm:-right-4`}
-            aria-label="View next products"
-            onClick={() => scrollProducts("next")}
-          >
-            <ChevronRight size={20} />
-          </button>
-        </div>
+        <button
+          type="button"
+          className={`${scrollButtonClassName} right-4 sm:right-6`}
+          aria-label="View next products"
+          onClick={() => scrollProducts("next")}
+        >
+          <ChevronRight size={20} />
+        </button>
       </div>
     </section>
   );
