@@ -8,11 +8,16 @@ import {
   UserRound,
   X,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 import { AnnouncementBar } from "@/components/common/announcement-bar";
 import { PRIMARY_NAVIGATION } from "@/constants/navigation";
 import { SearchOverlay } from "@/features/search";
+import {
+  MegaMenuDropdown,
+  MobileMegaMenuAccordion,
+  MegaMenuCategoryKey,
+} from "@/features/mega-menu";
 
 const iconButtonClassName =
   "h-full shrink-0 place-items-center border-l-0 xl:border-l xl:border-border transition-colors hover:bg-surface-muted focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary cursor-pointer";
@@ -20,9 +25,41 @@ const iconButtonClassName =
 export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [activeMegaMenu, setActiveMegaMenu] = useState<MegaMenuCategoryKey | null>(null);
+
+  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleNavMouseEnter = (categoryKey?: MegaMenuCategoryKey) => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    if (categoryKey) {
+      setActiveMegaMenu(categoryKey);
+    } else {
+      setActiveMegaMenu(null);
+    }
+  };
+
+  const handleNavMouseLeave = () => {
+    closeTimeoutRef.current = setTimeout(() => {
+      setActiveMegaMenu(null);
+    }, 150);
+  };
+
+  const getCategoryKey = (label: string): MegaMenuCategoryKey | undefined => {
+    const normalized = label.toLowerCase().trim();
+    if (normalized === "shop") return "shop";
+    if (normalized === "men") return "men";
+    if (normalized === "women") return "women";
+    return undefined;
+  };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white">
+    <header
+      className="sticky top-0 z-50 w-full bg-white"
+      onMouseLeave={handleNavMouseLeave}
+    >
       <div className="site-header-grid mx-auto grid w-full max-w-[1585px] min-w-0 items-center px-1 sm:px-2">
         <div className="flex h-full min-w-0 items-center">
           <button
@@ -40,21 +77,32 @@ export function SiteHeader() {
             aria-label="Main navigation"
           >
             <ul className="flex h-full items-center gap-6 xl:gap-8 2xl:gap-10">
-              {PRIMARY_NAVIGATION.map(({ badge, href, label }) => (
-                <li key={href} className="flex h-full items-center">
-                  <Link
-                    href={href}
-                    className="inline-flex items-start whitespace-nowrap text-[13px] transition-colors hover:text-primary xl:text-[15px] 2xl:text-[18px]"
+              {PRIMARY_NAVIGATION.map(({ badge, href, label }) => {
+                const categoryKey = getCategoryKey(label);
+                const isActive = activeMegaMenu === categoryKey && categoryKey !== undefined;
+
+                return (
+                  <li
+                    key={href}
+                    className="flex h-full items-center"
+                    onMouseEnter={() => handleNavMouseEnter(categoryKey)}
                   >
-                    <span>{label}</span>
-                    {badge ? (
-                      <span className="ml-1 -mt-1 text-[8px] font-bold text-primary uppercase 2xl:text-[10px]">
-                        {badge}
-                      </span>
-                    ) : null}
-                  </Link>
-                </li>
-              ))}
+                    <Link
+                      href={href}
+                      className={`inline-flex items-start whitespace-nowrap text-[13px] transition-colors xl:text-[15px] 2xl:text-[18px] ${
+                        isActive ? "text-primary font-semibold" : "hover:text-primary"
+                      }`}
+                    >
+                      <span>{label}</span>
+                      {badge ? (
+                        <span className="ml-1 -mt-1 text-[8px] font-bold text-primary uppercase 2xl:text-[10px]">
+                          {badge}
+                        </span>
+                      ) : null}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
         </div>
@@ -123,6 +171,17 @@ export function SiteHeader() {
         </div>
       </div>
 
+      {/* Desktop Mega Menu Dropdown */}
+      {activeMegaMenu ? (
+        <MegaMenuDropdown
+          categoryKey={activeMegaMenu}
+          isOpen={!!activeMegaMenu}
+          onMouseEnter={() => handleNavMouseEnter(activeMegaMenu)}
+          onMouseLeave={handleNavMouseLeave}
+          onClose={() => setActiveMegaMenu(null)}
+        />
+      ) : null}
+
       <AnnouncementBar />
 
       {/* Backdrop dimmed layer when menu is open */}
@@ -157,25 +216,39 @@ export function SiteHeader() {
               <span className="text-[13px] text-black">Search Products...</span>
             </button>
 
-            {/* Mobile Navigation Links */}
+            {/* Mobile Navigation Links with Accordion for Mega Menu items */}
             <nav aria-label="Mobile navigation">
               <ul className="space-y-1">
-                {PRIMARY_NAVIGATION.map(({ badge, href, label }) => (
-                  <li key={href}>
-                    <Link
-                      href={href}
-                      className="flex items-center justify-between rounded-lg px-3.5 py-3 text-[15px] font-medium text-foreground transition-colors hover:bg-surface-muted active:bg-surface-muted"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      <span>{label}</span>
-                      {badge ? (
-                        <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">
-                          {badge}
-                        </span>
-                      ) : null}
-                    </Link>
-                  </li>
-                ))}
+                {PRIMARY_NAVIGATION.map(({ badge, href, label }) => {
+                  const catKey = getCategoryKey(label);
+                  if (catKey) {
+                    return (
+                      <MobileMegaMenuAccordion
+                        key={href}
+                        categoryKey={catKey}
+                        label={label}
+                        badge={badge}
+                        onItemClick={() => setIsMenuOpen(false)}
+                      />
+                    );
+                  }
+                  return (
+                    <li key={href}>
+                      <Link
+                        href={href}
+                        className="flex items-center justify-between rounded-lg px-3.5 py-3 text-[15px] font-medium text-foreground transition-colors hover:bg-surface-muted active:bg-surface-muted"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <span>{label}</span>
+                        {badge ? (
+                          <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-bold uppercase text-primary">
+                            {badge}
+                          </span>
+                        ) : null}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </nav>
 
@@ -207,3 +280,4 @@ export function SiteHeader() {
     </header>
   );
 }
+

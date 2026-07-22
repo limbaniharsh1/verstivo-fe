@@ -6,10 +6,10 @@ export function SocialGallery() {
     <section className="grid overflow-x-clip bg-soft-surface md:grid-cols-[38.3%_24.3%_37.4%]">
       <div className="flex items-center px-5 py-8 sm:px-10 md:py-12 lg:px-10 xl:px-16">
         <div className="w-full max-w-[360px]">
-          <h2 className="text-[28px] leading-tight font-normal tracking-[-0.03em] min-[380px]:text-[34px] sm:text-[40px] lg:text-[43px]">
+          <h2 className="text-[28px] leading-tight font-semibold tracking-[-0.03em] min-[380px]:text-[34px] sm:text-[40px] lg:text-[43px]">
             @verstivo.in
           </h2>
-          <p className="mt-3 text-[14px] leading-relaxed text-foreground/90 min-[380px]:text-[15px] sm:mt-5 sm:text-[16px] lg:text-[18px] lg:leading-[1.35]">
+          <p className="mt-3 text-[14px] font-semibold leading-relaxed text-foreground/90 min-[380px]:text-[15px] sm:mt-5 sm:text-[16px] lg:text-[18px] lg:leading-[1.35]">
             Share your VERSTIVO-Style and inspire others! Just mention @verstivo.in on Instagram
             to become part of our highlight gallery.
           </p>
@@ -17,14 +17,14 @@ export function SocialGallery() {
             href="https://www.instagram.com/"
             target="_blank"
             rel="noreferrer"
-            className="primary-cta mt-5 inline-flex min-h-10 items-center justify-center rounded-full bg-primary px-5 text-[13px] font-medium transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:mt-6 sm:text-[14px]"
+            className="primary-cta mt-5 inline-flex min-h-11 items-center justify-center rounded-full bg-primary px-4 text-[13px] font-semibold transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:mt-6 sm:text-[14px]"
           >
             Follow Us
           </Link>
         </div>
       </div>
 
-      <div className="relative aspect-[4/3] w-full min-h-[220px] sm:aspect-[16/9] md:aspect-auto md:min-h-[486px]">
+      <div className="relative aspect-[4/3] w-full min-h-[350px] sm:aspect-[16/9] md:aspect-auto md:min-h-[549px]">
         <Image
           src="/assets/footer/57ec43477f87aea1a99daaf3a971dcc37eeccede.png"
           alt="Verstivo community member wearing clogs by a marina"

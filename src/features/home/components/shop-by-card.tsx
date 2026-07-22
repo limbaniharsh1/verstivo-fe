@@ -5,16 +5,24 @@ type ShopByCardProps = {
   href: string;
   imageSrc: string;
   imageAlt: string;
+  title?: string;
+  subtitle?: string;
 };
 
-export function ShopByCard({ href, imageSrc, imageAlt }: ShopByCardProps) {
+export function ShopByCard({
+  href,
+  imageSrc,
+  imageAlt,
+  title = "EXPLORE BIRKO-FLOR ®",
+  subtitle = "DURABLE, EASY-CARE STYLES WITH EVERYDAY COMFORT.",
+}: ShopByCardProps) {
   return (
-    <article>
+    <article className="w-full">
       <Link
         href={href}
         className="group block focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary"
       >
-        <div className="relative aspect-[0.88] overflow-hidden bg-surface-muted">
+        <div className="relative aspect-[0.88] w-full overflow-hidden bg-surface-muted">
           <Image
             src={imageSrc}
             alt={imageAlt}
@@ -24,13 +32,18 @@ export function ShopByCard({ href, imageSrc, imageAlt }: ShopByCardProps) {
           />
         </div>
 
-        <div className="px-5 pt-7 pb-3">
-          <p className="max-w-[260px] text-[10px] leading-relaxed uppercase text-muted">
-            Durable, easy-care styles with everyday comfort.
+        <div className="pt-4 pb-2 text-left space-y-2">
+          <h3 className="text-[16px] font-semibold text-foreground">
+            {title}
+          </h3>
+          <p className="text-[11px] font-medium leading-snug uppercase text-muted tracking-wide max-w-[280px]">
+            {subtitle}
           </p>
-          <span className="mt-5 inline-flex min-h-9 items-center justify-center rounded-full bg-foreground px-4 text-[12px] font-medium text-primary-contrast transition-opacity group-hover:opacity-80">
-            Shop Now
-          </span>
+          <div className="pt-1.5">
+            <span className="inline-flex h-10 items-center justify-center rounded-full bg-black px-5 text-[14px] font-semibold text-white transition-all group-hover:bg-neutral-800">
+              Shop Now
+            </span>
+          </div>
         </div>
       </Link>
     </article>

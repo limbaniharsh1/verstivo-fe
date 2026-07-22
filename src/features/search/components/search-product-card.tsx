@@ -66,7 +66,7 @@ export function SearchProductCard({ product }: SearchProductCardProps) {
         <h3 className="text-[13px] sm:text-[14px] font-semibold text-foreground truncate leading-tight">
           {product.name}
         </h3>
-        <p className="text-[10px] sm:text-[11px] font-medium uppercase tracking-wider text-muted truncate mt-0.5">
+        <p className="text-[10px] sm:text-[11px] font-medium uppercase text-muted truncate mt-0.5">
           {product.subtitle}
         </p>
         <p className="text-[13px] sm:text-[14px] font-bold text-foreground mt-1.5">

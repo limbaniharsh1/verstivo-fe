@@ -35,7 +35,7 @@ const getFooterHref = (label: string) =>
 export function SiteFooter() {
   return (
     <footer className="w-full overflow-x-clip bg-primary text-primary-contrast">
-      <div className="border-b border-primary-border py-5 text-center min-[400px]:py-7">
+      <div className="border-b border-white py-5 text-center min-[400px]:py-7">
         <Link
           href="/"
           className="inline-block text-[26px] font-black tracking-[0.06em] min-[360px]:text-[30px] min-[400px]:text-[36px] sm:text-[44px]"
@@ -46,13 +46,13 @@ export function SiteFooter() {
         </Link>
       </div>
 
-      <div className="grid border-b border-primary-border lg:grid-cols-[34%_66%] xl:grid-cols-2">
-        <div className="flex min-h-[180px] flex-col items-center justify-center border-b border-primary-border px-5 py-8 text-center min-[400px]:px-7 min-[400px]:py-10 sm:px-8 lg:border-r lg:border-b-0 lg:items-start lg:text-left">
-          <div className="flex w-full max-w-[440px] flex-col items-center text-center lg:items-start lg:text-left">
-            <h2 className="mx-auto max-w-[360px] text-[18px] font-medium leading-[1.2] min-[380px]:text-[20px] sm:text-[22px] lg:mx-0">
+      <div className="grid border-b border-white lg:grid-cols-[40%_60%] xl:grid-cols-2">
+        <div className="flex flex-col items-center justify-center border-b border-white px-6 py-10 text-center min-[400px]:px-8 min-[400px]:py-12 sm:px-10 lg:border-r lg:border-b-0 lg:items-start lg:px-12 lg:py-14 lg:text-left">
+          <div className="flex w-full max-w-[460px] flex-col items-center text-center lg:items-start lg:text-left">
+            <h2 className="text-[24px] font-normal leading-[1] tracking-tight min-[380px]:text-[26px] sm:text-[30px] lg:text-[32px] text-primary-contrast">
               Expert advice, updates, and surprises for your inbox
             </h2>
-            <form className="mt-5 flex h-11 w-full max-w-[400px] rounded-full border border-primary-contrast p-0.5 sm:mt-7">
+            <form className="mt-6 flex h-13 w-full max-w-[440px] items-center rounded-full border border-primary-contrast p-1.5 sm:mt-8 sm:h-14">
               <label htmlFor="footer-email" className="sr-only">
                 Email address
               </label>
@@ -63,11 +63,11 @@ export function SiteFooter() {
                 required
                 autoComplete="email"
                 placeholder="Enter your email"
-                className="footer-email-input min-w-0 flex-1 bg-transparent px-3 text-[12px] outline-none placeholder:text-on-primary-muted min-[380px]:px-4"
+                className="footer-email-input min-w-0 flex-1 bg-transparent px-4 text-sm text-primary-contrast outline-none placeholder:text-primary-contrast/90 sm:px-5 sm:text-base"
               />
               <button
                 type="submit"
-                className="shrink-0 rounded-full bg-surface px-4 text-[12px] font-medium text-foreground transition-colors hover:bg-surface-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-contrast min-[380px]:px-5"
+                className="flex h-full shrink-0 items-center justify-center rounded-full bg-white px-6 text-sm font-semibold text-black transition-colors hover:bg-white/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-contrast sm:px-7 sm:text-base"
               >
                 Submit
               </button>

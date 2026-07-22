@@ -20,9 +20,9 @@ const BENEFITS = [
 
 export function BenefitsBar() {
   return (
-    <section className="w-full max-w-full overflow-hidden border-y border-border bg-surface" aria-label="Shopping benefits">
+    <section className="w-full max-w-full overflow-hidden bg-surface" aria-label="Shopping benefits">
       <div className="mx-auto grid max-w-[1585px] grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="flex min-h-18 items-center justify-center border-b border-border px-3 text-center text-[22px] font-medium sm:border-r lg:border-b-0">
+        <div className="flex min-h-20 items-center justify-center border-b border-border px-3 text-center text-[22px] font-medium sm:border-r lg:border-b-0">
           Only at verstivo.in
         </div>
 
@@ -35,7 +35,7 @@ export function BenefitsBar() {
           >
             <Icon size={22} strokeWidth={1.5} aria-hidden="true" />
             <div>
-              <p className="text-[14px] font-medium">{title}</p>
+              <p className="text-[14px] font-semibold">{title}</p>
               <p className="mt-0.5 text-[12px] font-medium text-muted">{description}</p>
             </div>
           </div>

@@ -7,7 +7,7 @@ export function CraftsmanshipSection() {
       className="grid bg-soft-surface md:grid-cols-[52%_48%]"
       aria-labelledby="craftsmanship-heading"
     >
-      <div className="relative min-h-[420px] md:min-h-[520px]">
+      <div className="relative min-h-[428px] md:min-h-[612px]">
         <Image
           src="/assets/images/b7bd49f0deb28b664665e620db64c07b27969e3f.jpg"
           alt="Footwear artisan carefully crafting a shoe by hand"
@@ -17,16 +17,16 @@ export function CraftsmanshipSection() {
         />
       </div>
 
-      <div className="flex items-center px-7 py-12 sm:px-12 md:px-14 lg:px-20">
-        <div className="max-w-[460px]">
+      <div className="flex items-center px-6 py-10 sm:px-10 md:pl-12 md:pr-6 lg:pl-16 lg:pr-8 xl:pl-20 xl:pr-10">
+        <div className="max-w-[580px]">
           <h2
             id="craftsmanship-heading"
-            className="text-[40px] leading-tight font-medium tracking-[-0.035em] sm:text-[40px]"
+            className="text-[36px] leading-tight font-semibold sm:text-[36px]"
           >
             Crafted for Every Step.
           </h2>
 
-          <div className="mt-4 space-y-5 text-[16px] leading-[1.35] font-medium sm:text-[16px]">
+          <div className="mt-4 space-y-5 text-[16px] leading-[1.35] font-medium sm:text-[18px]">
             <p>At VERSTIVO, we believe that every step should feel as good as it looks.</p>
             <p>
               Our journey began with a simple vision—to create premium footwear that blends
@@ -46,7 +46,7 @@ export function CraftsmanshipSection() {
 
           <Link
             href="/about"
-            className="primary-cta mt-6 inline-flex min-h-10 items-center justify-center rounded-full bg-primary px-5 text-[12px] font-medium transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            className="primary-cta mt-6 inline-flex min-h-10 items-center justify-center rounded-full bg-primary px-4 text-[16px] font-medium transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             About Us
           </Link>
