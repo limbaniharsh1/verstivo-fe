@@ -22,7 +22,7 @@ export function BenefitsBar() {
   return (
     <section className="border-y border-border bg-surface" aria-label="Shopping benefits">
       <div className="mx-auto grid max-w-[1585px] grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="flex min-h-16 items-center justify-center border-b border-border px-5 text-center text-[17px] font-medium sm:border-r lg:border-b-0">
+        <div className="flex min-h-18 items-center justify-center border-b border-border px-3 text-center text-[22px] font-medium sm:border-r lg:border-b-0">
           Only at verstivo.in
         </div>
 
@@ -33,10 +33,10 @@ export function BenefitsBar() {
               index < BENEFITS.length - 1 ? "border-b sm:border-r lg:border-b-0" : ""
             }`}
           >
-            <Icon size={19} strokeWidth={1.5} aria-hidden="true" />
+            <Icon size={22} strokeWidth={1.5} aria-hidden="true" />
             <div>
-              <p className="text-[12px] font-medium">{title}</p>
-              <p className="mt-0.5 text-[9px] text-muted">{description}</p>
+              <p className="text-[14px] font-medium">{title}</p>
+              <p className="mt-0.5 text-[12px] font-medium text-muted">{description}</p>
             </div>
           </div>
         ))}

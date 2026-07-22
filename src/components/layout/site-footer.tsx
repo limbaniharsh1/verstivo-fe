@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const FOOTER_LINK_GROUPS = [
@@ -19,7 +20,14 @@ const FOOTER_LINK_GROUPS = [
   },
 ] as const;
 
-const PAYMENT_METHODS = ["Razorpay", "RuPay", "G Pay", "PhonePe", "Paytm", "BHIM"] as const;
+const PAYMENT_METHODS = [
+  { name: "Razorpay", icon: "/assets/icons/Frame 1261153958.png" },
+  { name: "RuPay", icon: "/assets/icons/Frame 1261153962.png" },
+  { name: "G Pay", icon: "/assets/icons/Frame 1261153960.png" },
+  { name: "PhonePe", icon: "/assets/icons/Frame 1261153961.png" },
+  { name: "Paytm", icon: "/assets/icons/Frame 1261153959.png" },
+  { name: "BHIM", icon: "/assets/icons/Frame 1261153963.png" },
+] as const;
 
 const getFooterHref = (label: string) =>
   `/${label.toLowerCase().replaceAll("&", "and").replaceAll(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`;
@@ -31,6 +39,7 @@ export function SiteFooter() {
         <Link
           href="/"
           className="inline-block text-[38px] font-black tracking-[-0.07em] sm:text-[44px]"
+          style={{ fontFamily: "var(--font-monument)" }}
           aria-label="Verstivo home"
         >
           VERSTIVO
@@ -72,13 +81,13 @@ export function SiteFooter() {
         >
           {FOOTER_LINK_GROUPS.map((group) => (
             <div key={group.title}>
-              <h2 className="text-[12px] font-medium">{group.title}</h2>
+              <h2 className="text-[18px] font-medium">{group.title}</h2>
               <ul className="mt-4 space-y-2.5">
                 {group.links.map((link) => (
                   <li key={link}>
                     <Link
                       href={getFooterHref(link)}
-                      className="text-[10px] text-on-primary-muted transition-colors hover:text-primary-contrast"
+                      className="text-[14px] font-normal text-on-primary-muted transition-colors hover:text-primary-contrast"
                     >
                       {link}
                     </Link>
@@ -90,34 +99,47 @@ export function SiteFooter() {
         </nav>
       </div>
 
-      <div className="flex flex-col gap-5 px-7 py-6 text-[10px] sm:px-10 lg:flex-row lg:items-center lg:justify-between">
+      <div className="flex flex-col gap-5 px-7 py-7 text-[10px] sm:px-10 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex flex-wrap items-center gap-1.5" aria-label="Accepted payment methods">
           {PAYMENT_METHODS.map((method) => (
             <span
-              key={method}
-              className="rounded-sm bg-surface px-1.5 py-1 text-[7px] font-semibold text-foreground"
+              key={method.name}
+              className="flex items-center justify-center rounded-sm bg-surface px-1.5 py-1"
             >
-              {method}
+              <Image
+                src={method.icon}
+                alt={method.name}
+                width={30}
+                height={20}
+                className="h-4 w-auto object-contain"
+              />
             </span>
           ))}
         </div>
 
-        <p className="text-on-primary-muted">© 2026 VERSTIVO. All rights reserved.</p>
+        <p className="text-on-primary-muted text-[14px]">© {new Date().getFullYear()} BIRKENSTOCK DIGITAL GMBH All rights reserved.</p>
 
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-wrap items-center gap-4 text-[14px]">
           <Link href="/privacy" className="text-on-primary-muted hover:text-primary-contrast">
             Privacy Policy
           </Link>
           <Link href="/terms" className="text-on-primary-muted hover:text-primary-contrast">
             Terms of Service
           </Link>
-          <Link href="https://www.instagram.com/" aria-label="Instagram">
-            <span className="text-[11px] font-semibold" aria-hidden="true">
-              IG
-            </span>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-4">
+          <Link href="https://www.instagram.com/" aria-label="Instagram" className="text-on-primary-muted hover:text-primary-contrast transition-colors">
+            <Image
+              src="/assets/icons/Group.png"
+              alt="Instagram"
+              width={20}
+              height={20}
+              className="h-5 w-5 object-contain"
+            />
           </Link>
           <Link href="https://www.facebook.com/" aria-label="Facebook">
-            <span className="text-[16px] font-semibold" aria-hidden="true">
+            <span className="text-[20px] font-semibold" aria-hidden="true">
               f
             </span>
           </Link>

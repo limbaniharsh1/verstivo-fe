@@ -42,10 +42,10 @@ export function ProductCard({ product }: ProductCardProps) {
 
       <button
         type="button"
-        className="z-10 col-start-1 row-start-1 m-4 flex h-11 cursor-pointer items-center gap-2 self-end justify-self-end rounded-full bg-foreground px-3 text-[16px] text-primary-contrast transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        className="z-10 col-start-1 row-start-1 m-3 flex h-9.5 cursor-pointer items-center gap-2 self-end justify-self-end rounded-full bg-foreground px-3 text-[12px] text-primary-contrast transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         aria-label={`Add ${product.name} to cart`}
       >
-        <Handbag size={18} />
+        <Handbag size={16} />
         Add
       </button>
 

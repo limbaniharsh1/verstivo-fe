@@ -32,7 +32,7 @@ export function ShopByProduct() {
       <div className="mx-auto max-w-[1440px]">
         <h2
           id="shop-by-product-heading"
-          className="mb-6 text-[26px] leading-tight font-semibold tracking-[-0.03em] text-foreground sm:text-[30px]"
+          className="mb-6 text-[26px] leading-tight font-medium tracking-[-0.03em] text-foreground sm:text-[34px]"
         >
           Shop by Product
         </h2>

@@ -4,12 +4,12 @@ import Link from "next/link";
 export function SocialGallery() {
   return (
     <section className="grid bg-soft-surface md:grid-cols-[38.3%_24.3%_37.4%]">
-      <div className="flex min-h-[360px] items-center px-7 py-12 sm:px-12 lg:px-10 xl:px-16">
+      <div className="flex min-h-[560px] items-center px-7 py-12 sm:px-12 lg:px-10 xl:px-16">
         <div className="w-full max-w-[360px]">
-          <h2 className="text-[28px] leading-tight font-semibold tracking-[-0.03em]">
+          <h2 className="text-[43px] leading-tight font-normal tracking-[-0.03em]">
             @verstivo.in
           </h2>
-          <p className="mt-5 max-w-[330px] text-[14px] leading-[1.35]">
+          <p className="mt-5 max-w-[330px] text-[18px] leading-[1.35]">
             Share your VERSTIVO-Style and inspire others! Just mention @verstivo.in on Instagram
             to become part of our highlight gallery.
           </p>
@@ -17,14 +17,14 @@ export function SocialGallery() {
             href="https://www.instagram.com/"
             target="_blank"
             rel="noreferrer"
-            className="primary-cta mt-6 inline-flex min-h-10 items-center justify-center rounded-full bg-primary px-5 text-[12px] font-medium transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            className="primary-cta mt-6 inline-flex min-h-10 items-center justify-center rounded-full bg-primary px-5 text-[14px] font-medium transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             Follow Us
           </Link>
         </div>
       </div>
 
-      <div className="relative min-h-[460px] md:min-h-[386px]">
+      <div className="relative min-h-[560px] md:min-h-[486px]">
         <Image
           src="/assets/footer/57ec43477f87aea1a99daaf3a971dcc37eeccede.png"
           alt="Verstivo community member wearing clogs by a marina"
