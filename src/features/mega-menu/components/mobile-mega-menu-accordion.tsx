@@ -41,19 +41,17 @@ export function MobileMegaMenuAccordion({
         </span>
         <ChevronDown
           size={18}
-          className={`transition-transform duration-200 text-muted ${
-            isExpanded ? "rotate-180 text-primary" : ""
-          }`}
+          className={`transition-transform duration-200 text-muted ${isExpanded ? "rotate-180 text-primary" : ""
+            }`}
         />
       </button>
 
       {/* Collapsible Accordion Content */}
       <div
-        className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${
-          isExpanded
+        className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${isExpanded
             ? "grid-rows-[1fr] opacity-100 pb-4"
             : "grid-rows-[0fr] opacity-0 pointer-events-none"
-        }`}
+          }`}
       >
         <div className="overflow-hidden px-4 space-y-4 pt-1">
           {/* Columns */}

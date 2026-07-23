@@ -21,12 +21,12 @@ export function CraftsmanshipSection() {
         <div className="max-w-[580px]">
           <h2
             id="craftsmanship-heading"
-            className="text-[36px] leading-tight font-semibold sm:text-[36px]"
+            className="text-[20px] min-[375px]:text-[22px] min-[420px]:text-[26px] sm:text-[30px] md:text-[36px] leading-tight font-semibold whitespace-normal sm:whitespace-nowrap md:whitespace-normal"
           >
             Crafted for Every Step.
           </h2>
 
-          <div className="mt-4 space-y-5 text-[16px] leading-[1.35] font-medium sm:text-[18px]">
+          <div className="mt-3 sm:mt-4 space-y-3 sm:space-y-4 md:space-y-5 text-[14px] sm:text-[16px] md:text-[18px] leading-relaxed font-medium">
             <p>At VERSTIVO, we believe that every step should feel as good as it looks.</p>
             <p>
               Our journey began with a simple vision—to create premium footwear that blends
