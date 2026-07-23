@@ -182,7 +182,7 @@ export function SiteHeader() {
 
               {/* Account Icon (Visible on 768px+ / md screens) */}
               <Link
-                href="/account"
+                href="/login"
                 className="hidden md:grid size-9 place-items-center rounded-full hover:bg-surface-muted transition-colors cursor-pointer"
                 aria-label="Account"
               >
