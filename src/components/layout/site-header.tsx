@@ -60,7 +60,7 @@ export function SiteHeader() {
       className="sticky top-0 z-50 w-full bg-white"
       onMouseLeave={handleNavMouseLeave}
     >
-      <div className="site-header-grid mx-auto grid w-full max-w-[1585px] min-w-0 items-center px-1 sm:px-2">
+      <div className="site-header-grid mx-auto grid w-full max-w-[1585px] min-w-0 items-center px-3 sm:px-4 md:px-6 lg:px-8">
         <div className="flex h-full min-w-0 items-center">
           <button
             type="button"
@@ -109,7 +109,7 @@ export function SiteHeader() {
 
         <Link
           href="/"
-          className="flex h-full min-w-0 max-w-full items-center justify-center border-x-0 xl:border-x xl:border-border px-[70px] text-center text-[15px] min-[375px]:text-[17px] min-[420px]:text-[20px] sm:text-[22px] lg:text-[24px] xl:text-[34px] 2xl:text-[28px]"
+          className="flex h-full min-w-0 max-w-full items-center justify-center border-x-0 xl:border-x xl:border-border px-2 sm:px-4 lg:px-8 xl:px-[70px] text-center text-[15px] min-[375px]:text-[17px] min-[420px]:text-[20px] sm:text-[22px] lg:text-[24px] xl:text-[34px] 2xl:text-[28px]"
           style={{ fontFamily: "var(--font-monument)" }}
           aria-label="Verstivo home"
         >
@@ -132,16 +132,6 @@ export function SiteHeader() {
             </span>
           </button>
 
-          {/* Mobile Search Icon Button */}
-          <button
-            type="button"
-            onClick={() => setIsSearchOpen(true)}
-            className={`${iconButtonClassName} flex sm:hidden w-12`}
-            aria-label="Search products"
-          >
-            <Search className="size-5" strokeWidth={1.5} />
-          </button>
-
           <button
             type="button"
             className={`${iconButtonClassName} hidden w-[85px] sm:grid 2xl:w-[100px]`}
@@ -156,7 +146,7 @@ export function SiteHeader() {
           >
             <Heart className="size-5 2xl:size-6" strokeWidth={1.5} />
           </button>
-          <div className="flex h-full w-[74px] shrink-0 items-center justify-center border-l-0 xl:border-l xl:border-border lg:w-[112px] 2xl:w-[155px]">
+          <div className="flex h-full w-[80px] sm:w-[85px] shrink-0 items-center justify-end sm:justify-center border-l-0 xl:border-l xl:border-border lg:w-[112px] 2xl:w-[155px]">
             <button
               type="button"
               className="flex h-9 items-center gap-2 rounded-full bg-primary px-3 text-[12px] font-semibold text-primary-contrast transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary lg:h-11 lg:text-[14px] 2xl:h-[52px] 2xl:gap-3 2xl:px-6 2xl:text-[16px] cursor-pointer"
