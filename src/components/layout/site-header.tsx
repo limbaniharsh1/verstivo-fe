@@ -19,6 +19,7 @@ import {
   MobileMegaMenuAccordion,
   MegaMenuCategoryKey,
 } from "@/features/mega-menu";
+import { CartDrawer, useCart } from "@/features/cart";
 
 const iconButtonClassName =
   "h-full shrink-0 place-items-center border-l-0 xl:border-l xl:border-border transition-colors hover:bg-surface-muted focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary cursor-pointer";
@@ -27,6 +28,8 @@ export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [activeMegaMenu, setActiveMegaMenu] = useState<MegaMenuCategoryKey | null>(null);
+
+  const { openCart, totalCount } = useCart();
 
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -198,12 +201,13 @@ export function SiteHeader() {
               {/* Cart Icon (Visible on all responsive screens) */}
               <button
                 type="button"
+                onClick={openCart}
                 className="relative grid size-9 place-items-center rounded-full hover:bg-surface-muted transition-colors cursor-pointer"
-                aria-label="Cart with 0 items"
+                aria-label={`Cart with ${totalCount} items`}
               >
                 <ShoppingCart className="size-5 text-black" strokeWidth={1.5} />
                 <span className="absolute -top-0.5 -right-0.5 grid size-4.5 place-items-center rounded-full bg-primary text-[10px] font-bold text-primary-contrast shadow-xs">
-                  0
+                  {totalCount}
                 </span>
               </button>
             </div>
@@ -212,12 +216,13 @@ export function SiteHeader() {
             <div className="hidden h-full shrink-0 items-center justify-center border-l-0 xl:border-l xl:border-border lg:flex lg:w-[112px] 2xl:w-[155px]">
               <button
                 type="button"
+                onClick={openCart}
                 className="flex h-9 items-center gap-2 rounded-full bg-primary px-3 text-[12px] font-semibold text-primary-contrast transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary lg:h-11 lg:text-[14px] 2xl:h-[52px] 2xl:gap-3 2xl:px-6 2xl:text-[16px] cursor-pointer"
-                aria-label="Cart with 0 items"
+                aria-label={`Cart with ${totalCount} items`}
               >
                 <span className="text-[16px]">Cart</span>
                 <span className="grid size-5 place-items-center rounded-full bg-white text-[10px] font-bold text-primary lg:size-6 lg:text-[12px]">
-                  0
+                  {totalCount}
                 </span>
               </button>
             </div>
@@ -331,6 +336,9 @@ export function SiteHeader() {
 
       {/* Global Interactive Search Overlay */}
       <SearchOverlay isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+
+      {/* Global Interactive Cart Drawer */}
+      <CartDrawer />
     </header>
   );
 }

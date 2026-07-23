@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 
 import "./globals.css";
+import { CartProvider } from "@/features/cart";
 
 export const metadata: Metadata = {
   title: {
@@ -24,7 +25,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" className="overflow-x-clip">
       <body className="antialiased bg-surface text-foreground overflow-x-clip">
-        {children}
+        <CartProvider>{children}</CartProvider>
       </body>
     </html>
   );
