@@ -14,7 +14,7 @@ type ProductCarouselProps = {
 };
 
 const scrollButtonClassName =
-  "absolute top-[37%] z-20 hidden size-9 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-surface shadow-md transition-colors hover:bg-foreground hover:text-primary-contrast active:bg-foreground active:text-primary-contrast focus-visible:bg-foreground focus-visible:text-primary-contrast focus-visible:outline-2 focus-visible:outline-primary sm:grid";
+  "absolute top-[33%] sm:top-[34%] z-20 hidden size-9 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-surface shadow-md transition-colors hover:bg-foreground hover:text-primary-contrast active:bg-foreground active:text-primary-contrast focus-visible:bg-foreground focus-visible:text-primary-contrast focus-visible:outline-2 focus-visible:outline-primary sm:grid";
 
 export function ProductCarousel({
   heading,
@@ -90,12 +90,12 @@ export function ProductCarousel({
 
         <ul
           ref={productListRef}
-          className="scrollbar-hidden flex snap-x snap-mandatory gap-1 overflow-x-auto pr-4 sm:pr-8 md:pr-8 lg:pr-11"
+          className="scrollbar-hidden flex snap-x snap-mandatory gap-2 overflow-x-auto pr-0"
         >
           {products.map((product) => (
             <li
               key={product.id}
-              className="min-w-0 shrink-0 basis-[76%] min-[480px]:basis-[58%] sm:basis-[45%] md:basis-[31.5%] lg:basis-[calc(25%_-_3px)] snap-start"
+              className="min-w-0 shrink-0 basis-[74%] min-[480px]:basis-[56%] sm:basis-[42%] md:basis-[30%] lg:basis-[26.8%] snap-start overflow-hidden"
             >
               <ProductCard product={product} />
             </li>
@@ -104,7 +104,7 @@ export function ProductCarousel({
 
         <button
           type="button"
-          className={`${scrollButtonClassName} right-4 sm:right-6`}
+          className={`${scrollButtonClassName} right-2 sm:right-4 md:right-6 lg:right-8`}
           aria-label="View next products"
           onClick={() => scrollProducts("next")}
         >

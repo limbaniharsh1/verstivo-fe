@@ -22,7 +22,7 @@ export function BenefitsBar() {
   return (
     <section className="w-full max-w-full overflow-hidden border-t border-border bg-surface" aria-label="Shopping benefits">
       <div className="mx-auto grid max-w-[1585px] grid-cols-2 lg:grid-cols-4">
-        <div className="flex min-h-16 py-3 items-center justify-center border-b border-r border-border px-2.5 sm:px-4 text-center text-[13px] min-[360px]:text-[15px] sm:text-[18px] lg:text-[22px] font-medium lg:border-b-0">
+        <div className="flex min-h-20 py-3 items-center justify-center border-b border-r border-border px-2.5 sm:px-4 text-center text-[13px] min-[360px]:text-[15px] sm:text-[18px] lg:text-[22px] font-medium lg:border-b-0">
           Only at verstivo.in
         </div>
 
