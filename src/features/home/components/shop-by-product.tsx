@@ -45,7 +45,7 @@ export function ShopByProduct() {
           Shop by Product
         </h2>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-0.5">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
           {SHOP_BY_ITEMS.map((item) => (
             <ShopByCard key={item.href} {...item} />
           ))}

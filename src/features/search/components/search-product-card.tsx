@@ -4,6 +4,7 @@ import { Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { useCart } from "@/features/cart";
 
 import type { SearchProduct } from "@/features/search/data/search-data";
 
@@ -12,8 +13,24 @@ type SearchProductCardProps = {
 };
 
 export function SearchProductCard({ product }: SearchProductCardProps) {
+  const { addItem } = useCart();
   const [isLiked, setIsLiked] = useState(false);
   const productUrl = `/products/${product.id || "arizona-soft-footbed"}`;
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    const numericPrice = parseInt(product.price.replace(/[^0-9]/g, ""), 10) || 7693;
+    addItem({
+      id: product.id || product.name.toLowerCase().replace(/\s+/g, "-"),
+      name: product.name,
+      subtitle: product.subtitle,
+      price: numericPrice,
+      formattedPrice: product.price,
+      image: product.image,
+      imageAlt: product.imageAlt,
+    });
+  };
 
   return (
     <article className="group relative flex flex-col w-full min-w-[220px] max-w-[280px] sm:min-w-[250px] sm:max-w-[300px] shrink-0 select-none cursor-pointer">
@@ -62,10 +79,7 @@ export function SearchProductCard({ product }: SearchProductCardProps) {
         {/* Add to Cart Button */}
         <button
           type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            e.preventDefault();
-          }}
+          onClick={handleAddToCart}
           className="absolute bottom-2.5 right-2.5 z-10 flex h-7 sm:h-7.5 items-center justify-center rounded-full bg-black px-3.5 sm:px-4 text-[11px] sm:text-[12px] font-medium text-white shadow-xs transition-all hover:bg-neutral-800 active:scale-95 focus-visible:outline-2 focus-visible:outline-primary"
           aria-label={`Add ${product.name} to cart`}
         >

@@ -3,6 +3,7 @@
 import { Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useCart } from "@/features/cart";
 
 import type { Product } from "@/features/home/data/trending-products";
 
@@ -11,12 +12,28 @@ type ProductCardProps = {
 };
 
 export function ProductCard({ product }: ProductCardProps) {
+  const { addItem } = useCart();
   const badgeClassName =
     product.badge?.tone === "primary"
       ? "bg-primary text-primary-contrast"
       : "bg-surface text-foreground";
 
   const productUrl = `/products/${product.id || "arizona-soft-footbed"}`;
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    const numericPrice = parseInt(product.price.replace(/[^0-9]/g, ""), 10) || 7693;
+    addItem({
+      id: product.id || product.name.toLowerCase().replace(/\s+/g, "-"),
+      name: product.name,
+      subtitle: product.subtitle,
+      price: numericPrice,
+      formattedPrice: product.price,
+      image: product.image,
+      imageAlt: product.imageAlt,
+    });
+  };
 
   return (
     <article className="product-card group relative cursor-pointer">
@@ -55,10 +72,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
       <button
         type="button"
-        onClick={(e) => {
-          e.stopPropagation();
-          e.preventDefault();
-        }}
+        onClick={handleAddToCart}
         className="z-10 col-start-1 row-start-1 m-1.5 min-[375px]:m-2 sm:m-2.5 lg:m-3 flex h-6 min-[375px]:h-6.5 sm:h-7 md:h-7.5 cursor-pointer items-center justify-center rounded-full bg-foreground px-2.5 min-[375px]:px-3 md:px-3.5 text-[10px] min-[375px]:text-[10.5px] sm:text-[11px] md:text-[11.5px] lg:text-[12px] font-medium text-primary-contrast shadow-sm transition-all active:scale-95 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary self-end justify-self-end"
         aria-label={`Add ${product.name} to cart`}
       >

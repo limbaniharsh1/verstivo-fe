@@ -24,17 +24,19 @@ export function SocialGallery() {
         </div>
       </div>
 
-      <div className="relative aspect-[4/3] sm:aspect-[16/9] md:aspect-auto min-h-[260px] min-[420px]:min-h-[300px] sm:min-h-[360px] md:min-h-[420px] lg:min-h-[500px] xl:min-h-[549px] w-full">
-        <Image
-          src="/assets/footer/57ec43477f87aea1a99daaf3a971dcc37eeccede.png"
-          alt="Verstivo community member wearing clogs by a marina"
-          fill
-          sizes="(max-width: 767px) 100vw, (max-width: 1023px) 28vw, 24vw"
-          className="object-cover"
-        />
+      <div className="relative aspect-[4/3] sm:aspect-[16/9] md:aspect-auto min-h-[260px] min-[420px]:min-h-[300px] sm:min-h-[360px] md:min-h-[420px] lg:min-h-[500px] xl:min-h-[549px] w-full pr-[5px]">
+        <div className="relative h-full w-full">
+          <Image
+            src="/assets/footer/57ec43477f87aea1a99daaf3a971dcc37eeccede.png"
+            alt="Verstivo community member wearing clogs by a marina"
+            fill
+            sizes="(max-width: 767px) 100vw, (max-width: 1023px) 28vw, 24vw"
+            className="object-cover"
+          />
+        </div>
       </div>
 
-      <div className="grid grid-rows-2 gap-0.5 min-h-[260px] min-[420px]:min-h-[300px] sm:min-h-[360px] md:min-h-[420px] lg:min-h-[500px] xl:min-h-[549px] w-full">
+      <div className="grid grid-rows-2 gap-1 min-h-[260px] min-[420px]:min-h-[300px] sm:min-h-[360px] md:min-h-[420px] lg:min-h-[500px] xl:min-h-[549px] w-full">
         <div className="relative aspect-[16/9] sm:aspect-[21/9] md:aspect-auto w-full h-full">
           <Image
             src="/assets/footer/Rectangle 40128.png"
@@ -44,7 +46,7 @@ export function SocialGallery() {
             className="object-cover"
           />
         </div>
-        <div className="grid grid-cols-2 gap-0.5 w-full h-full">
+        <div className="grid grid-cols-2 gap-1 w-full h-full">
           <div className="relative aspect-[4/3] sm:aspect-[16/9] md:aspect-auto w-full h-full">
             <Image
               src="/assets/footer/0a819d7e99ed18bdba7d06fd2491556cd0239060.png"
