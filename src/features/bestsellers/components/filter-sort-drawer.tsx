@@ -1,6 +1,6 @@
 "use client";
 
-import { Minus, Plus, X } from "lucide-react";
+import { Check, Minus, Plus, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 type FilterSortDrawerProps = {
@@ -19,18 +19,29 @@ const COLOR_OPTIONS: readonly ColorOption[] = [
   {
     id: "brown-beige",
     label: "Brown & Beige",
-    style: "bg-gradient-to-br from-[#9E7852] via-[#C5B49D] to-[#EBE0D3]",
+    style: "bg-gradient-to-br from-[#A27243] via-[#CDBA9E] to-[#EFE7DC]",
   },
-  { id: "blue", label: "Blue", style: "bg-[#0000C9]" },
+  { id: "blue", label: "Blue", style: "bg-[#0000DB]" },
   {
     id: "white-grey",
     label: "White & Grey",
-    style: "bg-gradient-to-br from-white via-[#E0E0E0] to-[#B0B0B0] border border-border",
+    style: "bg-gradient-to-br from-[#FFFFFF] via-[#D6D6D6] to-[#8C8C8C]",
   },
-  { id: "white", label: "White", style: "bg-white border border-border" },
-  { id: "brown", label: "Brown", style: "bg-[#794429]" },
-  { id: "grey", label: "Grey", style: "bg-[#8A8A8A]" },
+  { id: "white", label: "White", style: "bg-white border border-black/10" },
+  { id: "brown", label: "Brown", style: "bg-[#874A27]" },
+  { id: "grey", label: "Grey", style: "bg-[#888888]" },
 ];
+
+const SIZE_OPTIONS = ["35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46"];
+
+const DISCOUNT_OPTIONS = [
+  { id: "10-plus", label: "10% and above" },
+  { id: "20-plus", label: "20% and above" },
+  { id: "30-plus", label: "30% and above" },
+  { id: "50-plus", label: "50% and above" },
+];
+
+const MATERIAL_OPTIONS = ["Birko-Flor", "Leather", "Suede", "EVA", "Nubuck"];
 
 const SORT_OPTIONS = [
   { id: "featured", label: "Featured" },
@@ -41,13 +52,16 @@ const SORT_OPTIONS = [
 ];
 
 export function FilterSortDrawer({ isOpen, onClose }: FilterSortDrawerProps) {
-  const [selectedSort, setSelectedSort] = useState<string>("bestsellers");
+  const [selectedSort, setSelectedSort] = useState<string>("");
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
+  const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
+  const [selectedDiscounts, setSelectedDiscounts] = useState<string[]>([]);
+  const [selectedMaterials, setSelectedMaterials] = useState<string[]>([]);
   const [expandedSections, setExpandedSections] = useState({
     sort: true,
     discount: false,
     colour: true,
-    size: false,
+    size: true,
     material: false,
   });
 
@@ -78,9 +92,36 @@ export function FilterSortDrawer({ isOpen, onClose }: FilterSortDrawerProps) {
     );
   };
 
+  const toggleSize = (sizeId: string) => {
+    setSelectedSizes((prev) =>
+      prev.includes(sizeId)
+        ? prev.filter((id) => id !== sizeId)
+        : [...prev, sizeId]
+    );
+  };
+
+  const toggleDiscount = (discountId: string) => {
+    setSelectedDiscounts((prev) =>
+      prev.includes(discountId)
+        ? prev.filter((id) => id !== discountId)
+        : [...prev, discountId]
+    );
+  };
+
+  const toggleMaterial = (materialId: string) => {
+    setSelectedMaterials((prev) =>
+      prev.includes(materialId)
+        ? prev.filter((id) => id !== materialId)
+        : [...prev, materialId]
+    );
+  };
+
   const handleClearAll = () => {
-    setSelectedSort("bestsellers");
+    setSelectedSort("");
     setSelectedColors([]);
+    setSelectedSizes([]);
+    setSelectedDiscounts([]);
+    setSelectedMaterials([]);
   };
 
   return (
@@ -161,7 +202,25 @@ export function FilterSortDrawer({ isOpen, onClose }: FilterSortDrawerProps) {
             </button>
 
             {expandedSections.discount ? (
-              <div className="mt-3 text-xs text-muted">No discount filters available</div>
+              <div className="mt-4 space-y-3 pl-1">
+                {DISCOUNT_OPTIONS.map((option) => {
+                  const isChecked = selectedDiscounts.includes(option.id);
+                  return (
+                    <label
+                      key={option.id}
+                      className="flex items-center gap-3 text-sm cursor-pointer select-none"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={isChecked}
+                        onChange={() => toggleDiscount(option.id)}
+                        className="size-4 rounded-xs border-border/80 text-primary focus:ring-0 cursor-pointer accent-[#0000C9]"
+                      />
+                      <span>{option.label}</span>
+                    </label>
+                  );
+                })}
+              </div>
             ) : null}
           </div>
 
@@ -177,22 +236,50 @@ export function FilterSortDrawer({ isOpen, onClose }: FilterSortDrawerProps) {
             </button>
 
             {expandedSections.colour ? (
-              <div className="mt-5 grid grid-cols-5 gap-y-4 gap-x-2">
+              <div className="mt-5 grid grid-cols-5 gap-y-5 gap-x-2.5 items-start">
                 {COLOR_OPTIONS.map((color) => {
                   const isSelected = selectedColors.includes(color.id);
+                  const isLightColor =
+                    color.id === "white" ||
+                    color.id === "white-grey" ||
+                    color.id === "brown-beige";
+
                   return (
                     <button
                       key={color.id}
                       type="button"
                       onClick={() => toggleColor(color.id)}
-                      className="flex flex-col items-center gap-1.5 cursor-pointer group focus-visible:outline-2 focus-visible:outline-primary rounded-lg p-1"
+                      className="flex flex-col items-center gap-1.5 cursor-pointer group focus-visible:outline-2 focus-visible:outline-primary rounded-lg"
                     >
-                      <span
-                        className={`size-10 rounded-full transition-transform group-hover:scale-105 shadow-xs ${color.style} ${
-                          isSelected ? "ring-2 ring-primary ring-offset-2" : ""
+                      <div
+                        className={`relative flex size-11 sm:size-12 items-center justify-center rounded-full bg-white transition-all duration-200 group-hover:scale-105 ${
+                          isSelected
+                            ? "border-2 border-black p-[2px] shadow-xs scale-105"
+                            : "border border-black/15 p-[3px] group-hover:border-black/40"
                         }`}
-                      />
-                      <span className="text-[11px] leading-tight text-foreground text-center font-normal">
+                      >
+                        <span
+                          className={`size-full rounded-full flex items-center justify-center transition-all ${color.style}`}
+                        >
+                          {isSelected ? (
+                            <Check
+                              size={15}
+                              className={
+                                isLightColor
+                                  ? "text-black stroke-[3]"
+                                  : "text-white stroke-[3]"
+                              }
+                            />
+                          ) : null}
+                        </span>
+                      </div>
+                      <span
+                        className={`text-[12px] leading-tight text-center transition-colors ${
+                          isSelected
+                            ? "font-semibold text-black"
+                            : "font-medium text-foreground/80"
+                        }`}
+                      >
                         {color.label}
                       </span>
                     </button>
@@ -214,7 +301,25 @@ export function FilterSortDrawer({ isOpen, onClose }: FilterSortDrawerProps) {
             </button>
 
             {expandedSections.size ? (
-              <div className="mt-3 text-xs text-muted">Select sizes (36 - 45)</div>
+              <div className="mt-4 flex flex-wrap gap-2.5">
+                {SIZE_OPTIONS.map((size) => {
+                  const isSelected = selectedSizes.includes(size);
+                  return (
+                    <button
+                      key={size}
+                      type="button"
+                      onClick={() => toggleSize(size)}
+                      className={`flex size-10 items-center justify-center rounded-full text-xs font-semibold transition-all cursor-pointer ${
+                        isSelected
+                          ? "bg-black text-white shadow-xs"
+                          : "border border-black/20 text-foreground hover:border-black/60 hover:bg-surface-muted"
+                      }`}
+                    >
+                      {size}
+                    </button>
+                  );
+                })}
+              </div>
             ) : null}
           </div>
 
@@ -230,24 +335,42 @@ export function FilterSortDrawer({ isOpen, onClose }: FilterSortDrawerProps) {
             </button>
 
             {expandedSections.material ? (
-              <div className="mt-3 text-xs text-muted">Birko-Flor, Leather, Suede</div>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {MATERIAL_OPTIONS.map((material) => {
+                  const isSelected = selectedMaterials.includes(material);
+                  return (
+                    <button
+                      key={material}
+                      type="button"
+                      onClick={() => toggleMaterial(material)}
+                      className={`rounded-full px-3.5 py-1.5 text-xs font-medium transition-all cursor-pointer ${
+                        isSelected
+                          ? "bg-black text-white shadow-xs"
+                          : "border border-black/20 text-foreground hover:border-black/60 hover:bg-surface-muted"
+                      }`}
+                    >
+                      {material}
+                    </button>
+                  );
+                })}
+              </div>
             ) : null}
           </div>
         </div>
 
         {/* Drawer Footer Actions */}
-        <div className="shrink-0 border-t border-border/70 p-5 bg-white flex items-center gap-3.5">
+        <div className="shrink-0 border-t border-border/70 p-5 bg-white flex items-center gap-2">
           <button
             type="button"
             onClick={handleClearAll}
-            className="w-[130px] rounded-full border border-black/80 bg-white py-3 text-sm font-medium text-black transition-colors hover:bg-surface-muted active:scale-98 cursor-pointer"
+            className="w-[140px] rounded-full border border-black/80 bg-white py-2 text-sm font-medium text-black transition-colors hover:bg-surface-muted active:scale-98 cursor-pointer"
           >
             Clear All
           </button>
           <button
             type="button"
             onClick={onClose}
-            className="flex-1 rounded-full bg-[#0000C9] py-3 text-sm font-medium text-white transition-opacity hover:opacity-90 active:scale-98 cursor-pointer"
+            className="flex-1 rounded-full bg-[#0000C9] py-2 text-sm font-medium text-white transition-opacity hover:opacity-90 active:scale-98 cursor-pointer"
           >
             Apply Filter
           </button>
