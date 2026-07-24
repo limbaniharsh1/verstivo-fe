@@ -117,14 +117,8 @@ a {
   background: var(--surface-muted);
 }
 
-.product-title,
-.product-price {
-  font-size: 16px;
-}
 
-.product-subtitle {
-  font-size: 12px;
-}
+
 
 .promo-overlay {
   background: linear-gradient(to top,

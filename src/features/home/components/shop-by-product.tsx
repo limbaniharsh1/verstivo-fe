@@ -34,18 +34,18 @@ const SHOP_BY_ITEMS = [
 export function ShopByProduct() {
   return (
     <section
-      className="bg-surface px-5 py-10 text-foreground sm:px-8 lg:px-11 lg:py-14"
+      className="bg-surface px-4 py-8 min-[375px]:px-5 sm:px-8 md:px-8 lg:px-11 lg:py-14 text-foreground"
       aria-labelledby="shop-by-product-heading"
     >
       <div className="mx-auto w-full max-w-[1585px]">
         <h2
           id="shop-by-product-heading"
-          className="mb-8 text-left text-[30px] sm:text-[36px] xl:text-[36px] font-semibold"
+          className="mb-5 sm:mb-6 md:mb-8 text-left text-[22px] min-[375px]:text-[24px] sm:text-[30px] md:text-[32px] lg:text-[36px] font-semibold tracking-[-0.02em]"
         >
           Shop by Product
         </h2>
 
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4 lg:gap-1">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-0.5">
           {SHOP_BY_ITEMS.map((item) => (
             <ShopByCard key={item.href} {...item} />
           ))}
@@ -54,3 +54,4 @@ export function ShopByProduct() {
     </section>
   );
 }
+

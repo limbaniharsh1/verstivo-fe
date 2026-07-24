@@ -47,12 +47,12 @@ export function SiteFooter() {
       </div>
 
       <div className="grid border-b border-white lg:grid-cols-[40%_60%] xl:grid-cols-2">
-        <div className="flex flex-col items-center justify-center border-b border-white px-3 py-8 text-center min-[380px]:px-6 min-[400px]:py-12 sm:px-10 lg:border-r lg:border-b-0 lg:items-start lg:px-12 lg:py-14 lg:text-left">
+        <div className="flex flex-col items-center justify-center border-b border-white px-3 py-5 min-[360px]:py-6 min-[400px]:py-10 sm:px-10 lg:border-r lg:border-b-0 lg:items-start lg:px-12 lg:py-14 lg:text-left">
           <div className="flex w-full max-w-[460px] flex-col items-center text-center lg:items-start lg:text-left">
-            <h2 className="text-[18px] font-normal leading-tight tracking-tight min-[360px]:text-[21px] min-[400px]:text-[24px] min-[480px]:text-[26px] sm:text-[30px] lg:text-[32px] text-primary-contrast">
+            <h2 className="text-[14px] min-[360px]:text-[16px] min-[400px]:text-[20px] min-[480px]:text-[24px] sm:text-[28px] lg:text-[32px] font-normal leading-tight tracking-tight text-primary-contrast">
               Expert advice, updates, and surprises for your inbox
             </h2>
-            <form className="mt-5 flex h-11 w-full max-w-[440px] items-center rounded-full border border-primary-contrast p-1 min-[360px]:h-12 sm:mt-8 sm:h-14">
+            <form className="mt-3 flex h-9.5 min-[360px]:h-10.5 min-[400px]:h-12 w-full max-w-[440px] items-center rounded-full border border-primary-contrast p-0.5 min-[360px]:p-1 sm:mt-8 sm:h-14">
               <label htmlFor="footer-email" className="sr-only">
                 Email address
               </label>
@@ -63,11 +63,11 @@ export function SiteFooter() {
                 required
                 autoComplete="email"
                 placeholder="Enter your email"
-                className="footer-email-input min-w-0 flex-1 bg-transparent px-3 text-[12px] text-primary-contrast outline-none placeholder:text-primary-contrast/90 min-[360px]:px-4 min-[360px]:text-sm sm:px-5 sm:text-base"
+                className="footer-email-input min-w-0 flex-1 bg-transparent px-3 text-[11px] min-[360px]:text-[12px] min-[400px]:text-[13px] sm:px-5 sm:text-base text-primary-contrast outline-none placeholder:text-primary-contrast/90"
               />
               <button
                 type="submit"
-                className="flex h-full shrink-0 items-center justify-center rounded-full bg-white px-4 text-[12px] font-semibold text-black transition-colors hover:bg-white/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-contrast min-[360px]:px-5 min-[360px]:text-sm sm:px-7 sm:text-base"
+                className="flex h-full shrink-0 items-center justify-center rounded-full bg-white px-3 text-[11px] min-[360px]:px-4 min-[360px]:text-[12px] min-[400px]:text-sm sm:px-7 sm:text-base font-semibold text-black transition-colors hover:bg-white/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-contrast"
               >
                 Submit
               </button>

@@ -44,16 +44,16 @@ export function ProductCarousel({
       aria-labelledby={headingId}
     >
       <div className="w-full pr-5 sm:pr-8 lg:pr-11">
-        <div className="mb-6 flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
+        <div className="mb-4 min-[375px]:mb-5 sm:mb-6 flex flex-col gap-3 min-[425px]:flex-row min-[425px]:items-center min-[425px]:justify-between sm:gap-4">
           <h2
             id={headingId}
-            className="text-[24px] leading-tight font-medium tracking-[-0.03em] sm:text-[34px]"
+            className="text-[20px] min-[375px]:text-[22px] sm:text-[28px] md:text-[32px] lg:text-[34px] leading-tight font-semibold tracking-[-0.02em] text-foreground"
           >
             {heading}
           </h2>
 
           {showGenderFilter ? (
-            <div className="flex shrink-0 items-center gap-2" aria-label="Filter products by gender">
+            <div className="flex shrink-0 items-center gap-2 sm:gap-2.5" aria-label="Filter products by gender">
               {(["men", "women"] as const).map((gender) => {
                 const isSelected = selectedGender === gender;
 
@@ -65,8 +65,8 @@ export function ProductCarousel({
                     onClick={() => setSelectedGender(gender)}
                     className={
                       isSelected
-                        ? "min-h-9 rounded-full bg-foreground px-5 text-[11px] capitalize text-primary-contrast"
-                        : "min-h-9 rounded-full border border-foreground bg-surface px-5 text-[11px] capitalize text-foreground transition-colors hover:bg-surface-muted"
+                        ? "inline-flex h-8 min-[375px]:h-8.5 sm:h-9 items-center justify-center rounded-full bg-foreground px-4 min-[375px]:px-4.5 sm:px-5 text-[11.5px] min-[375px]:text-[12px] sm:text-[12.5px] lg:text-[13px] font-semibold capitalize text-primary-contrast transition-all shadow-xs border border-foreground"
+                        : "inline-flex h-8 min-[375px]:h-8.5 sm:h-9 items-center justify-center rounded-full border border-border bg-surface px-4 min-[375px]:px-4.5 sm:px-5 text-[11.5px] min-[375px]:text-[12px] sm:text-[12.5px] lg:text-[13px] font-medium capitalize text-foreground transition-all hover:border-foreground/50 hover:bg-surface-muted"
                     }
                   >
                     {gender}
@@ -90,12 +90,12 @@ export function ProductCarousel({
 
         <ul
           ref={productListRef}
-          className="scrollbar-hidden flex snap-x snap-mandatory gap-1 overflow-x-auto pr-0"
+          className="scrollbar-hidden flex snap-x snap-mandatory gap-1 overflow-x-auto pr-4 sm:pr-8 md:pr-8 lg:pr-11"
         >
           {products.map((product) => (
             <li
               key={product.id}
-              className="min-w-0 shrink-0 basis-[82%] snap-start sm:basis-[48%] lg:basis-[calc(27.027%_-_3px)]"
+              className="min-w-0 shrink-0 basis-[76%] min-[480px]:basis-[58%] sm:basis-[45%] md:basis-[31.5%] lg:basis-[calc(25%_-_3px)] snap-start"
             >
               <ProductCard product={product} />
             </li>

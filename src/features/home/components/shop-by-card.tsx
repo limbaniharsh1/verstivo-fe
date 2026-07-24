@@ -22,25 +22,25 @@ export function ShopByCard({
         href={href}
         className="group block focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary"
       >
-        <div className="relative aspect-[0.88] w-full overflow-hidden bg-surface-muted">
+        <div className="relative aspect-[0.9] sm:aspect-[0.88] w-full overflow-hidden bg-surface-muted rounded-xs">
           <Image
             src={imageSrc}
             alt={imageAlt}
             fill
-            sizes="(max-width: 640px) 82vw, (max-width: 1024px) 48vw, 25vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-[1.025]"
+            sizes="(max-width: 639px) 48vw, (max-width: 1023px) 24vw, 25vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />
         </div>
 
-        <div className="pt-4 pb-2 text-left space-y-2">
-          <h3 className="text-[16px] font-semibold text-foreground">
+        <div className="pt-2 sm:pt-3 pb-2 text-left space-y-1 sm:space-y-1.5 px-0.5">
+          <h3 className="text-[11.5px] min-[375px]:text-[12.5px] min-[425px]:text-[13.5px] sm:text-[14.5px] lg:text-[16px] font-bold text-foreground leading-tight tracking-tight">
             {title}
           </h3>
-          <p className="text-[11px] font-medium leading-snug uppercase text-muted tracking-wide max-w-[280px]">
+          <p className="text-[8.5px] min-[375px]:text-[9.5px] sm:text-[10px] lg:text-[10.5px] font-medium leading-normal uppercase text-muted tracking-wide max-w-[280px]">
             {subtitle}
           </p>
-          <div className="pt-1.5">
-            <span className="inline-flex h-10 items-center justify-center rounded-full bg-black px-5 text-[14px] font-semibold text-white transition-all group-hover:bg-neutral-800">
+          <div className="pt-1">
+            <span className="inline-flex h-7 min-[375px]:h-7.5 sm:h-8.5 lg:h-9.5 items-center justify-center rounded-full bg-black px-3 min-[375px]:px-3.5 sm:px-4 lg:px-5 text-[10px] min-[375px]:text-[10.5px] sm:text-[12px] lg:text-[13px] font-semibold text-white transition-all group-hover:bg-neutral-800 shadow-2xs">
               Shop Now
             </span>
           </div>
@@ -49,3 +49,5 @@ export function ShopByCard({
     </article>
   );
 }
+
+
