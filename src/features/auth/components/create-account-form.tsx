@@ -2,75 +2,37 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 import { FormInput } from "./form-input";
-import { GoogleIcon } from "./google-icon";
-import { CheckCircle2 } from "lucide-react";
+import { createAccountSchema, type CreateAccountSchemaType } from "@/lib/schemas/auth";
+import { SocialAuthButtons } from "@/components/auth/SocialAuthButtons";
+import { AuthDivider } from "@/components/auth/AuthDivider";
+import { AuthSuccessBanner } from "@/components/auth/AuthSuccessBanner";
 
 export function CreateAccountForm() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const [errors, setErrors] = useState<{
-    firstName?: string;
-    lastName?: string;
-    email?: string;
-    password?: string;
-  }>({});
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const validateForm = () => {
-    const newErrors: {
-      firstName?: string;
-      lastName?: string;
-      email?: string;
-      password?: string;
-    } = {};
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<CreateAccountSchemaType>({
+    resolver: zodResolver(createAccountSchema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+    },
+  });
 
-    // First Name validation
-    if (!firstName.trim()) {
-      newErrors.firstName = "First name is required.";
-    }
-
-    // Last Name validation
-    if (!lastName.trim()) {
-      newErrors.lastName = "Last name is required.";
-    }
-
-    // Email validation
-    if (!email.trim()) {
-      newErrors.email = "Email address is required.";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      newErrors.email = "Please enter a valid email address.";
-    }
-
-    // Password validation
-    if (!password) {
-      newErrors.password = "Password is required.";
-    } else if (password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters.";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validateForm()) return;
-
-    setIsSubmitting(true);
-    // Simulate production API submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSuccess(true);
-      setTimeout(() => {
-        setIsSuccess(false);
-      }, 3000);
-    }, 1000);
+  const onSubmit = async (_data: CreateAccountSchemaType) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    setIsSuccess(true);
+    toast.success("Account created successfully!");
+    setTimeout(() => setIsSuccess(false), 3000);
   };
 
   return (
@@ -93,37 +55,24 @@ export function CreateAccountForm() {
 
       {/* Success Notification */}
       {isSuccess && (
-        <div className="mb-5 p-3.5 rounded-[10px] bg-emerald-50 border border-emerald-200 text-emerald-800 text-[13.5px] flex items-center gap-2 animate-in fade-in duration-300">
-          <CheckCircle2 size={17} className="text-emerald-600 shrink-0" />
-          <span>Account created successfully! Welcome to Verstivo.</span>
-        </div>
+        <AuthSuccessBanner message="Account created successfully! Welcome to Verstivo." />
       )}
 
       {/* Form */}
-      <form onSubmit={handleSubmit} className="space-y-3.5" noValidate>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-3.5" noValidate>
         {/* First Name Field */}
         <FormInput
           placeholder="First name"
-          value={firstName}
-          onChange={(e) => {
-            setFirstName(e.target.value);
-            if (errors.firstName)
-              setErrors((prev) => ({ ...prev, firstName: undefined }));
-          }}
-          error={errors.firstName}
+          {...register("firstName")}
+          error={errors.firstName?.message}
           autoComplete="given-name"
         />
 
         {/* Last Name Field */}
         <FormInput
           placeholder="Last name"
-          value={lastName}
-          onChange={(e) => {
-            setLastName(e.target.value);
-            if (errors.lastName)
-              setErrors((prev) => ({ ...prev, lastName: undefined }));
-          }}
-          error={errors.lastName}
+          {...register("lastName")}
+          error={errors.lastName?.message}
           autoComplete="family-name"
         />
 
@@ -131,12 +80,8 @@ export function CreateAccountForm() {
         <FormInput
           type="email"
           placeholder="Email"
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-            if (errors.email) setErrors((prev) => ({ ...prev, email: undefined }));
-          }}
-          error={errors.email}
+          {...register("email")}
+          error={errors.email?.message}
           autoComplete="email"
         />
 
@@ -144,13 +89,8 @@ export function CreateAccountForm() {
         <FormInput
           isPassword
           placeholder="Password"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-            if (errors.password)
-              setErrors((prev) => ({ ...prev, password: undefined }));
-          }}
-          error={errors.password}
+          {...register("password")}
+          error={errors.password?.message}
           autoComplete="new-password"
         />
 
@@ -166,23 +106,11 @@ export function CreateAccountForm() {
         </div>
       </form>
 
-      {/* Divider */}
-      <div className="relative flex items-center justify-center my-5">
-        <div className="border-t border-neutral-200/90 w-full" />
-        <span className="bg-white px-3.5 text-[13px] text-neutral-400 font-normal absolute">
-          or
-        </span>
-      </div>
+      <AuthDivider />
 
-      {/* Google Sign-up Button */}
-      <button
-        type="button"
-        onClick={() => alert("Google Sign-Up initiated")}
-        className="w-full h-[46px] sm:h-[48px] rounded-full border border-neutral-300 bg-white hover:bg-neutral-50 active:scale-[0.99] text-black font-medium text-[14.5px] sm:text-[15px] flex items-center justify-center gap-2.5 transition-all cursor-pointer shadow-xs"
-      >
-        <GoogleIcon size={19} />
-        <span>Sign up with Google</span>
-      </button>
+      <SocialAuthButtons label="Sign up with Google" onGoogleClick={() => toast.info("Google Sign-Up initiated")} />
     </div>
   );
 }
+
+

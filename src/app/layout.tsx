@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
+import { Toaster } from "sonner";
 
 import "./globals.css";
 import { CartProvider } from "@/features/cart";
@@ -26,7 +27,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" className="overflow-x-clip">
       <body className="antialiased bg-surface text-foreground overflow-x-clip">
         <CartProvider>{children}</CartProvider>
+        <Toaster position="bottom-right" richColors />
       </body>
     </html>
   );
 }
+

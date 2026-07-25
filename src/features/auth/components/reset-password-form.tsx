@@ -2,38 +2,31 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 import { FormInput } from "./form-input";
-import { CheckCircle2 } from "lucide-react";
+import { resetPasswordSchema, type ResetPasswordSchemaType } from "@/lib/schemas/auth";
+import { AuthSuccessBanner } from "@/components/auth/AuthSuccessBanner";
 
 export function ResetPasswordForm() {
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState<string | undefined>();
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSent, setIsSent] = useState(false);
 
-  const validateForm = () => {
-    if (!email.trim()) {
-      setError("Email address is required.");
-      return false;
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      setError("Please enter a valid email address.");
-      return false;
-    }
-    setError(undefined);
-    return true;
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<ResetPasswordSchemaType>({
+    resolver: zodResolver(resetPasswordSchema),
+    defaultValues: {
+      email: "",
+    },
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validateForm()) return;
-
-    setIsSubmitting(true);
-    // Simulate production API email sending
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSent(true);
-    }, 1000);
+  const onSubmit = async (_data: ResetPasswordSchemaType) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    setIsSent(true);
+    toast.success("Verification email sent!");
   };
 
   return (
@@ -50,24 +43,17 @@ export function ResetPasswordForm() {
 
       {/* Success Notification */}
       {isSent && (
-        <div className="mb-5 p-3.5 rounded-[10px] bg-emerald-50 border border-emerald-200 text-emerald-800 text-[13.5px] flex items-center gap-2 animate-in fade-in duration-300">
-          <CheckCircle2 size={17} className="text-emerald-600 shrink-0" />
-          <span>Verification email sent! Please check your inbox.</span>
-        </div>
+        <AuthSuccessBanner message="Verification email sent! Please check your inbox." />
       )}
 
       {/* Form */}
-      <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
         {/* Email* Field */}
         <FormInput
           type="email"
           placeholder="Email*"
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-            if (error) setError(undefined);
-          }}
-          error={error}
+          {...register("email")}
+          error={errors.email?.message}
           autoComplete="email"
         />
 
@@ -93,3 +79,5 @@ export function ResetPasswordForm() {
     </div>
   );
 }
+
+

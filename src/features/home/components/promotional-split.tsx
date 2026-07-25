@@ -3,7 +3,7 @@ import { PromoCard } from "@/features/home/components/promo-card";
 export function PromotionalSplit() {
   return (
     <section
-      className="grid gap-0.5 bg-surface md:grid-cols-2"
+      className="grid gap-1 bg-surface md:grid-cols-2"
       aria-label="Featured collections"
     >
       <PromoCard

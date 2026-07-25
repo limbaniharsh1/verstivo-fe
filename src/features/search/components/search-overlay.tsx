@@ -2,8 +2,10 @@
 
 import { ChevronLeft, ChevronRight, Search, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useEscapeKey } from "@/hooks/useEscapeKey";
 
 import { ProductCard } from "@/features/home/components/product-card";
+
 import {
   MOST_SEARCHED_TAGS,
   SEARCH_PRODUCTS,
@@ -55,15 +57,8 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
   }, [isOpen]);
 
   // Handle Escape key press
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isOpen) {
-        onClose();
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, onClose]);
+  useEscapeKey(onClose, isOpen);
+
 
   // Check scroll positions for chevron buttons
   const checkScroll = useCallback(() => {
