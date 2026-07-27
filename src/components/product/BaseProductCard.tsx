@@ -18,6 +18,8 @@ type BaseProductCardProps = {
   variant?: ProductCardVariant;
   showBadge?: boolean;
   showWishlist?: boolean;
+  isWishlistLiked?: boolean;
+  onWishlistToggle?: (liked: boolean) => void;
   productUrl?: string;
 };
 
@@ -26,6 +28,8 @@ export function BaseProductCard({
   variant = "default",
   showBadge = true,
   showWishlist = true,
+  isWishlistLiked,
+  onWishlistToggle,
   productUrl: customUrl,
 }: BaseProductCardProps) {
   const { addItem } = useCart();
@@ -124,7 +128,11 @@ export function BaseProductCard({
 
           {showWishlist && (
             <div className="absolute top-2.5 right-2.5 z-10">
-              <WishlistButton productName={product.name} />
+              <WishlistButton
+                productName={product.name}
+                isLiked={isWishlistLiked}
+                onToggle={onWishlistToggle}
+              />
             </div>
           )}
 
@@ -177,7 +185,11 @@ export function BaseProductCard({
 
       {showWishlist && (
         <div className="z-10 col-start-1 row-start-1 m-2 min-[375px]:m-2.5 sm:m-3 self-start justify-self-end">
-          <WishlistButton productName={product.name} />
+          <WishlistButton
+            productName={product.name}
+            isLiked={isWishlistLiked}
+            onToggle={onWishlistToggle}
+          />
         </div>
       )}
 

@@ -151,22 +151,22 @@ export function SiteHeader() {
             </button>
 
             {/* Desktop Account Button */}
-            <button
-              type="button"
+            <Link
+              href="/account"
               className={`${iconButtonClassName} hidden w-[64px] lg:grid xl:w-[85px] 2xl:w-[100px]`}
               aria-label="Account"
             >
               <UserRound className="size-4.5 2xl:size-6" strokeWidth={1.5} />
-            </button>
+            </Link>
 
             {/* Desktop Wishlist Button */}
-            <button
-              type="button"
+            <Link
+              href="/account?tab=wishlist"
               className={`${iconButtonClassName} hidden w-[64px] lg:grid xl:w-[85px] 2xl:w-[100px]`}
               aria-label="Wishlist"
             >
               <Heart className="size-4.5 2xl:size-6" strokeWidth={1.5} />
-            </button>
+            </Link>
 
             {/* Responsive Action Icons (< lg) */}
             <div className="flex items-center gap-1 sm:gap-1.5 lg:hidden">
@@ -182,7 +182,7 @@ export function SiteHeader() {
 
               {/* Account Icon (Visible on 768px+ / md screens) */}
               <Link
-                href="/login"
+                href="/account"
                 className="hidden md:grid size-9 place-items-center rounded-full hover:bg-surface-muted transition-colors cursor-pointer"
                 aria-label="Account"
               >
@@ -191,7 +191,7 @@ export function SiteHeader() {
 
               {/* Wishlist Icon (Visible on 768px+ / md screens) */}
               <Link
-                href="/wishlist"
+                href="/account?tab=wishlist"
                 className="hidden md:grid size-9 place-items-center rounded-full hover:bg-surface-muted transition-colors cursor-pointer"
                 aria-label="Wishlist"
               >
@@ -310,7 +310,7 @@ export function SiteHeader() {
                   <span>Account</span>
                 </Link>
                 <Link
-                  href="/wishlist"
+                  href="/account?tab=wishlist"
                   className="flex items-center gap-2 text-xs font-semibold py-2 px-4 rounded-full text-foreground hover:bg-surface-muted transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Heart } from "lucide-react";
 
 type WishlistButtonProps = {
@@ -20,6 +20,10 @@ export function WishlistButton({
 }: WishlistButtonProps) {
   const [liked, setLiked] = useState(initialLiked);
 
+  useEffect(() => {
+    setLiked(initialLiked);
+  }, [initialLiked]);
+
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
@@ -37,7 +41,7 @@ export function WishlistButton({
     >
       <Heart
         className={`size-4 min-[375px]:size-5 sm:size-4.5 lg:size-5.5 transition-colors ${
-          liked ? "fill-red-500 text-red-500" : "text-foreground"
+          liked ? "fill-black text-black" : "text-black"
         } ${iconClassName}`}
         strokeWidth={1.6}
       />
