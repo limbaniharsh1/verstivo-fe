@@ -4,7 +4,7 @@ import { TRENDING_PRODUCTS } from "@/features/home/data/trending-products";
 export function MostLovedProducts() {
   return (
     <ProductCarousel
-      heading="Verstivo Most Loved"
+      heading="TRENDING FOR YOU"
       headingId="most-loved-products-heading"
       products={TRENDING_PRODUCTS}
       showGenderFilter

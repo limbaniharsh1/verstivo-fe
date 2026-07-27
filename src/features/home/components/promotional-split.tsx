@@ -11,18 +11,18 @@ export function PromotionalSplit() {
         description={"3-Piece gift with your $100+ purchase.\nUse code: SHINE"}
         href="/sale"
         linkLabel="Shop Summer"
-        imageSrc="/assets/images/33c0d153e6bec9e7a876d78ebf4f02d66e4fd911.png"
-        imageAlt="Person wearing taupe sandals on a sunny summer day"
-        imagePosition="object-[center_62%]"
+        imageSrc="/39c9ee8f9c58d7b72e55a72574b740b5e0c57f2e.png"
+        imageAlt="Person wearing blue sandals on rocks near the ocean"
+        imagePosition="object-bottom"
       />
       <PromoCard
         title="Bestseller"
-        description="The curated styles on everybody's wishlist"
+        description="The coveted styles on everybody's wishlist."
         href="/bestsellers"
         linkLabel="Shop Bestseller"
-        imageSrc="/assets/images/1fe07ec4b610c0e9dd220081baed9ee3525f02e1.png"
-        imageAlt="Person wearing blue buckle sandals outdoors"
-        imagePosition="object-[center_68%]"
+        imageSrc="/f2713d5baed71040d12bc0c237031f6104715403.png"
+        imageAlt="Person wearing pink buckle sandals with white pants"
+        imagePosition="object-bottom"
       />
     </section>
   );

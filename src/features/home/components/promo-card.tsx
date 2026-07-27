@@ -8,7 +8,7 @@ type PromoCardProps = {
   linkLabel: string;
   imageSrc: string;
   imageAlt: string;
-  imagePosition?: "object-center" | "object-[center_62%]" | "object-[center_68%]";
+  imagePosition?: string;
 };
 
 export function PromoCard({

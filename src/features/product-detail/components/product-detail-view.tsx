@@ -6,6 +6,7 @@ import { SocialGallery } from "@/features/home/components/social-gallery";
 import { TRENDING_PRODUCTS } from "@/features/home/data/trending-products";
 import { ProductGallery } from "./product-gallery";
 import { ProductInfo } from "./product-info";
+import { ProductReviews } from "./product-reviews";
 import type { ProductDetailData } from "../data/product-detail-data";
 
 type ProductDetailViewProps = {
@@ -33,6 +34,11 @@ export function ProductDetailView({ product }: ProductDetailViewProps) {
       {/* Crafted for Every Step Section */}
       <div className="w-full">
         <CraftsmanshipSection />
+      </div>
+
+      {/* Product Reviews Section */}
+      <div className="w-full border-t border-slate-100">
+        <ProductReviews />
       </div>
       
       {/* Bottom Section: You most loved Carousel */}
