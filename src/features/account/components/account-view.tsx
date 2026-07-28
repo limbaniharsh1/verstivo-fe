@@ -58,7 +58,7 @@ export function AccountView() {
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
-                className={`whitespace-nowrap px-3.5 sm:px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer ${
+                className={`whitespace-nowrap px-4 sm:px-5 py-2 rounded-full text-sm sm:text-[16px] font-medium transition-all cursor-pointer ${
                   isActive
                     ? "bg-black text-white shadow-xs"
                     : "bg-white text-slate-800 border border-slate-200/90 hover:bg-slate-50 hover:border-slate-300"

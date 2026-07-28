@@ -27,7 +27,7 @@ export function ProductReviews() {
       <div className="mx-auto w-full max-w-[1440px] px-4 sm:px-6 md:px-8 lg:px-12">
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 xl:gap-16 items-start">
           {/* Left Summary Sidebar */}
-          <div className="w-full lg:w-[290px] xl:w-[320px] shrink-0">
+          <div className="w-full lg:w-[290px] xl:w-[320px] shrink-0 lg:sticky lg:top-24">
             <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight flex items-baseline gap-2">
               Reviews
               <span className="font-normal text-slate-500 text-lg sm:text-xl">
