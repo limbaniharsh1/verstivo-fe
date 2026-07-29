@@ -10,11 +10,26 @@ import type { ProductDetailData } from "../data/product-detail-data";
 
 type ProductInfoProps = {
   product: ProductDetailData;
+  selectedColorId?: string;
+  onSelectColor?: (colorId: string) => void;
 };
 
-export function ProductInfo({ product }: ProductInfoProps) {
+export function ProductInfo({
+  product,
+  selectedColorId: propSelectedColorId,
+  onSelectColor,
+}: ProductInfoProps) {
   const { addItem } = useCart();
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]?.id || "");
+  const [internalSelectedColor, setInternalSelectedColor] = useState(
+    product.colors[0]?.id || ""
+  );
+
+  const selectedColor = propSelectedColorId ?? internalSelectedColor;
+
+  const handleColorChange = (colorId: string) => {
+    setInternalSelectedColor(colorId);
+    onSelectColor?.(colorId);
+  };
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
@@ -112,7 +127,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
               <button
                 key={color.id}
                 type="button"
-                onClick={() => setSelectedColor(color.id)}
+                onClick={() => handleColorChange(color.id)}
                 className={`relative size-11 min-[360px]:size-12 sm:size-14 rounded-lg overflow-hidden border transition-all cursor-pointer bg-white ${
                   isSelected
                     ? "border-black"
