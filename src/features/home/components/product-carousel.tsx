@@ -40,10 +40,10 @@ export function ProductCarousel({
 
   return (
     <section
-      className="bg-surface py-10 pl-5 pr-0 w-full overflow-hidden sm:pl-8 lg:pl-11 lg:py-12"
+      className="bg-surface py-10 w-full overflow-hidden lg:py-12"
       aria-labelledby={headingId}
     >
-      <div className="w-full pr-5 sm:pr-8 lg:pr-11">
+      <div className="w-full px-5 sm:px-8 lg:px-11">
         <div className="mb-4 min-[375px]:mb-5 sm:mb-6 flex flex-col gap-3 min-[425px]:flex-row min-[425px]:items-center min-[425px]:justify-between sm:gap-4">
           <h2
             id={headingId}
@@ -81,7 +81,7 @@ export function ProductCarousel({
       <div className="relative w-full">
         <button
           type="button"
-          className={`${scrollButtonClassName} left-0 sm:-left-4`}
+          className={`${scrollButtonClassName} left-2 sm:left-4 lg:left-6`}
           aria-label="View previous products"
           onClick={() => scrollProducts("previous")}
         >
@@ -90,7 +90,7 @@ export function ProductCarousel({
 
         <ul
           ref={productListRef}
-          className="scrollbar-hidden flex snap-x snap-mandatory gap-2 overflow-x-auto pr-0"
+          className="scrollbar-hidden flex snap-x snap-mandatory gap-2 overflow-x-auto px-5 sm:px-8 lg:px-11 scroll-px-5 sm:scroll-px-8 lg:scroll-px-11"
         >
           {products.map((product) => (
             <li

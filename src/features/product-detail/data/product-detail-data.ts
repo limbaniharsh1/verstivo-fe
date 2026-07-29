@@ -2,6 +2,7 @@ export type ProductColor = {
   id: string;
   name: string;
   image: string;
+  galleryImages?: { id: string; src: string; alt: string }[];
 };
 
 export type ProductDetailData = {
@@ -36,11 +37,65 @@ export const SAMPLE_PRODUCT_DETAIL: ProductDetailData = {
       id: "brushed-chrome",
       name: "Brushed Chrome",
       image: "/assets/images/menu/arizona.png",
+      galleryImages: [
+        {
+          id: "chrome-1",
+          src: "/assets/images/menu/arizona.png",
+          alt: "Arizona Soft Footbed Brushed Chrome side view",
+        },
+        {
+          id: "chrome-2",
+          src: "/assets/images/florida-soft-footbed.png",
+          alt: "Arizona Soft Footbed Brushed Chrome front pair view",
+        },
+        {
+          id: "chrome-3",
+          src: "/assets/images/menu/safaga.png",
+          alt: "Arizona Soft Footbed Brushed Chrome sole view",
+        },
+        {
+          id: "chrome-4",
+          src: "/assets/images/menu/uji.png",
+          alt: "Arizona Soft Footbed Brushed Chrome top view pair",
+        },
+        {
+          id: "chrome-5",
+          src: "/assets/images/menu/gizeh.png",
+          alt: "Arizona Soft Footbed Brushed Chrome flat profile",
+        },
+      ],
     },
     {
       id: "black",
       name: "Habana Black",
       image: "/assets/images/menu/boston.png",
+      galleryImages: [
+        {
+          id: "black-1",
+          src: "/assets/images/menu/boston.png",
+          alt: "Boston Clog Habana Black side view",
+        },
+        {
+          id: "black-2",
+          src: "/assets/images/menu/safaga.png",
+          alt: "Boston Clog Habana Black alternative view",
+        },
+        {
+          id: "black-3",
+          src: "/assets/images/menu/uji.png",
+          alt: "Boston Clog Habana Black top view",
+        },
+        {
+          id: "black-4",
+          src: "/assets/images/florida-soft-footbed.png",
+          alt: "Boston Clog Habana Black front view",
+        },
+        {
+          id: "black-5",
+          src: "/assets/images/menu/gizeh.png",
+          alt: "Boston Clog Habana Black detail view",
+        },
+      ],
     },
   ],
   sizes: [

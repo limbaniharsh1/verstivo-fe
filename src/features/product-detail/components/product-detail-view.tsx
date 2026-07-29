@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { CraftsmanshipSection } from "@/features/home/components/craftsmanship-section";
 import { ProductCarousel } from "@/features/home/components/product-carousel";
 import { SocialGallery } from "@/features/home/components/social-gallery";
@@ -14,6 +15,22 @@ type ProductDetailViewProps = {
 };
 
 export function ProductDetailView({ product }: ProductDetailViewProps) {
+  const [selectedColorId, setSelectedColorId] = useState(
+    product.colors[0]?.id || ""
+  );
+
+  const activeColor =
+    product.colors.find((c) => c.id === selectedColorId) || product.colors[0];
+
+  const galleryImages =
+    activeColor?.galleryImages && activeColor.galleryImages.length > 0
+      ? activeColor.galleryImages
+      : product.galleryImages.map((img, idx) =>
+          idx === 0 && activeColor?.image
+            ? { ...img, src: activeColor.image, alt: `${product.name} - ${activeColor.name}` }
+            : img
+        );
+
   return (
     <div className="w-full bg-white">
       {/* Product Detail Main Grid Container */}
@@ -21,12 +38,16 @@ export function ProductDetailView({ product }: ProductDetailViewProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-start">
           {/* Left Side: Product Gallery (7 cols on lg) */}
           <div className="lg:col-span-7 xl:col-span-7">
-            <ProductGallery images={product.galleryImages} />
+            <ProductGallery key={selectedColorId} images={galleryImages} />
           </div>
 
           {/* Right Side: Product Info (5 cols on lg) */}
           <div className="lg:col-span-5 xl:col-span-5">
-            <ProductInfo product={product} />
+            <ProductInfo
+              product={product}
+              selectedColorId={selectedColorId}
+              onSelectColor={setSelectedColorId}
+            />
           </div>
         </div>
       </div>
