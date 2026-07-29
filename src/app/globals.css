@@ -8,6 +8,54 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Reyhan";
+  src: url("/assets/fonts/Reyhan Font/Reyhan-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Reyhan";
+  src: url("/assets/fonts/Reyhan Font/Reyhan-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Reyhan";
+  src: url("/assets/fonts/Reyhan Font/Reyhan-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Reyhan";
+  src: url("/assets/fonts/Reyhan Font/Reyhan-Semibold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Reyhan";
+  src: url("/assets/fonts/Reyhan Font/Reyhan-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Reyhan";
+  src: url("/assets/fonts/Reyhan Font/Reyhan-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --brand-primary: #0000C9;
   --brand-primary-hover: #0600b8;
@@ -46,6 +94,7 @@
   --color-hero: var(--hero-background);
   --font-sans: var(--font-reyhan);
   --font-monument: var(--font-monument);
+  --breakpoint-3xl: 103.125rem;
 }
 
 * {
@@ -81,8 +130,13 @@ a {
 }
 
 .site-header-grid {
-  grid-template-columns: 1fr auto 1fr;
-  height: 70px;
+  grid-template-columns: 500px 1fr 500px;
+}
+
+@media (min-width: 1650px) {
+  .site-header-grid {
+    grid-template-columns: 580px 1fr 580px;
+  }
 }
 
 .scrollbar-hidden {

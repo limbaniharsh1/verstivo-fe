@@ -4,11 +4,11 @@ import Link from "next/link";
 import {
   Heart,
   Menu,
-  Search,
   ShoppingCart,
   UserRound,
   X,
 } from "lucide-react";
+import { LiaSearchSolid } from "react-icons/lia";
 import { useState, useRef } from "react";
 
 import { AnnouncementBar } from "@/components/common/announcement-bar";
@@ -22,7 +22,7 @@ import {
 import { CartDrawer, useCart } from "@/features/cart";
 
 const iconButtonClassName =
-  "h-full shrink-0 place-items-center border-l-0 xl:border-l xl:border-border transition-colors hover:bg-surface-muted focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary cursor-pointer";
+  "h-full shrink-0 place-items-center border-r-0 xl:border-r xl:border-border transition-colors hover:bg-surface-muted focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary cursor-pointer";
 
 export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -65,11 +65,11 @@ export function SiteHeader() {
       onMouseLeave={handleNavMouseLeave}
     >
       <div className="relative w-full border-b border-border bg-white">
-        <div className="mx-auto flex h-[70px] w-full max-w-[1585px] min-w-0 items-center justify-between px-3 sm:px-4 md:px-5 lg:px-5 xl:px-8 lg:grid site-header-grid">
-          <div className="flex h-full min-w-0 items-center gap-1.5 sm:gap-2">
+        <div className="mx-auto flex h-[70px] 3xl:h-[82px] w-full max-w-[1750px] min-w-0 items-center ps-3 sm:ps-4 md:ps-5 xl:ps-13 3xl:ps-14.5 pe-4.5 xl:grid site-header-grid">
+          <div className="flex h-full min-w-0 items-center gap-1.5 sm:gap-2 border-r-0 xl:border-r xl:border-border">
             <button
               type="button"
-              className="grid size-10 place-items-center transition-colors hover:bg-surface-muted lg:hidden cursor-pointer shrink-0"
+              className="grid size-10 place-items-center transition-colors hover:bg-surface-muted xl:hidden cursor-pointer shrink-0"
               aria-label={isMenuOpen ? "Close navigation" : "Open navigation"}
               aria-expanded={isMenuOpen}
               onClick={() => setIsMenuOpen((currentValue) => !currentValue)}
@@ -80,7 +80,7 @@ export function SiteHeader() {
             {/* Responsive Mobile Logo right next to toggle */}
             <Link
               href="/"
-              className="flex h-full items-center lg:hidden"
+              className="flex h-full items-center xl:hidden"
               style={{ fontFamily: "var(--font-monument)" }}
               aria-label="Verstivo home"
             >
@@ -90,10 +90,10 @@ export function SiteHeader() {
             </Link>
 
             <nav
-              className="hidden h-full w-full min-w-0 items-center pl-1 pr-3 xl:pl-4 xl:pr-6 2xl:pl-6 2xl:pr-8 lg:flex"
+              className="hidden h-full w-full min-w-0 items-center xl:flex"
               aria-label="Main navigation"
             >
-              <ul className="flex h-full w-full items-center justify-between gap-2 lg:gap-3 xl:gap-6 2xl:gap-8">
+              <ul className="flex h-full items-center gap-[34px] 3xl:gap-[38px]">
                 {PRIMARY_NAVIGATION.map(({ badge, href, label }) => {
                   const categoryKey = getCategoryKey(label);
                   const isActive = activeMegaMenu === categoryKey && categoryKey !== undefined;
@@ -106,7 +106,7 @@ export function SiteHeader() {
                     >
                       <Link
                         href={href}
-                        className={`inline-flex items-start whitespace-nowrap text-[12px] lg:text-[13px] xl:text-[14.5px] 2xl:text-[16px] transition-colors ${
+                        className={`inline-flex items-start whitespace-nowrap text-[12px] lg:text-[13px] xl:text-[14.5px] 2xl:text-[16px] 3xl:text-[18px] font-medium transition-colors ${
                           isActive ? "text-primary font-semibold" : "hover:text-primary"
                         }`}
                       >
@@ -127,24 +127,24 @@ export function SiteHeader() {
           {/* Desktop Logo in Center */}
           <Link
             href="/"
-            className="hidden h-full min-w-0 items-center justify-center border-x-0 xl:border-x xl:border-border px-2 lg:px-4 xl:px-10 2xl:px-14 text-center text-[20px] lg:text-[21px] xl:text-[28px] 2xl:text-[32px] font-bold tracking-tight shrink-0 lg:flex"
+            className="hidden h-full min-w-0 items-center justify-center border-r-0 xl:border-r xl:border-border px-2 lg:px-4 xl:px-10 2xl:px-14 text-center text-[20px] lg:text-[21px] xl:text-[28px] 2xl:text-[32px] font-bold tracking-tight shrink-0 xl:flex"
             style={{ fontFamily: "var(--font-monument)" }}
             aria-label="Verstivo home"
           >
             <span className="truncate">VERSTIVO</span>
           </Link>
 
-          <div className="flex h-full min-w-0 items-center justify-end">
+          <div className="flex h-full w-full min-w-0 items-center justify-end">
             {/* Desktop Search Button Trigger */}
             <button
               type="button"
               onClick={() => setIsSearchOpen(true)}
-              className="hidden h-full min-w-0 flex-1 items-center justify-center border-l border-border px-4 xl:flex 2xl:px-6 cursor-pointer"
+              className="hidden h-full min-w-0 w-full max-w-[240px] 3xl:max-w-[320px] items-center justify-center border-r border-border px-[21px] xl:flex cursor-pointer"
               aria-label="Open product search"
             >
-              <span className="flex h-10 w-full max-w-[220px] min-w-0 items-center gap-2 rounded-full border border-black px-3.5 transition-colors xl:max-w-[280px] 2xl:h-[52px] 2xl:max-w-[320px] 2xl:gap-3 2xl:px-5">
-                <Search className="size-4 shrink-0 text-black 2xl:size-[22px]" strokeWidth={1.5} aria-hidden="true" />
-                <span className="min-w-0 flex-1 text-left text-[12px] text-black xl:text-[13.5px] 2xl:text-[14px]">
+              <span className="flex h-[38px] 3xl:h-[44px] w-full min-w-0 items-center gap-1.5 rounded-full border border-black px-3.5 transition-colors 3xl:px-5">
+                <LiaSearchSolid className="size-[18px] 3xl:size-[20px] shrink-0 text-black" aria-hidden="true" />
+                <span className="min-w-0 flex-1 text-left text-[12px] text-black xl:text-[13.5px] 2xl:text-[14px] 3xl:text-[16px]">
                   Search Products
                 </span>
               </span>
@@ -153,7 +153,7 @@ export function SiteHeader() {
             {/* Desktop Account Button */}
             <Link
               href="/account"
-              className={`${iconButtonClassName} hidden w-[64px] lg:grid xl:w-[85px] 2xl:w-[100px]`}
+              className={`${iconButtonClassName} hidden xl:grid w-[80px] 3xl:w-[92px]`}
               aria-label="Account"
             >
               <UserRound className="size-4.5 2xl:size-6" strokeWidth={1.5} />
@@ -162,14 +162,14 @@ export function SiteHeader() {
             {/* Desktop Wishlist Button */}
             <Link
               href="/account?tab=wishlist"
-              className={`${iconButtonClassName} hidden w-[64px] lg:grid xl:w-[85px] 2xl:w-[100px]`}
+              className={`${iconButtonClassName} hidden xl:grid w-[80px] 3xl:w-[92px]`}
               aria-label="Wishlist"
             >
               <Heart className="size-4.5 2xl:size-6" strokeWidth={1.5} />
             </Link>
 
             {/* Responsive Action Icons (< lg) */}
-            <div className="flex items-center gap-1 sm:gap-1.5 lg:hidden">
+            <div className="flex items-center gap-1 sm:gap-1.5 xl:hidden">
               {/* Search Icon Trigger */}
               <button
                 type="button"
@@ -177,7 +177,7 @@ export function SiteHeader() {
                 className="grid size-9 place-items-center rounded-full hover:bg-surface-muted transition-colors cursor-pointer"
                 aria-label="Search products"
               >
-                <Search className="size-5 text-black" strokeWidth={1.5} />
+                <LiaSearchSolid className="size-5 text-black" />
               </button>
 
               {/* Account Icon (Visible on 768px+ / md screens) */}
@@ -213,15 +213,15 @@ export function SiteHeader() {
             </div>
 
             {/* Desktop Cart Button */}
-            <div className="hidden h-full shrink-0 items-center justify-center border-l-0 xl:border-l xl:border-border lg:flex lg:w-[95px] xl:w-[112px] 2xl:w-[155px]">
+            <div className="hidden h-full shrink-0 items-center justify-end xl:flex pl-[18px]">
               <button
                 type="button"
                 onClick={openCart}
-                className="flex h-8.5 items-center gap-1.5 rounded-full bg-primary px-3 text-[11.5px] font-semibold text-primary-contrast transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary lg:h-9.5 lg:text-[13px] xl:h-11 xl:text-[14px] 2xl:h-[52px] 2xl:gap-3 2xl:px-6 2xl:text-[16px] cursor-pointer"
+                className="flex h-8.5 shrink-0 items-center justify-center gap-1.5 rounded-full bg-primary text-[11.5px] font-medium text-primary-contrast transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary lg:h-[42px] lg:w-[90px] 3xl:h-[48px] 3xl:w-[110px] cursor-pointer"
                 aria-label={`Cart with ${totalCount} items`}
               >
-                <span className="text-[13px] lg:text-[14px] xl:text-[16px]">Cart</span>
-                <span className="grid size-4.5 place-items-center rounded-full bg-white text-[9.5px] font-bold text-primary lg:size-5 lg:text-[11px] xl:size-6 xl:text-[12px]">
+                <span className="text-[12px] lg:text-[12px] xl:text-[13px] 2xl:text-[14px] 3xl:text-[16px] font-medium">Cart</span>
+                <span className="grid size-4.5 place-items-center rounded-full bg-white text-[9.5px] font-bold text-primary lg:size-4.5 lg:text-[9.5px] xl:size-5 xl:text-[11px] 3xl:size-6 3xl:text-[12px]">
                   {totalCount}
                 </span>
               </button>
@@ -242,7 +242,7 @@ export function SiteHeader() {
 
         {/* Mobile Navigation Drawer Overlay with Smooth Slide/Fade Animation */}
         <div
-          className={`absolute top-full inset-x-0 z-50 grid transition-[grid-template-rows,opacity] duration-300 ease-in-out lg:hidden ${
+          className={`absolute top-full inset-x-0 z-50 grid transition-[grid-template-rows,opacity] duration-300 ease-in-out xl:hidden ${
             isMenuOpen
               ? "grid-rows-[1fr] opacity-100 border-b border-border shadow-2xl bg-white"
               : "grid-rows-[0fr] opacity-0 pointer-events-none"
@@ -259,7 +259,7 @@ export function SiteHeader() {
                 }}
                 className="flex h-10 w-full items-center gap-2.5 rounded-full border border-black px-4 transition-colors text-left cursor-pointer"
               >
-                <Search size={16} className="text-black shrink-0" strokeWidth={1.5} />
+                <LiaSearchSolid size={18} className="text-black shrink-0" />
                 <span className="text-[13px] text-black">Search Products...</span>
               </button>
 
@@ -328,7 +328,7 @@ export function SiteHeader() {
       {/* Backdrop dimmed layer when menu is open */}
       {isMenuOpen ? (
         <div
-          className="fixed inset-0 top-[70px] z-40 bg-black/40 backdrop-blur-xs transition-opacity duration-300 lg:hidden"
+          className="fixed inset-0 top-[70px] z-40 bg-black/40 backdrop-blur-xs transition-opacity duration-300 xl:hidden"
           onClick={() => setIsMenuOpen(false)}
           aria-hidden="true"
         />

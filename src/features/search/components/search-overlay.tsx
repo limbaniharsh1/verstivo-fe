@@ -1,6 +1,7 @@
 "use client";
 
-import { ChevronLeft, ChevronRight, Search, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { LiaSearchSolid } from "react-icons/lia";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useEscapeKey } from "@/hooks/useEscapeKey";
 
@@ -141,7 +142,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
           {/* Top Search Input Bar */}
           <div className="flex items-center gap-3 sm:gap-6">
             <div className="relative flex h-10 sm:h-12 w-full min-w-0 items-center rounded-lg border border-black bg-white px-4 transition-colors focus-within:border-black focus-within:ring-1 focus-within:ring-black">
-              <Search className="size-4 sm:size-5 shrink-0 text-muted" strokeWidth={1.6} />
+              <LiaSearchSolid className="size-[18px] sm:size-[22px] shrink-0 text-muted" />
               <input
                 ref={inputRef}
                 type="text"
