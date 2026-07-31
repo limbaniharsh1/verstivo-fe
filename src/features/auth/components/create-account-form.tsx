@@ -55,7 +55,7 @@ export function CreateAccountForm() {
 
       {/* Success Notification */}
       {isSuccess && (
-        <AuthSuccessBanner message="Account created successfully! Welcome to Verstivo." />
+        <AuthSuccessBanner message="Account created successfully! Welcome to Blupair." />
       )}
 
       {/* Form */}

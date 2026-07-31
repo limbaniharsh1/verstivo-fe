@@ -119,18 +119,19 @@ export function ShippingAddressTab() {
   return (
     <div className="w-full bg-white border border-slate-200/90 rounded-2xl overflow-hidden shadow-xs">
       {/* Card Header with Action Button */}
-      <div className="px-5 sm:px-6 py-3.5 sm:py-4 border-b border-slate-100 flex items-center justify-between gap-4">
-        <h3 className="text-base sm:text-lg font-semibold text-slate-900">
+      <div className="px-5 sm:px-6 py-3.5 sm:py-4 border-b border-slate-100 flex flex-row items-center justify-between gap-3 flex-wrap sm:flex-nowrap">
+        <h3 className="text-sm sm:text-base md:text-lg font-semibold text-slate-900 whitespace-nowrap">
           Shipping Address
         </h3>
 
         <button
           type="button"
           onClick={handleOpenAdd}
-          className="text-primary hover:text-primary-hover text-[16px] font-semibold flex items-center gap-1 transition-colors cursor-pointer"
+          className="text-primary hover:text-primary-hover text-[15px] md:text-[16px] font-semibold flex items-center gap-1 transition-colors cursor-pointer whitespace-nowrap"
         >
-          <Plus className="w-4.5 h-4.5" />
-          <span>Add a new address</span>
+          <Plus className="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5" />
+          <span className="sm:hidden">Add</span>
+          <span className="hidden sm:inline">Add a new address</span>
         </button>
       </div>
 
@@ -147,18 +148,18 @@ export function ShippingAddressTab() {
               >
                 <div>
                   {address.isDefault && (
-                    <h4 className="text-[22px] font-normal text-black leading-tight mb-2.5">
+                    <h4 className="text-lg xl:text-[22px] font-normal text-black leading-tight mb-4.5">
                       Default
                     </h4>
                   )}
 
                   {/* Username: 22px font-size, 400 weight, proper black */}
-                  <p className="text-[22px] font-normal text-black leading-tight mb-1.5">
+                  <p className="text-base xl:text-lg font-medium text-black leading-tight mb-1.5">
                     {fullName}
                   </p>
 
                   {/* Address: 18px font-size, proper black */}
-                  <div className="text-[18px] text-black leading-snug space-y-0.5 font-normal">
+                  <div className="text-sm xl:text-base text-black leading-snug space-y-0.5 font-normal">
                     <p>{address.address1}</p>
                     {address.address2 && <p>{address.address2}</p>}
                     <p>{address.city}</p>
@@ -170,18 +171,18 @@ export function ShippingAddressTab() {
                 </div>
 
                 {/* Action Buttons (Edit & Delete: 16px font-size, 500 weight, white bg, #D0D0D0 1px border, 2px gap) */}
-                <div className="mt-3.5 flex items-center gap-[2px]">
+                <div className="mt-3.5 xl:mt-4.5 flex items-center gap-2 sm:gap-2.5">
                   <button
                     type="button"
                     onClick={() => handleOpenEdit(address)}
-                    className="min-w-[60px] h-[34px] px-3.5 rounded-full bg-white border border-[#D0D0D0] hover:bg-slate-50 text-[16px] font-medium text-slate-900 flex items-center justify-center transition-colors shadow-2xs cursor-pointer"
+                    className="min-w-[60px] py-1 py-1.75 px-4 xl:px-4.5 rounded-full bg-white border border-[#D0D0D0] hover:bg-slate-50 text-sm xl:text-[16px] font-medium text-slate-900 flex items-center justify-center transition-colors shadow-2xs cursor-pointer"
                   >
                     Edit
                   </button>
                   <button
                     type="button"
                     onClick={() => handleDelete(address.id!)}
-                    className="min-w-[70px] h-[34px] px-4 rounded-full bg-white border border-[#D0D0D0] hover:bg-slate-50 text-[16px] font-medium text-slate-900 flex items-center justify-center transition-colors shadow-2xs cursor-pointer"
+                    className="min-w-[70px] py-1 py-1.75 px-4 xl:px-4.5 rounded-full bg-white border border-[#D0D0D0] hover:bg-slate-50 text-sm xl:text-[16px] font-medium text-slate-900 flex items-center justify-center transition-colors shadow-2xs cursor-pointer"
                   >
                     Delete
                   </button>

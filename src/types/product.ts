@@ -10,6 +10,7 @@ export interface BaseProduct {
   name: string;
   subtitle: string;
   price: string | number;
+  originalPrice?: string | number;
   image: string;
   imageAlt: string;
   badge?: string | ProductBadge;

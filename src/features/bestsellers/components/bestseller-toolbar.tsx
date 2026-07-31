@@ -14,7 +14,7 @@ export function BestsellerToolbar({ totalCount }: BestsellerToolbarProps) {
   return (
     <>
       <div className="w-full bg-white">
-        <div className="mx-auto flex w-full max-w-[1585px] items-center justify-between px-3 sm:px-4 md:px-6 lg:px-8 pt-3 pb-1.5 sm:pt-4 sm:pb-5">
+        <div className="container-main flex items-center justify-between pt-3 pb-1.5 sm:pt-4 sm:pb-5">
           {/* Total Products Count */}
           <span className="text-xs sm:text-sm font-medium text-foreground">
             {totalCount} products

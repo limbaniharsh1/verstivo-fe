@@ -27,7 +27,7 @@ export function CraftsmanshipSection() {
           </h2>
 
           <div className="mt-3 md:mt-3 lg:mt-4 space-y-2.5 sm:space-y-3 md:space-y-3 lg:space-y-4 xl:space-y-5 text-[14px] sm:text-[15px] md:text-[13.5px] lg:text-[15px] xl:text-[17px] leading-relaxed font-medium text-foreground/90">
-            <p>At VERSTIVO, we believe that every step should feel as good as it looks.</p>
+            <p>At BLUPAIR, we believe that every step should feel as good as it looks.</p>
             <p>
               Our journey began with a simple vision—to create premium footwear that blends
               timeless design, lasting comfort, and exceptional quality. Every pair is
@@ -39,14 +39,14 @@ export function CraftsmanshipSection() {
               ensuring that every product delivers confidence with every step.
             </p>
             <p>
-              VERSTIVO is more than a footwear brand—it&apos;s a commitment to craftsmanship,
+              BLUPAIR is more than a footwear brand—it&apos;s a commitment to craftsmanship,
               comfort, and modern living.
             </p>
           </div>
 
           <Link
             href="/about"
-            className="primary-cta mt-5 md:mt-4 lg:mt-6 inline-flex min-h-10 items-center justify-center rounded-full bg-primary px-5 text-[14px] sm:text-[15px] lg:text-[16px] font-medium transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            className="mt-5 md:mt-4 lg:mt-6 inline-flex h-10 items-center justify-center rounded-full bg-primary px-6 text-[13.5px] sm:text-[14px] font-semibold text-white !text-white shadow-xs transition-all hover:bg-primary-hover active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             About Us
           </Link>

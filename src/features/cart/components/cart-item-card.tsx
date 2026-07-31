@@ -62,24 +62,24 @@ export function CartItemCard({ item }: CartItemCardProps) {
         <div className="flex-1 min-w-0 flex flex-col justify-between">
           <div>
             {/* Title */}
-            <h4 className="text-[14px] sm:text-[15px] font-semibold text-black tracking-tight leading-snug line-clamp-1">
+            <h4 className="text-responsive-lg font-semibold text-black tracking-tight leading-snug line-clamp-1">
               {product.name}
             </h4>
-
+ 
             {/* Subtitle */}
-            <p className="text-[10px] sm:text-[11px] font-normal text-neutral-500 uppercase tracking-normal mt-0.5 line-clamp-1">
+            <p className="text-responsive-subtitle font-normal text-neutral-500 uppercase tracking-normal mt-0.5 line-clamp-1">
               {product.subtitle}
             </p>
-
+ 
             {/* Price & Delete Button */}
             <div className="flex items-center justify-between mt-1 sm:mt-1.5">
               <div className="flex items-baseline gap-1.5 sm:gap-2">
                 {formattedOriginalTotal && (
-                  <span className="text-[12px] sm:text-[13px] text-neutral-400 line-through font-normal">
+                  <span className="text-responsive-subtitle text-neutral-400 line-through font-normal">
                     {formattedOriginalTotal}
                   </span>
                 )}
-                <span className="text-[13.5px] sm:text-[14px] font-bold text-[#0000d6]">
+                <span className="text-responsive-lg font-bold text-[#0000d6]">
                   {formattedItemTotal}
                 </span>
               </div>

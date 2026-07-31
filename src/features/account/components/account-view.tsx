@@ -43,7 +43,7 @@ export function AccountView() {
 
           <Link
             href="/login"
-            className="px-4 py-1.5 sm:px-5 sm:py-1.5 rounded-full border border-slate-300 text-xs sm:text-sm font-medium text-slate-800 hover:bg-slate-50 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-300"
+            className="whitespace-nowrap px-4 sm:px-5 py-2 rounded-full border border-slate-200/90 text-sm sm:text-[16px] font-medium text-slate-800 hover:bg-slate-50 hover:border-slate-300 transition-all focus:outline-none focus:ring-2 focus:ring-slate-300"
           >
             Sign Out
           </Link>

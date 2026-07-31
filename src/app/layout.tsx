@@ -7,8 +7,8 @@ import { CartProvider } from "@/features/cart";
 
 export const metadata: Metadata = {
   title: {
-    default: "Verstivo",
-    template: "%s | Verstivo",
+    default: "Blupair",
+    template: "%s | Blupair",
   },
   description: "Built for the ones building.",
 };
@@ -24,7 +24,7 @@ type RootLayoutProps = Readonly<{
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" className="overflow-x-clip">
+    <html lang="en" className="overflow-x-clip" suppressHydrationWarning>
       <body className="antialiased bg-surface text-foreground overflow-x-clip">
         <CartProvider>{children}</CartProvider>
         <Toaster position="bottom-right" richColors />

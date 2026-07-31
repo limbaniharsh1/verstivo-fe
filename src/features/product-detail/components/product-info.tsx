@@ -92,33 +92,34 @@ export function ProductInfo({
   return (
     <div className="flex flex-col w-full text-foreground">
       {/* Title & Subtitle */}
-      <h1 className="text-xl min-[360px]:text-2xl sm:text-3xl lg:text-[32px] font-semibold tracking-tight text-black leading-tight">
+      <h1 className="text-xl min-[360px]:text-2xl sm:text-3xl lg:text-[34px] font-semibold tracking-tight text-black leading-tight">
         {product.name}
       </h1>
-      <p className="text-xs sm:text-sm text-neutral-500 font-normal mt-1">
+      <p className="text-xs sm:text-base text-neutral-600 font-normal mt-1">
         {product.subtitle}
       </p>
 
       {/* Price & Offer Section */}
-      <div className="mt-3.5 sm:mt-4 flex flex-wrap items-baseline gap-2 sm:gap-2.5">
-        <span className="text-xl min-[360px]:text-2xl sm:text-[26px] font-semibold text-black tracking-tight">
+      <div className="mt-3.5 sm:mt-4 xl:mt-5 flex flex-wrap items-center gap-2 sm:gap-2.5">
+        <span className="text-xl min-[360px]:text-2xl sm:text-3xl xl:text-[34px] font-semibold text-black tracking-tight">
           {product.price}
         </span>
-        <span className="text-xs min-[360px]:text-sm sm:text-base font-normal text-neutral-400 line-through">
+        <span className="text-xs min-[360px]:text-sm sm:text-base xl:text-2xl font-medium text-neutral-400 line-through">
           {product.originalPrice}
         </span>
-        <span className="inline-flex items-center rounded-full bg-[#0000D1] px-2 min-[360px]:px-2.5 py-0.5 text-[10px] min-[360px]:text-[11px] font-bold text-white uppercase tracking-wider">
+        <span className="inline-flex items-center rounded-full bg-[#0000D1] px-2 min-[360px]:px-2.5 py-0.5 text-[10px] min-[360px]:text-[11px] xl:text-base font-normal text-white uppercase tracking-wider">
           {product.discountBadge}
         </span>
       </div>
-      <p className="text-[10.5px] min-[360px]:text-[11.5px] text-neutral-500 font-normal mt-1">
-        {product.taxLabel}
+      <p className="text-[10.5px] min-[360px]:text-[11.5px] sm:text-sm xl:text-base font-normal mt-1">
+        {/* {product.taxLabel} */}
+        MRP inclusive of all taxes
       </p>
 
       {/* Color Selection */}
       <div className="mt-5 sm:mt-6">
-        <p className="text-xs sm:text-sm font-medium text-black">
-          Color: <span className="font-normal text-neutral-700">{activeColorObj?.name}</span>
+        <p className="text-xs sm:text-sm xl:text-base font-medium text-black">
+          Color: <span className="font-normal">{activeColorObj?.name}</span>
         </p>
         <div className="flex items-center gap-2.5 sm:gap-3 mt-2 sm:mt-2.5">
           {product.colors.map((color) => {
@@ -128,7 +129,7 @@ export function ProductInfo({
                 key={color.id}
                 type="button"
                 onClick={() => handleColorChange(color.id)}
-                className={`relative size-11 min-[360px]:size-12 sm:size-14 rounded-lg overflow-hidden border transition-all cursor-pointer bg-white ${
+                className={`relative size-11 min-[360px]:size-12 sm:size-14 xl:size-18 3xl:size-24 rounded-md overflow-hidden border transition-all cursor-pointer bg-white ${
                   isSelected
                     ? "border-black"
                     : "border-neutral-200 hover:border-neutral-400"
@@ -149,17 +150,17 @@ export function ProductInfo({
       </div>
 
       {/* Size Selection */}
-      <div className="mt-5 sm:mt-6">
-        <div className="flex flex-wrap items-center justify-between gap-1 text-xs sm:text-sm">
+      <div className="mt-5 sm:mt-6 xl:mt-7">
+        <div className="flex flex-wrap items-center justify-between gap-1 text-xs sm:text-sm xl:text-base">
           <span className="font-semibold text-black">
-            Select Size <span className="font-normal text-neutral-500">· UK / EU</span>
+            Select Size <span className="font-normal">· UK / EU</span>
           </span>
           <button
             type="button"
             onClick={() => setIsSizeGuideOpen(true)}
-            className="text-[#0000D1] font-medium hover:underline text-[11.5px] sm:text-[13px] cursor-pointer"
+            className="text-[#0000D1] font-medium hover:underline text-[11.5px] sm:text-[13px] xl:text-base cursor-pointer"
           >
-            Size, Fit + Switch Guide
+            Size Guide
           </button>
         </div>
 
@@ -175,7 +176,7 @@ export function ProductInfo({
                   setSelectedSize(`${size}-${index}`);
                   setSizeError(false);
                 }}
-                className={`flex h-9.5 sm:h-[42px] items-center justify-center rounded-lg border text-[11px] min-[360px]:text-[11.5px] sm:text-[12.5px] lg:text-[12px] xl:text-[13px] font-medium transition-all cursor-pointer px-2 whitespace-nowrap ${
+                className={`flex h-9.5 sm:h-[42px] items-center justify-center rounded-lg border text-[11px] min-[360px]:text-[11.5px] sm:text-[12.5px] lg:text-sm font-semibold transition-all cursor-pointer px-2 whitespace-nowrap ${
                   isSelected
                     ? "border-black bg-black text-white shadow-xs"
                     : "border-border bg-white text-neutral-800 hover:border-black"
@@ -244,7 +245,7 @@ export function ProductInfo({
       </div>
 
       {/* Accepted Payment Methods - Responsive Single Line Scroll */}
-      <div className="mt-6 sm:mt-7 flex flex-col min-[540px]:flex-row min-[540px]:items-center min-[540px]:justify-between gap-2 overflow-x-auto scrollbar-hidden py-0.5">
+      <div className="mt-6 sm:mt-7 flex flex-row items-center justify-between gap-2 overflow-x-auto scrollbar-hidden py-0.5">
         <span className="text-[12px] sm:text-[13.5px] font-normal text-neutral-500 shrink-0 whitespace-nowrap">
           Accepted Payment Methods
         </span>
@@ -316,7 +317,7 @@ export function ProductInfo({
       </div>
 
       {/* Service Features Row */}
-      <div className="mt-6 sm:mt-7 grid grid-cols-3 gap-1.5 min-[360px]:gap-2 border-y border-neutral-200/90 py-4 sm:py-5 text-center">
+      <div className="mt-6 sm:mt-7 grid grid-cols-3 gap-1.5 min-[360px]:gap-2 border-b border-[#D0D0D0] py-4 sm:py-5 text-center">
         {/* Free express shipping */}
         <div className="flex flex-col items-center justify-center gap-1.5 min-[360px]:gap-2 px-0.5 min-[360px]:px-1">
           <svg className="size-5 min-[360px]:size-6 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">

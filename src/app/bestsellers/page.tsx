@@ -9,9 +9,9 @@ import {
 } from "@/features/bestsellers";
 
 export const metadata = {
-  title: "Bestsellers | VERSTIVO",
+  title: "Bestsellers | BLUPAIR",
   description:
-    "Explore VERSTIVO's top-selling iconic footwear including Florida Soft Footbed Birko-Flor sandals.",
+    "Explore BLUPAIR's top-selling iconic footwear including Florida Soft Footbed Birko-Flor sandals.",
 };
 
 export default function BestsellersPage() {

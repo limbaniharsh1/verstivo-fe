@@ -61,8 +61,8 @@ export function FilterSortDrawer({ isOpen, onClose }: FilterSortDrawerProps) {
   const [expandedSections, setExpandedSections] = useState({
     sort: true,
     discount: false,
-    colour: true,
-    size: true,
+    colour: false,
+    size: false,
     material: false,
   });
 
@@ -123,6 +123,24 @@ export function FilterSortDrawer({ isOpen, onClose }: FilterSortDrawerProps) {
       headerClassName="h-[72px] shrink-0 border-b border-border/70 px-6"
       bodyClassName="px-6 py-5 space-y-6 flex-1 overflow-y-auto"
       closeButtonAriaLabel="Close Filter & Sort drawer"
+      footer={
+        <div className="border-t border-border/70 p-5 bg-white flex items-center gap-2">
+          <button
+            type="button"
+            onClick={handleClearAll}
+            className="w-[140px] rounded-full border border-black/80 bg-white py-2 text-sm font-medium text-black transition-colors hover:bg-surface-muted active:scale-98 cursor-pointer"
+          >
+            Clear All
+          </button>
+          <button
+            type="button"
+            onClick={onClose}
+            className="flex-1 rounded-full bg-[#0000C9] py-2 text-sm font-medium text-white transition-opacity hover:opacity-90 active:scale-98 cursor-pointer"
+          >
+            Apply Filter
+          </button>
+        </div>
+      }
     >
       {/* Section 1: Sort By */}
       <div className="border-b border-border/60 pb-6">
@@ -308,24 +326,6 @@ export function FilterSortDrawer({ isOpen, onClose }: FilterSortDrawerProps) {
             })}
           </div>
         ) : null}
-      </div>
-
-      {/* Drawer Footer Actions */}
-      <div className="sticky bottom-0 shrink-0 border-t border-border/70 p-5 bg-white flex items-center gap-2 mt-auto">
-        <button
-          type="button"
-          onClick={handleClearAll}
-          className="w-[140px] rounded-full border border-black/80 bg-white py-2 text-sm font-medium text-black transition-colors hover:bg-surface-muted active:scale-98 cursor-pointer"
-        >
-          Clear All
-        </button>
-        <button
-          type="button"
-          onClick={onClose}
-          className="flex-1 rounded-full bg-[#0000C9] py-2 text-sm font-medium text-white transition-opacity hover:opacity-90 active:scale-98 cursor-pointer"
-        >
-          Apply Filter
-        </button>
       </div>
     </Drawer>
   );

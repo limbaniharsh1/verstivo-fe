@@ -58,9 +58,9 @@ export function ProductDetailView({ product }: ProductDetailViewProps) {
       </div>
 
       {/* Product Reviews Section */}
-      <div className="w-full border-t border-slate-100">
+      {/* <div className="w-full border-t border-slate-100">
         <ProductReviews />
-      </div>
+      </div> */}
       
       {/* Bottom Section: You most loved Carousel */}
       <div className="w-full mt-5 sm:mt-4 pt-2 sm:pt-2">
@@ -72,7 +72,7 @@ export function ProductDetailView({ product }: ProductDetailViewProps) {
         />
       </div>
 
-      {/* Social Gallery @verstivo.in Section */}
+      {/* Social Gallery @blupair.in Section */}
       <div className="w-full">
         <SocialGallery />
       </div>

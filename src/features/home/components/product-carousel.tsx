@@ -1,7 +1,12 @@
 "use client";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import type { Swiper as SwiperClass } from "swiper";
+
+import "swiper/css";
 
 import { ProductCard } from "@/features/home/components/product-card";
 import type { Product } from "@/features/home/data/trending-products";
@@ -14,7 +19,7 @@ type ProductCarouselProps = {
 };
 
 const scrollButtonClassName =
-  "absolute top-[33%] sm:top-[34%] z-20 hidden size-9 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-surface shadow-md transition-colors hover:bg-foreground hover:text-primary-contrast active:bg-foreground active:text-primary-contrast focus-visible:bg-foreground focus-visible:text-primary-contrast focus-visible:outline-2 focus-visible:outline-primary sm:grid";
+  "absolute top-[33%] sm:top-[34%] z-20 hidden size-9 translate-y-1/2 cursor-pointer place-items-center rounded-full bg-surface shadow-md transition-colors hover:bg-foreground hover:text-primary-contrast active:bg-foreground active:text-primary-contrast focus-visible:bg-foreground focus-visible:text-primary-contrast focus-visible:outline-2 focus-visible:outline-primary sm:grid disabled:opacity-30 disabled:pointer-events-none";
 
 export function ProductCarousel({
   heading,
@@ -22,21 +27,23 @@ export function ProductCarousel({
   products,
   showGenderFilter = false,
 }: ProductCarouselProps) {
-  const productListRef = useRef<HTMLUListElement>(null);
+  const [swiperRef, setSwiperRef] = useState<SwiperClass | null>(null);
   const [selectedGender, setSelectedGender] = useState<"men" | "women">("men");
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
-  const scrollProducts = (direction: "previous" | "next") => {
-    const productList = productListRef.current;
-
-    if (!productList) {
-      return;
-    }
-
-    productList.scrollBy({
-      left: direction === "next" ? productList.clientWidth * 0.75 : -productList.clientWidth * 0.75,
-      behavior: "smooth",
-    });
+  const updateNavigationState = (swiper: SwiperClass) => {
+    setCanScrollLeft(!swiper.isBeginning);
+    setCanScrollRight(!swiper.isEnd);
   };
+
+  // Re-evaluate navigation state when products change
+  useEffect(() => {
+    if (swiperRef) {
+      swiperRef.update();
+      updateNavigationState(swiperRef);
+    }
+  }, [products, swiperRef]);
 
   return (
     <section
@@ -81,32 +88,69 @@ export function ProductCarousel({
       <div className="relative w-full">
         <button
           type="button"
+          disabled={!canScrollLeft}
           className={`${scrollButtonClassName} left-2 sm:left-4 lg:left-6`}
           aria-label="View previous products"
-          onClick={() => scrollProducts("previous")}
+          onClick={() => swiperRef?.slidePrev()}
         >
           <ChevronLeft size={20} />
         </button>
 
-        <ul
-          ref={productListRef}
-          className="scrollbar-hidden flex snap-x snap-mandatory gap-2 overflow-x-auto px-5 sm:px-8 lg:px-11 scroll-px-5 sm:scroll-px-8 lg:scroll-px-11"
+        <Swiper
+          onSwiper={(swiper) => {
+            setSwiperRef(swiper);
+            updateNavigationState(swiper);
+          }}
+          onSlideChange={updateNavigationState}
+          onBreakpoint={updateNavigationState}
+          onUpdate={updateNavigationState}
+          modules={[Navigation]}
+          spaceBetween={8}
+          slidesPerView={1.5}
+          breakpoints={{
+            480: {
+              slidesPerView: 1.8,
+              spaceBetween: 8,
+            },
+            640: {
+              slidesPerView: 2.3,
+              spaceBetween: 8,
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 8,
+            },
+            1024: {
+              slidesPerView: 3.2,
+              spaceBetween: 8,
+            },
+            1280: {
+              slidesPerView: 3.5,
+              spaceBetween: 8,
+            },
+            1650: {
+              slidesPerView: 4.5,
+              spaceBetween: 8,
+            },
+          }}
+          className="w-full !px-5 sm:!px-8 lg:!px-11 !overflow-visible select-none cursor-grab active:cursor-grabbing"
         >
           {products.map((product) => (
-            <li
+            <SwiperSlide
               key={product.id}
-              className="min-w-0 shrink-0 basis-[74%] min-[480px]:basis-[56%] sm:basis-[42%] md:basis-[30%] lg:basis-[26.8%] snap-start overflow-hidden"
+              className="min-w-0 shrink-0 overflow-hidden"
             >
               <ProductCard product={product} />
-            </li>
+            </SwiperSlide>
           ))}
-        </ul>
+        </Swiper>
 
         <button
           type="button"
+          disabled={!canScrollRight}
           className={`${scrollButtonClassName} right-2 sm:right-4 md:right-6 lg:right-8`}
           aria-label="View next products"
-          onClick={() => scrollProducts("next")}
+          onClick={() => swiperRef?.slideNext()}
         >
           <ChevronRight size={20} />
         </button>

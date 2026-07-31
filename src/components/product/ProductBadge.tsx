@@ -19,7 +19,7 @@ export function ProductBadge({ badge, className = "" }: ProductBadgeProps) {
 
   return (
     <span
-      className={`rounded-full px-3 py-1 text-xs min-[375px]:text-sm sm:text-[14px] font-medium shadow-xs pointer-events-none inline-flex items-center justify-center ${badgeClassName} ${className}`}
+      className={`rounded-full px-3 py-1 text-xs min-[375px]:text-sm sm:text-[14px] font-medium pointer-events-none inline-flex items-center justify-center ${badgeClassName} ${className}`}
     >
       {label}
     </span>

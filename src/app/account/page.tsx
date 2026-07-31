@@ -4,8 +4,8 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { AccountView } from "@/features/account/components/account-view";
 
 export const metadata = {
-  title: "Account | VERSTIVO",
-  description: "Manage your personal information, address, and orders at VERSTIVO.",
+  title: "Account | BLUPAIR",
+  description: "Manage your personal information, address, and orders at BLUPAIR.",
 };
 
 export default function AccountPage() {

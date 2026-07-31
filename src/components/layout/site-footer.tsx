@@ -53,9 +53,9 @@ const FOOTER_LINK_GROUPS = [
     ],
   },
   {
-    title: "Verstivo",
+    title: "Blupair",
     links: [
-      { label: "About Verstivo", href: "/about" },
+      { label: "About Blupair", href: "/about" },
       { label: "Sustainability", href: "/sustainability" },
       { label: "Press", href: "/press" },
       { label: "Our Blog", href: "/blog" },
@@ -95,10 +95,10 @@ export function SiteFooter() {
     <footer className="w-full overflow-hidden bg-primary text-white border-t border-white">
       {/* 1. Top Benefits Bar */}
       <div className="grid grid-cols-1 border-b border-white min-[480px]:grid-cols-2 lg:grid-cols-[31%_1fr_1fr_1fr]">
-        {/* Cell 1: Only at verstivo.in (Wider box) */}
+        {/* Cell 1: Only at blupair.in (Wider box) */}
         <div className="flex min-h-[80px] items-center justify-center border-b border-white border-r-0 min-[480px]:border-r lg:border-b-0 px-6 py-4 text-center">
           <span className="text-[17px] sm:text-[19px] lg:text-[21px] font-semibold tracking-tight text-white">
-            Only at verstivo.in
+            Only at blupair.in
           </span>
         </div>
 
@@ -192,9 +192,9 @@ export function SiteFooter() {
           href="/"
           className="inline-block text-[30px] min-[390px]:text-[35px] sm:text-[40px] lg:text-[48px] font-black tracking-[0.05em] text-white leading-none"
           style={{ fontFamily: "var(--font-monument)" }}
-          aria-label="VERSTIVO homepage"
+          aria-label="BLUPAIR homepage"
         >
-          VERSTIVO
+          BLUPAIR
         </Link>
       </div>
 

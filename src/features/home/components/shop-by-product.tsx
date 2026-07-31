@@ -34,10 +34,10 @@ const SHOP_BY_ITEMS = [
 export function ShopByProduct() {
   return (
     <section
-      className="bg-surface px-4 py-8 min-[375px]:px-5 sm:px-8 md:px-8 lg:px-11 lg:py-14 text-foreground"
+      className="bg-surface py-8 lg:py-14 text-foreground"
       aria-labelledby="shop-by-product-heading"
     >
-      <div className="mx-auto w-full max-w-[1585px]">
+      <div className="container-main">
         <h2
           id="shop-by-product-heading"
           className="mb-5 sm:mb-6 md:mb-8 text-left text-[22px] min-[375px]:text-[24px] sm:text-[30px] md:text-[32px] lg:text-[36px] font-semibold tracking-[-0.02em]"

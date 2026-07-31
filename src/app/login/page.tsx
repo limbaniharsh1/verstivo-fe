@@ -4,8 +4,8 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { LoginForm } from "@/features/auth";
 
 export const metadata: Metadata = {
-  title: "Log In | Verstivo",
-  description: "Log in to your Verstivo account.",
+  title: "Log In | Blupair",
+  description: "Log in to your Blupair account.",
 };
 
 export default function LoginPage() {

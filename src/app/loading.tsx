@@ -8,7 +8,7 @@ export default function GlobalLoading() {
         <div className="absolute inset-0 rounded-full border-3 border-[#0000d6] border-t-transparent animate-spin" />
       </div>
       <p className="mt-4 text-xs tracking-widest text-neutral-400 font-mono uppercase">
-        Loading Verstivo
+        Loading Blupair
       </p>
     </div>
   );

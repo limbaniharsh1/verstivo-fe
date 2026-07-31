@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Check } from "lucide-react";
+import { BsBagPlus } from "react-icons/bs";
 import { toast } from "sonner";
 import { useCart } from "@/features/cart";
 import { parseNumericPrice, formatDisplayPrice } from "@/lib/price";
@@ -39,6 +40,7 @@ export function BaseProductCard({
     customUrl || `/products/${product.id || "arizona-soft-footbed"}`;
 
   const formattedPrice = formatDisplayPrice(product.price);
+  const formattedOriginalPrice = product.originalPrice ? formatDisplayPrice(product.originalPrice) : undefined;
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -61,7 +63,6 @@ export function BaseProductCard({
   };
 
 
-  // Horizontal variant (used in cart drawer bestseller recommendation items)
   if (variant === "horizontal") {
     return (
       <div className="flex items-center justify-between gap-3 sm:gap-4 py-1 group">
@@ -77,36 +78,42 @@ export function BaseProductCard({
             className="object-contain p-1.5 sm:p-2 transition-transform duration-300 group-hover:scale-105"
           />
         </Link>
-
+ 
         <Link href={productUrl} className="flex-1 min-w-0 pr-1 sm:pr-2 cursor-pointer">
-          <h4 className="text-[14px] sm:text-[16px] font-semibold text-black tracking-tight line-clamp-1 hover:underline">
+          <h4 className="text-responsive-lg font-semibold text-black tracking-tight line-clamp-1 hover:underline">
             {product.name}
           </h4>
-          <p className="text-[10px] sm:text-[11px] font-medium text-neutral-500 uppercase tracking-normal mt-0.5 mb-2 line-clamp-1">
+          <p className="text-responsive-subtitle font-medium text-neutral-500 uppercase tracking-normal mt-0.5 mb-2 line-clamp-1">
             {product.subtitle}
           </p>
-          <p className="text-[13px] sm:text-[14px] font-bold text-black">
+          <p className="text-responsive-lg font-bold text-black">
             {formattedPrice}
           </p>
         </Link>
-
+ 
         <button
           type="button"
           onClick={handleAddToCart}
-          className={`shrink-0 h-8 sm:h-9 px-4 sm:px-5 rounded-full text-[12px] sm:text-[13px] font-medium transition-all duration-200 cursor-pointer flex items-center justify-center gap-1.5 ${
-            isAdded
+          className={`group/btn shrink-0 flex h-6.5 sm:h-7.5 md:h-7.5 xl:h-9 cursor-pointer items-center justify-center rounded-full px-2.5 min-[375px]:px-3 md:px-3.5 xl:px-4.5 text-responsive-lg font-medium shadow-sm transition-all active:scale-95 ${isAdded
               ? "bg-emerald-600 text-white shadow-xs scale-95"
-              : "bg-black text-white hover:bg-neutral-800 active:scale-95 shadow-xs"
-          }`}
+              : "bg-black text-white hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            }`}
           aria-label={`Add ${product.name} to cart`}
         >
           {isAdded ? (
-            <>
+            <span className="flex items-center justify-center gap-1.5">
               <Check size={14} strokeWidth={2.5} />
               <span>Added</span>
-            </>
+            </span>
           ) : (
-            <span>Add</span>
+            <span className="relative flex items-center justify-center pl-0 transition-all duration-300 ease-linear group-hover/btn:pl-6">
+              <span className="absolute left-1/2 -translate-x-1/2 opacity-0 transition-all duration-300 ease-linear group-hover/btn:left-0 group-hover/btn:translate-x-0 group-hover/btn:opacity-100 shrink-0 flex items-center justify-center">
+                <BsBagPlus className="size-3.5 sm:size-4" strokeWidth={0.5} />
+              </span>
+              <span className="shrink-0">
+                Add
+              </span>
+            </span>
           )}
         </button>
       </div>
@@ -207,20 +214,32 @@ export function BaseProductCard({
       <button
         type="button"
         onClick={handleAddToCart}
-        className="z-10 col-start-1 row-start-1 m-1.5 min-[375px]:m-2 sm:m-2.5 lg:m-3 flex h-6 min-[375px]:h-6.5 sm:h-7 md:h-7.5 cursor-pointer items-center justify-center rounded-full bg-foreground px-2.5 min-[375px]:px-3 md:px-3.5 text-[10px] min-[375px]:text-[10.5px] sm:text-[11px] md:text-[11.5px] lg:text-[12px] font-medium text-primary-contrast shadow-sm transition-all active:scale-95 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary self-end justify-self-end"
+        className="group/btn z-10 col-start-1 row-start-1 m-1.5 min-[375px]:m-2 sm:m-2.5 lg:m-3 flex h-7.75 xl:h-9 cursor-pointer items-center justify-center rounded-full bg-foreground px-4.5 text-responsive-lg font-medium text-primary-contrast shadow-sm transition-all active:scale-95 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary self-end justify-self-end"
         aria-label={`Add ${product.name} to cart`}
       >
-        Add
+        <span className="relative flex items-center justify-center pl-0 transition-all duration-300 ease-linear group-hover/btn:pl-6">
+          <span className="absolute left-1/2 -translate-x-1/2 opacity-0 transition-all duration-300 ease-linear group-hover/btn:left-0 group-hover/btn:translate-x-0 group-hover/btn:opacity-100 shrink-0 flex items-center justify-center">
+            <BsBagPlus className="size-3.5 sm:size-4" strokeWidth={0.5} />
+          </span>
+          <span className="shrink-0">
+            Add
+          </span>
+        </span>
       </button>
 
-      <h3 className="product-title col-start-1 row-start-2 px-2 min-[375px]:px-2.5 sm:px-3.5 md:px-4 pt-1.5 sm:pt-2.5 leading-tight font-semibold text-[11px] min-[375px]:text-[11.5px] sm:text-[12.5px] md:text-[13px] lg:text-[14px] truncate pointer-events-none" title={product.name}>
+      <h3 className="product-title col-start-1 row-start-2 px-2 min-[375px]:px-2.5 sm:px-3.5 md:px-4 pt-1.5 sm:pt-2.5 xl:pt-4 leading-tight font-semibold text-responsive-lg truncate pointer-events-none" title={product.name}>
         {product.name}
       </h3>
-      <p className="product-subtitle col-start-1 row-start-3 px-2 min-[375px]:px-2.5 sm:px-3.5 md:px-4 pt-0.5 uppercase text-muted text-[9px] min-[375px]:text-[9.5px] sm:text-[10px] md:text-[10.5px] lg:text-[11px] truncate pointer-events-none" title={product.subtitle}>
+      <p className="product-subtitle col-start-1 row-start-3 px-2 min-[375px]:px-2.5 sm:px-3.5 md:px-4 pt-0.5 3xl:pt-1 uppercase text-muted text-responsive-subtitle line-clamp-2 pointer-events-none font-medium" title={product.subtitle}>
         {product.subtitle}
       </p>
-      <p className="product-price col-start-1 row-start-4 px-2 min-[375px]:px-2.5 sm:px-3.5 md:px-4 pt-1 sm:pt-1.5 pb-2.5 sm:pb-3.5 font-semibold text-[11px] min-[375px]:text-[11.5px] sm:text-[12.5px] md:text-[13px] lg:text-[14px] pointer-events-none">
-        {formattedPrice}
+      <p className="product-price col-start-1 row-start-4 px-2 min-[375px]:px-2.5 sm:px-3.5 md:px-4 pt-1 sm:pt-1.5 xl:pt-4 pb-2.5 sm:pb-3.5 font-semibold text-responsive-lg pointer-events-none flex flex-wrap items-center gap-1.5 sm:gap-2">
+        {formattedOriginalPrice && (
+          <span className="line-through text-muted font-normal">
+            {formattedOriginalPrice}
+          </span>
+        )}
+        <span className="text-foreground">{formattedPrice}</span>
       </p>
     </article>
   );

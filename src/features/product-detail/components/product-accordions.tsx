@@ -21,7 +21,7 @@ export function ProductAccordions({ items }: ProductAccordionsProps) {
   };
 
   return (
-    <div className="w-full border-t border-border mt-6 pt-2 divide-y divide-border">
+    <div className="w-full divide-y divide-[#D0D0D0] border-b border-[#D0D0D0]">
       {items.map((item) => {
         const isOpen = openId === item.id;
 

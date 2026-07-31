@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "About Us | CHAMPL - Modern Indian Comfort Footwear",
   description:
     "Discover the story behind CHAMPL, our founder Sahil Gol's vision, and our mission to transform everyday Indian footwear into iconic, comfortable, and handcrafted design.",
-  keywords: ["CHAMPL", "About Us", "Sahil Gol", "Footwear Craftsmanship", "Comfort Footwear India", "Verstivo"],
+  keywords: ["CHAMPL", "About Us", "Sahil Gol", "Footwear Craftsmanship", "Comfort Footwear India", "Blupair"],
 };
 
 export default function AboutPage() {

@@ -82,10 +82,10 @@ export function SiteHeader() {
               href="/"
               className="flex h-full items-center xl:hidden"
               style={{ fontFamily: "var(--font-monument)" }}
-              aria-label="Verstivo home"
+              aria-label="Blupair home"
             >
               <span className="truncate text-[15px] min-[375px]:text-[17px] min-[420px]:text-[19px] sm:text-[22px] font-bold tracking-tight">
-                VERSTIVO
+                BLUPAIR
               </span>
             </Link>
 
@@ -129,18 +129,18 @@ export function SiteHeader() {
             href="/"
             className="hidden h-full min-w-0 items-center justify-center border-r-0 xl:border-r xl:border-border px-2 lg:px-4 xl:px-10 2xl:px-14 text-center text-[20px] lg:text-[21px] xl:text-[28px] 2xl:text-[32px] font-bold tracking-tight shrink-0 xl:flex"
             style={{ fontFamily: "var(--font-monument)" }}
-            aria-label="Verstivo home"
+            aria-label="Blupair home"
           >
-            <span className="truncate">VERSTIVO</span>
+            <span className="truncate">BLUPAIR</span>
           </Link>
 
           <div className="flex h-full w-full min-w-0 items-center justify-end">
             {/* Desktop Search Button Trigger */}
             <button
               type="button"
-              onClick={() => setIsSearchOpen(true)}
+              onClick={() => setIsSearchOpen((prev) => !prev)}
               className="hidden h-full min-w-0 w-full max-w-[240px] 3xl:max-w-[320px] items-center justify-center border-r border-border px-[21px] xl:flex cursor-pointer"
-              aria-label="Open product search"
+              aria-label="Open/Close product search"
             >
               <span className="flex h-[38px] 3xl:h-[44px] w-full min-w-0 items-center gap-1.5 rounded-full border border-black px-3.5 transition-colors 3xl:px-5">
                 <LiaSearchSolid className="size-[18px] 3xl:size-[20px] shrink-0 text-black" aria-hidden="true" />
@@ -239,6 +239,7 @@ export function SiteHeader() {
             onClose={() => setActiveMegaMenu(null)}
           />
         ) : null}
+
 
         {/* Mobile Navigation Drawer Overlay with Smooth Slide/Fade Animation */}
         <div

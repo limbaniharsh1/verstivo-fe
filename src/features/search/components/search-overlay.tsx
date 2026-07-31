@@ -119,10 +119,10 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
   if (!isMounted) return null;
 
   return (
-    <div className="fixed inset-x-0 top-[95px] bottom-0 z-40 flex flex-col justify-start overflow-hidden pointer-events-none">
+    <div className="absolute top-full left-0 right-0 h-[calc(100vh-100%)] z-40 flex flex-col justify-start overflow-hidden pointer-events-none">
       {/* Backdrop */}
       <div
-        className={`fixed inset-x-0 top-[95px] bottom-0 bg-black/40 backdrop-blur-xs transition-opacity duration-300 ease-in-out pointer-events-auto ${
+        className={`absolute inset-0 bg-black/40 backdrop-blur-xs transition-opacity duration-300 ease-in-out pointer-events-auto ${
           isAnimating ? "opacity-100" : "opacity-0"
         }`}
         onClick={onClose}

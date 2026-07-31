@@ -3,8 +3,9 @@
 import React, { useEffect } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { X, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { addressSchema, type AddressSchemaType } from "../schemas/account-schemas";
+import { Drawer } from "@/components/common/Drawer";
 
 export interface AddressData {
   id?: string;
@@ -27,8 +28,44 @@ interface AddressDrawerProps {
   initialData?: AddressData | null;
 }
 
-const COUNTRY_OPTIONS = ["India", "United States", "United Kingdom", "Canada", "Australia"];
-const PROVINCE_OPTIONS = ["Gujarat", "Maharashtra", "Delhi", "Karnataka", "Tamil Nadu", "Rajasthan", "Punjab"];
+const PROVINCE_OPTIONS = [
+  "Andhra Pradesh",
+  "Arunachal Pradesh",
+  "Assam",
+  "Bihar",
+  "Chhattisgarh",
+  "Goa",
+  "Gujarat",
+  "Haryana",
+  "Himachal Pradesh",
+  "Jharkhand",
+  "Karnataka",
+  "Kerala",
+  "Madhya Pradesh",
+  "Maharashtra",
+  "Manipur",
+  "Meghalaya",
+  "Mizoram",
+  "Nagaland",
+  "Odisha",
+  "Punjab",
+  "Rajasthan",
+  "Sikkim",
+  "Tamil Nadu",
+  "Telangana",
+  "Tripura",
+  "Uttar Pradesh",
+  "Uttarakhand",
+  "West Bengal",
+  "Andaman and Nicobar Islands",
+  "Chandigarh",
+  "Dadra and Nagar Haveli and Daman and Diu",
+  "Delhi",
+  "Jammu and Kashmir",
+  "Ladakh",
+  "Lakshadweep",
+  "Puducherry"
+];
 
 export function AddressDrawer({ isOpen, onClose, onSave, initialData }: AddressDrawerProps) {
   const isEditing = Boolean(initialData?.id);
@@ -48,7 +85,7 @@ export function AddressDrawer({ isOpen, onClose, onSave, initialData }: AddressD
       address1: "",
       address2: "",
       city: "",
-      country: "",
+      country: "India",
       province: "",
       postalCode: "",
       phone: "",
@@ -56,7 +93,6 @@ export function AddressDrawer({ isOpen, onClose, onSave, initialData }: AddressD
     },
   });
 
-  const selectedCountry = useWatch({ control, name: "country" });
   const selectedProvince = useWatch({ control, name: "province" });
 
   useEffect(() => {
@@ -81,7 +117,7 @@ export function AddressDrawer({ isOpen, onClose, onSave, initialData }: AddressD
           address1: "",
           address2: "",
           city: "",
-          country: "",
+          country: "India",
           province: "",
           postalCode: "",
           phone: "",
@@ -98,39 +134,43 @@ export function AddressDrawer({ isOpen, onClose, onSave, initialData }: AddressD
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden">
-      {/* Dark Backdrop */}
-      <div
-        className="fixed inset-0 bg-black/40 backdrop-blur-xs transition-opacity"
-        onClick={onClose}
-        aria-hidden="true"
-      />
+    <Drawer
+      isOpen={isOpen}
+      onClose={onClose}
+      title={isEditing ? "Edit address" : "Add a new address"}
+      position="right"
+      className="max-w-[420px] sm:max-w-[460px]"
+      headerClassName="h-[68px] sm:h-[72px] shrink-0 border-b border-slate-200 px-6 bg-white"
+      bodyClassName="px-6 py-5 flex-1 overflow-y-auto"
+      closeButtonAriaLabel="Close address drawer"
+      footer={
+        <div className="p-6 border-t border-slate-200 bg-white shrink-0 space-y-4">
+          <label className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-700 select-none cursor-pointer">
+            <input
+              type="checkbox"
+              {...register("setAsDefault")}
+              className="w-4 h-4 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer"
+            />
+            <span>Set as default address</span>
+          </label>
 
-      {/* Slide-over Drawer Panel */}
-      <div className="fixed inset-y-0 right-0 max-w-full flex">
-        <div className="w-screen max-w-[420px] sm:max-w-[460px] bg-white shadow-2xl flex flex-col h-full">
-          <form
-            onSubmit={handleSubmit(onSubmitForm)}
-            className="flex flex-col h-full overflow-hidden"
-            noValidate
+          <button
+            type="submit"
+            form="address-form"
+            disabled={isSubmitting}
+            className="w-full h-11 sm:h-12 rounded-full bg-primary hover:bg-primary-hover text-white text-sm font-semibold transition-colors shadow-xs cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
           >
-            {/* Drawer Fixed Header */}
-            <div className="px-6 py-4.5 border-b border-slate-200 flex items-center justify-between shrink-0 bg-white">
-              <h2 className="text-base sm:text-lg font-semibold text-slate-900">
-                Add a new address
-              </h2>
-              <button
-                type="button"
-                onClick={onClose}
-                className="text-slate-400 hover:text-slate-600 transition-colors p-1 rounded-lg cursor-pointer"
-                aria-label="Close drawer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Drawer Scrollable Body (Form Fields) */}
-            <div className="flex-1 overflow-y-auto px-6 py-5 space-y-3.5">
+            {isEditing ? "Update Address" : "Add Address"}
+          </button>
+        </div>
+      }
+    >
+      <form
+        id="address-form"
+        onSubmit={handleSubmit(onSubmitForm)}
+        className="space-y-3.5"
+        noValidate
+      >
               {/* First Name & Last Name */}
               <div className="grid grid-cols-2 gap-3.5">
                 <div>
@@ -218,36 +258,6 @@ export function AddressDrawer({ isOpen, onClose, onSave, initialData }: AddressD
                 )}
               </div>
 
-              {/* Country/region Select Dropdown */}
-              <div>
-                <div className="relative">
-                  <select
-                    {...register("country")}
-                    className={`w-full h-11 pl-4 pr-10 rounded-xl border text-sm bg-white appearance-none focus:outline-none transition-all cursor-pointer ${
-                      !selectedCountry ? "text-slate-400" : "text-slate-900"
-                    } ${
-                      errors.country
-                        ? "border-red-400 focus:border-red-500 focus:ring-1 focus:ring-red-500 bg-red-50/20"
-                        : "border-slate-300 focus:border-primary focus:ring-1 focus:ring-primary"
-                    }`}
-                  >
-                    <option value="" disabled hidden>
-                      Country/region
-                    </option>
-                    {COUNTRY_OPTIONS.map((c) => (
-                      <option key={c} value={c} className="text-slate-900">
-                        {c}
-                      </option>
-                    ))}
-                  </select>
-                  <ChevronDown className="w-4 h-4 text-slate-500 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                </div>
-                {errors.country && (
-                  <p className="text-xs text-red-500 mt-1 font-medium">
-                    {errors.country.message}
-                  </p>
-                )}
-              </div>
 
               {/* Province Select Dropdown */}
               <div>
@@ -326,30 +336,7 @@ export function AddressDrawer({ isOpen, onClose, onSave, initialData }: AddressD
                   </p>
                 )}
               </div>
-            </div>
-
-            {/* Drawer Fixed Footer (Separated by top horizontal border line) */}
-            <div className="p-6 border-t border-slate-200 bg-white shrink-0 space-y-4">
-              <label className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-700 select-none cursor-pointer">
-                <input
-                  type="checkbox"
-                  {...register("setAsDefault")}
-                  className="w-4 h-4 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer"
-                />
-                <span>Set as default address</span>
-              </label>
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full h-11 sm:h-12 rounded-full bg-primary hover:bg-primary-hover text-white text-sm font-semibold transition-colors shadow-xs cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
-              >
-                {isEditing ? "Update Address" : "Add Address"}
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+      </form>
+    </Drawer>
   );
 }

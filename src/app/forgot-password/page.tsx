@@ -4,8 +4,8 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { ResetPasswordForm } from "@/features/auth";
 
 export const metadata: Metadata = {
-  title: "Reset Password | Verstivo",
-  description: "Reset your Verstivo account password.",
+  title: "Reset Password | Blupair",
+  description: "Reset your Blupair account password.",
 };
 
 export default function ForgotPasswordPage() {

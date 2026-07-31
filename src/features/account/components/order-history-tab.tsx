@@ -144,7 +144,7 @@ export function OrderHistoryTab() {
           Order History
         </h3>
         <p className="text-xs sm:text-sm text-slate-500 font-normal">
-          You haven’t purchased anything from Verstivo yet.
+          You haven’t purchased anything from Blupair yet.
         </p>
       </div>
     );
@@ -207,23 +207,23 @@ export function OrderHistoryTab() {
               <div className="bg-[#F8F8F8] px-5 sm:px-8 py-3.5 sm:py-4 flex flex-wrap items-center justify-between gap-4 sm:gap-6 text-xs">
                 <div className="flex items-center gap-8 sm:gap-14">
                   <div>
-                    <span className="text-slate-500 block text-[11px]">Order placed:</span>
-                    <span className="font-semibold text-slate-900 text-xs sm:text-sm">
+                    <span className="text-slate-500 block text-[12px]">Order placed:</span>
+                    <span className="font-semibold text-slate-900 text-sm">
                       {order.orderDate}
                     </span>
                   </div>
 
                   <div>
-                    <span className="text-slate-500 block text-[11px]">Total:</span>
-                    <span className="font-semibold text-slate-900 text-xs sm:text-sm">
+                    <span className="text-slate-500 block text-[12px]">Total:</span>
+                    <span className="font-semibold text-slate-900 text-sm">
                       {order.total}
                     </span>
                   </div>
                 </div>
 
                 <div className="text-left sm:text-right">
-                  <span className="text-slate-500 block text-[11px]">Order Number:</span>
-                  <span className="font-semibold text-slate-900 text-xs sm:text-sm">
+                  <span className="text-slate-500 block text-[12px]">Order Number:</span>
+                  <span className="font-semibold text-slate-900 text-sm">
                     # {order.orderNumber}
                   </span>
                 </div>
@@ -244,7 +244,7 @@ export function OrderHistoryTab() {
                 </div>
 
                 {/* Items List (Reduced spacing between item rows) */}
-                <div className="space-y-2.5">
+                <div className="space-y-5 sm:space-y-2.5">
                   {order.items.map((item, idx) => (
                     <div
                       key={item.id}
@@ -252,7 +252,7 @@ export function OrderHistoryTab() {
                     >
                       {/* Product Thumbnail & Details */}
                       <div className="flex items-center gap-4">
-                        <div className="relative w-[160px] h-[160px] bg-[#F8F8F8] rounded-none flex items-center justify-center shrink-0 border border-slate-100 p-3 overflow-hidden">
+                        <div className="relative w-[125px] h-[125px] sm:w-[160px] sm:h-[160px] bg-[#F8F8F8] rounded-none flex items-center justify-center shrink-0 border border-slate-100 p-3 overflow-hidden">
                           {/* Quantity Badge (Square shape) */}
                           <span className="absolute top-1.5 right-1.5 w-5 h-5 bg-black text-white text-[12px] font-semibold rounded-sm flex items-center justify-center z-10">
                             {item.quantity}
@@ -267,10 +267,10 @@ export function OrderHistoryTab() {
                         </div>
 
                         <div>
-                          <h5 className="text-[18px] font-semibold text-black">
+                          <h5 className="text-base sm:text-[18px] font-semibold text-black">
                             {item.title}
                           </h5>
-                          <p className="text-[14px] text-slate-500 tracking-tight uppercase mt-0.5 mb-1">
+                          <p className="text-sm sm:text-[14px] text-slate-500 tracking-tight uppercase mt-0.5 mb-1">
                             {item.subtitle}
                           </p>
                           <p className="text-[18px] font-semibold text-black mt-4.5">
@@ -281,11 +281,11 @@ export function OrderHistoryTab() {
 
                       {/* Action Buttons (Rendered on first item row) */}
                       {idx === 0 && (
-                        <div className="flex items-center gap-2.5 self-start sm:self-center mt-2 sm:mt-0">
+                        <div className="flex items-center gap-2.5 self-start sm:self-center mt-1 sm:mt-2 sm:mt-0">
                           <button
                             type="button"
                             onClick={() => handleViewOrder(order)}
-                            className="px-5 py-2 sm:px-6 sm:py-2.5 rounded-full bg-black hover:bg-slate-800 text-white text-xs lg:text-[18px] font-medium transition-colors shadow-2xs cursor-pointer"
+                            className="px-5 py-2 sm:px-6 sm:py-2.5 rounded-full bg-black hover:bg-slate-800 text-white text-sm lg:text-[18px] font-medium transition-colors shadow-2xs cursor-pointer"
                           >
                             View Order
                           </button>
@@ -294,7 +294,7 @@ export function OrderHistoryTab() {
                             <button
                               type="button"
                               onClick={() => handleTrackOrder(order.orderNumber)}
-                              className="px-5 py-2 sm:px-6 sm:py-2.5 rounded-full bg-primary hover:bg-primary-hover text-white text-xs lg:text-[18px] font-medium transition-colors shadow-2xs cursor-pointer"
+                              className="px-5 py-2 sm:px-6 sm:py-2.5 rounded-full bg-primary hover:bg-primary-hover text-white text-sm lg:text-[18px] font-medium transition-colors shadow-2xs cursor-pointer"
                             >
                               Track Order
                             </button>
@@ -302,7 +302,7 @@ export function OrderHistoryTab() {
                             <button
                               type="button"
                               onClick={() => handleWriteReview(item)}
-                              className="px-5 py-2 sm:px-6 sm:py-2.5 rounded-full bg-primary hover:bg-primary-hover text-white text-xs lg:text-[18px] font-medium transition-colors shadow-2xs cursor-pointer"
+                              className="px-5 py-2 sm:px-6 sm:py-2.5 rounded-full bg-primary hover:bg-primary-hover text-white text-sm lg:text-[18px] font-medium transition-colors shadow-2xs cursor-pointer"
                             >
                               Write a review
                             </button>
