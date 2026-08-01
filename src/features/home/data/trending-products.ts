@@ -44,4 +44,24 @@ export const TRENDING_PRODUCTS: readonly Product[] = [
     ...productDetails,
     badge: { label: "30% OFF", tone: "primary" },
   },
+  {
+    id: "florida-taupe-5",
+    ...productDetails,
+    badge: { label: "Bestseller", tone: "neutral" },
+  },
+  {
+    id: "florida-taupe-6",
+    ...productDetails,
+    badge: { label: "30% OFF", tone: "primary" },
+  },
+  {
+    id: "florida-taupe-7",
+    ...productDetails,
+    badge: { label: "Bestseller", tone: "neutral" },
+  },
+  {
+    id: "florida-taupe-8",
+    ...productDetails,
+    badge: { label: "30% OFF", tone: "primary" },
+  },
 ];
