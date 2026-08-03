@@ -95,7 +95,7 @@ export function FounderAndMission() {
 
           {/* Right Column - Founder Profile Card */}
           <div className="w-full max-w-[340px] mx-auto lg:ml-auto lg:mr-0 lg:sticky lg:top-28 order-1 lg:order-2">
-            <div className="bg-[#f9f9fb] p-3.5 sm:p-4 rounded-none border border-slate-200/80 shadow-[0_12px_24px_-6px_rgba(0,0,0,0.12),0_4px_8px_-4px_rgba(0,0,0,0.06)] transition-shadow hover:shadow-[0_16px_32px_-6px_rgba(0,0,0,0.18)]">
+            <div className="bg-[#f9f9fb] p-3.5 sm:p-4 rounded-none border border-slate-200/80">
               <div className="relative aspect-[4/4.8] w-full overflow-hidden rounded-none bg-slate-200">
                 {!imageError ? (
                   <Image

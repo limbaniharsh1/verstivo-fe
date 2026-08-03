@@ -95,6 +95,24 @@
   --font-sans: var(--font-reyhan);
   --font-monument: var(--font-monument);
   --breakpoint-3xl: 103.125rem;
+
+  --shadow-2xs: none;
+  --shadow-xs: none;
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-xl: none;
+  --shadow-2xl: none;
+  --shadow-3xl: none;
+  --shadow-inner: none;
+
+  --drop-shadow-xs: none;
+  --drop-shadow-sm: none;
+  --drop-shadow-md: none;
+  --drop-shadow-lg: none;
+  --drop-shadow-xl: none;
+  --drop-shadow-2xl: none;
+  --drop-shadow-3xl: none;
 }
 
 @layer base {
