@@ -40,7 +40,7 @@ export function ShopByCard({
             {subtitle}
           </p>
           <div className="mt-2.5 xl:mt-4 3xl:mt-5">
-            <span className="inline-flex items-center justify-center rounded-full bg-black px-5 3xl:px-6 py-2 sm:py-2.5 3xl:py-3 text-responsive-lg !font-normal text-white transition-all group-hover:bg-neutral-800 shadow-2xs">
+            <span className="inline-flex items-center justify-center rounded-full bg-black px-5 3xl:px-6 py-2 sm:py-2.5 3xl:py-3 text-responsive-lg !font-normal text-white border border-transparent transition-all duration-300 ease-in-out hover:bg-white hover:text-black hover:border-border hover:shadow-none shadow-2xs">
               Shop Now
             </span>
           </div>

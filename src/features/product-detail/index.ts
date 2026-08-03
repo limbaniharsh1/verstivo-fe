@@ -1,6 +1,6 @@
 export * from "./data/product-detail-data";
-export * from "./components/product-gallery";
-export * from "./components/product-info";
-export * from "./components/product-accordions";
-export * from "./components/size-guide-drawer";
-export * from "./components/product-detail-view";
+export { ProductGallery } from "./components/product-gallery";
+export { ProductInfo } from "./components/product-info";
+export { ProductAccordions } from "./components/product-accordions";
+export { SizeGuideDrawer } from "./components/size-guide-drawer";
+export { ProductDetailView } from "./components/product-detail-view";

@@ -7,7 +7,7 @@ export function HeroBanner() {
       <div className="absolute inset-0 -z-20 h-full w-full">
         <Image
           src="/banner.png"
-          alt="Built for the ones building - Blupair footwear banner"
+          alt="Built for the ones building - Pairborn footwear banner"
           fill
           priority
           quality={95}
@@ -29,7 +29,7 @@ export function HeroBanner() {
           </p>
           <Link
             href="/bestsellers"
-            className="mt-6 sm:mt-7.75 inline-flex items-center justify-center rounded-full bg-primary hover:bg-primary-hover px-6 py-3 text-[13px] sm:text-[15px] lg:text-[16px] font-normal text-white !text-white shadow-md transition-all active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="mt-6 sm:mt-7.75 rounded-full bg-primary hover:bg-primary-hover text-white !text-white shadow-md transition-all active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white btn-banner-size"
           >
             Shop Bestseller
           </Link>

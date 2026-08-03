@@ -26,15 +26,15 @@ export function MegaMenuDropdown({
 
   return (
     <div
-      className="absolute top-full left-0 right-0 z-50 w-full bg-white border-y border-border shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200"
+      className="absolute top-full left-0 right-0 z-50 w-full bg-white border-y border-border shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200 max-h-[calc(100vh-100%)] overflow-y-auto"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       role="region"
       aria-label={`${categoryKey} Navigation Menu`}
     >
-      <div className="mx-auto grid w-full max-w-[1585px] grid-cols-1 lg:grid-cols-[42%_58%] xl:grid-cols-[40%_60%] min-h-[460px]">
+      <div className="mx-auto flex flex-col lg:flex-row w-full max-w-[1585px] min-h-[460px] items-stretch">
         {/* Left Side: Category / Material / Color Navigation */}
-        <div className="flex flex-col justify-between p-8 xl:p-12 2xl:p-14">
+        <div className="flex lg:w-[42%] xl:w-[40%] shrink-0 flex-col justify-between pt-[27px] pb-5 px-8 xl:pt-[27px] xl:pb-7 xl:px-12 2xl:pb-8 2xl:px-14 3xl:pt-[32px]">
           <div className="grid grid-cols-3 gap-6 xl:gap-10">
             {content.columns.map((column) => (
               <div key={column.title} className="flex flex-col">
@@ -46,7 +46,7 @@ export function MegaMenuDropdown({
                     <li key={link.label}>
                       <Link
                         href={link.href}
-                        className="inline-block text-[15px] xl:text-[16px] 2xl:text-[18px] font-semibold text-[#18181b] transition-colors hover:text-primary hover:translate-x-0.5 transform duration-150"
+                        className="relative pb-0.5 inline-block text-[15px] xl:text-[16px] 2xl:text-[18px] font-medium text-[#18181b] transition-colors hover:text-primary after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-px after:w-full after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left"
                         onClick={onClose}
                       >
                         {link.label}
@@ -70,7 +70,7 @@ export function MegaMenuDropdown({
         </div>
 
         {/* Right Side: Featured Footwear Product Grid */}
-        <div className="flex items-center justify-center border-l border-border bg-white p-8 xl:p-12 2xl:p-14">
+        <div className="flex flex-1 items-center justify-center border-t lg:border-t-0 lg:border-l border-border bg-white pt-[27px] pb-5 px-8 xl:pt-[27px] xl:pb-7 xl:px-12 2xl:pb-8 2xl:px-14 3xl:pt-[32px]">
           <div className="grid w-full grid-cols-4 gap-x-5 gap-y-8 items-end">
             {content.featuredItems.map((item) => (
               <Link
@@ -89,7 +89,7 @@ export function MegaMenuDropdown({
                     priority
                   />
                 </div>
-                <span className="mt-3 text-[13px] xl:text-[14px] font-semibold text-[#18181b] group-hover:text-primary transition-colors">
+                <span className="mt-3 text-responsive-lg truncate w-full font-semibold text-[#18181b] group-hover:text-primary transition-colors">
                   {item.name}
                 </span>
               </Link>

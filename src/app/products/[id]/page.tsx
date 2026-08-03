@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: ProductPageProps) {
   const { id } = await params;
   const product = getProductDetailById(id);
   return {
-    title: `${product.name} | BLUPAIR`,
+    title: `${product.name} | PAIRBORN`,
     description: product.subtitle,
   };
 }

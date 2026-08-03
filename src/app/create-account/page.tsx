@@ -4,8 +4,8 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { CreateAccountForm } from "@/features/auth";
 
 export const metadata: Metadata = {
-  title: "Create Account | Blupair",
-  description: "Create a new Blupair account.",
+  title: "Create Account | Pairborn",
+  description: "Create a new Pairborn account.",
 };
 
 export default function CreateAccountPage() {

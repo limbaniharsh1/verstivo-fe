@@ -55,7 +55,7 @@ export function CreateAccountForm() {
 
       {/* Success Notification */}
       {isSuccess && (
-        <AuthSuccessBanner message="Account created successfully! Welcome to Blupair." />
+        <AuthSuccessBanner message="Account created successfully! Welcome to Pairborn." />
       )}
 
       {/* Form */}

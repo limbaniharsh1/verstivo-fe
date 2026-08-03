@@ -28,7 +28,7 @@ const COLOR_OPTIONS: readonly ColorOption[] = [
     label: "White & Grey",
     style: "bg-gradient-to-br from-[#FFFFFF] via-[#D6D6D6] to-[#8C8C8C]",
   },
-  { id: "white", label: "White", style: "bg-white border border-black/10" },
+  { id: "white", label: "White", style: "bg-white" },
   { id: "brown", label: "Brown", style: "bg-[#874A27]" },
   { id: "grey", label: "Grey", style: "bg-[#888888]" },
 ];
@@ -119,7 +119,6 @@ export function FilterSortDrawer({ isOpen, onClose }: FilterSortDrawerProps) {
       onClose={onClose}
       title="Filter & Sort"
       position="right"
-      className="max-w-[440px]"
       headerClassName="h-[72px] shrink-0 border-b border-border/70 px-6"
       bodyClassName="px-6 py-5 space-y-6 flex-1 overflow-y-auto"
       closeButtonAriaLabel="Close Filter & Sort drawer"
@@ -128,14 +127,14 @@ export function FilterSortDrawer({ isOpen, onClose }: FilterSortDrawerProps) {
           <button
             type="button"
             onClick={handleClearAll}
-            className="w-[140px] rounded-full border border-black/80 bg-white py-2 text-sm font-medium text-black transition-colors hover:bg-surface-muted active:scale-98 cursor-pointer"
+            className="w-[140px] rounded-full border border-black/80 bg-white h-11 sm:h-12 text-sm font-medium text-black transition-colors hover:bg-surface-muted active:scale-98 cursor-pointer flex items-center justify-center"
           >
             Clear All
           </button>
           <button
             type="button"
             onClick={onClose}
-            className="flex-1 rounded-full bg-[#0000C9] py-2 text-sm font-medium text-white transition-opacity hover:opacity-90 active:scale-98 cursor-pointer"
+            className="flex-1 rounded-full bg-primary h-11 sm:h-12 text-sm font-medium text-white transition-all active:scale-98 cursor-pointer flex items-center justify-center"
           >
             Apply Filter
           </button>
@@ -230,18 +229,17 @@ export function FilterSortDrawer({ isOpen, onClose }: FilterSortDrawerProps) {
                   title={color.label}
                 >
                   <div
-                    className={`relative grid size-10 place-items-center rounded-full transition-transform duration-200 group-hover:scale-105 ${
-                      color.style
-                    } ${
+                    className={`relative size-10 rounded-full border border-border bg-white p-0.5 transition-transform duration-200 group-hover:scale-105 flex items-center justify-center ${
                       isSelected
-                        ? "ring-2 ring-black ring-offset-2 scale-105 shadow-sm"
+                        ? "ring-1 ring-black border-black scale-105 shadow-sm"
                         : "shadow-xs hover:shadow-md"
                     }`}
                   >
+                    <div className={`w-full h-full rounded-full ${color.style}`} />
                     {isSelected && (
                       <Check
-                        size={16}
-                        className={color.id === "white" ? "text-black" : "text-white"}
+                        size={14}
+                        className={`absolute ${color.id === "white" ? "text-black" : "text-white"}`}
                         strokeWidth={2.5}
                       />
                     )}

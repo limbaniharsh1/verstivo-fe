@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Check } from "lucide-react";
-import { BsBagPlus } from "react-icons/bs";
+import { CartIcon } from "@/components/common/CartIcon";
 import { toast } from "sonner";
 import { useCart } from "@/features/cart";
 import { parseNumericPrice, formatDisplayPrice } from "@/lib/price";
@@ -106,9 +106,9 @@ export function BaseProductCard({
               <span>Added</span>
             </span>
           ) : (
-            <span className="relative flex items-center justify-center pl-0 transition-all duration-300 ease-linear group-hover/btn:pl-6">
-              <span className="absolute left-1/2 -translate-x-1/2 opacity-0 transition-all duration-300 ease-linear group-hover/btn:left-0 group-hover/btn:translate-x-0 group-hover/btn:opacity-100 shrink-0 flex items-center justify-center">
-                <BsBagPlus className="size-3.5 sm:size-4" strokeWidth={0.5} />
+            <span className="relative flex items-center justify-center pl-0 transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover/btn:pl-6">
+              <span className="absolute left-1/2 -translate-x-1/2 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover/btn:left-0 group-hover/btn:translate-x-0 group-hover/btn:opacity-100 shrink-0 flex items-center justify-center">
+                <CartIcon className="h-[1.05em] w-[1.05em]" />
               </span>
               <span className="shrink-0">
                 Add
@@ -217,9 +217,9 @@ export function BaseProductCard({
         className="group/btn z-10 col-start-1 row-start-1 m-1.5 min-[375px]:m-2 sm:m-2.5 lg:m-3 flex h-7.75 xl:h-9 cursor-pointer items-center justify-center rounded-full bg-foreground px-4.5 text-responsive-lg font-medium text-primary-contrast shadow-sm transition-all active:scale-95 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary self-end justify-self-end"
         aria-label={`Add ${product.name} to cart`}
       >
-        <span className="relative flex items-center justify-center pl-0 transition-all duration-300 ease-linear group-hover/btn:pl-6">
-          <span className="absolute left-1/2 -translate-x-1/2 opacity-0 transition-all duration-300 ease-linear group-hover/btn:left-0 group-hover/btn:translate-x-0 group-hover/btn:opacity-100 shrink-0 flex items-center justify-center">
-            <BsBagPlus className="size-3.5 sm:size-4" strokeWidth={0.5} />
+        <span className="relative flex items-center justify-center pl-0 transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover/btn:pl-6">
+          <span className="absolute left-1/2 -translate-x-1/2 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover/btn:left-0 group-hover/btn:translate-x-0 group-hover/btn:opacity-100 shrink-0 flex items-center justify-center">
+            <CartIcon className="h-[1.05em] w-[1.05em]" />
           </span>
           <span className="shrink-0">
             Add

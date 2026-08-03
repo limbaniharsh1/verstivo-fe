@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import {
-  Heart,
   Menu,
   ShoppingCart,
   UserRound,
   X,
 } from "lucide-react";
+import { HeartIcon } from "@/components/common/HeartIcon";
 import { LiaSearchSolid } from "react-icons/lia";
 import { useState, useRef } from "react";
 
@@ -22,7 +22,7 @@ import {
 import { CartDrawer, useCart } from "@/features/cart";
 
 const iconButtonClassName =
-  "h-full shrink-0 place-items-center border-r-0 xl:border-r xl:border-border transition-colors hover:bg-surface-muted focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary cursor-pointer";
+  "h-full shrink-0 place-items-center border-r-0 xl:border-r xl:border-border transition-colors duration-300 ease-in-out hover:bg-black hover:text-white focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary cursor-pointer";
 
 export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -82,10 +82,10 @@ export function SiteHeader() {
               href="/"
               className="flex h-full items-center xl:hidden"
               style={{ fontFamily: "var(--font-monument)" }}
-              aria-label="Blupair home"
+              aria-label="Pairborn home"
             >
               <span className="truncate text-[15px] min-[375px]:text-[17px] min-[420px]:text-[19px] sm:text-[22px] font-bold tracking-tight">
-                BLUPAIR
+                PAIRBORN
               </span>
             </Link>
 
@@ -106,8 +106,10 @@ export function SiteHeader() {
                     >
                       <Link
                         href={href}
-                        className={`inline-flex items-start whitespace-nowrap text-[12px] lg:text-[13px] xl:text-[14.5px] 2xl:text-[16px] 3xl:text-[18px] font-medium transition-colors ${
-                          isActive ? "text-primary font-semibold" : "hover:text-primary"
+                        className={`relative pb-1 inline-flex items-start whitespace-nowrap text-[12px] lg:text-[13px] xl:text-[14.5px] 2xl:text-[16px] 3xl:text-[18px] font-medium transition-colors after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-px after:w-full after:bg-primary after:transition-transform after:duration-300 after:origin-left ${
+                          isActive
+                            ? "text-primary font-semibold after:scale-x-100"
+                            : "hover:text-primary after:scale-x-0 hover:after:scale-x-100"
                         }`}
                       >
                         <span>{label}</span>
@@ -129,9 +131,9 @@ export function SiteHeader() {
             href="/"
             className="hidden h-full min-w-0 items-center justify-center border-r-0 xl:border-r xl:border-border px-2 lg:px-4 xl:px-10 2xl:px-14 text-center text-[20px] lg:text-[21px] xl:text-[28px] 2xl:text-[32px] font-bold tracking-tight shrink-0 xl:flex"
             style={{ fontFamily: "var(--font-monument)" }}
-            aria-label="Blupair home"
+            aria-label="Pairborn home"
           >
-            <span className="truncate">BLUPAIR</span>
+            <span className="truncate">PAIRBORN</span>
           </Link>
 
           <div className="flex h-full w-full min-w-0 items-center justify-end">
@@ -156,7 +158,7 @@ export function SiteHeader() {
               className={`${iconButtonClassName} hidden xl:grid w-[80px] 3xl:w-[92px]`}
               aria-label="Account"
             >
-              <UserRound className="size-4.5 2xl:size-6" strokeWidth={1.5} />
+              <UserRound className="size-4 2xl:size-5" strokeWidth={1.5} />
             </Link>
 
             {/* Desktop Wishlist Button */}
@@ -165,7 +167,7 @@ export function SiteHeader() {
               className={`${iconButtonClassName} hidden xl:grid w-[80px] 3xl:w-[92px]`}
               aria-label="Wishlist"
             >
-              <Heart className="size-4.5 2xl:size-6" strokeWidth={1.5} />
+              <HeartIcon className="size-4 2xl:size-5" />
             </Link>
 
             {/* Responsive Action Icons (< lg) */}
@@ -173,7 +175,7 @@ export function SiteHeader() {
               {/* Search Icon Trigger */}
               <button
                 type="button"
-                onClick={() => setIsSearchOpen(true)}
+                onClick={() => setIsSearchOpen((prev) => !prev)}
                 className="grid size-9 place-items-center rounded-full hover:bg-surface-muted transition-colors cursor-pointer"
                 aria-label="Search products"
               >
@@ -195,7 +197,7 @@ export function SiteHeader() {
                 className="hidden md:grid size-9 place-items-center rounded-full hover:bg-surface-muted transition-colors cursor-pointer"
                 aria-label="Wishlist"
               >
-                <Heart className="size-5 text-black" strokeWidth={1.5} />
+                <HeartIcon className="size-5 text-black" />
               </Link>
 
               {/* Cart Icon (Visible on all responsive screens) */}
@@ -281,7 +283,7 @@ export function SiteHeader() {
                       );
                     }
                     return (
-                      <li key={href}>
+                      <li key={href} className="border-b border-border/50 last:border-none">
                         <Link
                           href={href}
                           className="flex items-center justify-between rounded-lg px-3.5 py-3 text-[15px] font-medium text-foreground transition-colors hover:bg-surface-muted active:bg-surface-muted"
@@ -315,7 +317,7 @@ export function SiteHeader() {
                   className="flex items-center gap-2 text-xs font-semibold py-2 px-4 rounded-full text-foreground hover:bg-surface-muted transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  <Heart size={18} strokeWidth={1.5} />
+                  <HeartIcon className="size-4.5" />
                   <span>Wishlist</span>
                 </Link>
               </div>

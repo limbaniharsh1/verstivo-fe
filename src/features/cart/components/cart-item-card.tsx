@@ -134,10 +134,10 @@ export function CartItemCard({ item }: CartItemCardProps) {
                     setSelectedSizeIndex(index);
                     updateSize(product.id, sz);
                   }}
-                  className={`min-h-[38px] sm:min-h-[40px] py-1 px-1 flex items-center justify-center rounded-[5px] border text-[11.5px] min-[360px]:text-[12px] sm:text-[13px] font-semibold tracking-tight transition-all cursor-pointer text-center leading-tight whitespace-nowrap ${
+                  className={`min-h-[38px] sm:min-h-[40px] py-1 px-1 flex items-center justify-center rounded-[5px] border text-[11.5px] min-[360px]:text-[12px] sm:text-[13px] font-semibold tracking-tight transition-all cursor-pointer text-center leading-tight whitespace-nowrap bg-[#ffffff] ${
                     isSelected
-                      ? "border-black bg-black text-white shadow-xs"
-                      : "border-neutral-200 bg-white text-black hover:border-[#0000d6] hover:text-[#0000d6]"
+                      ? "border-black text-black"
+                      : "border-neutral-200 text-neutral-500 hover:border-black hover:text-black"
                   }`}
                 >
                   {sz}

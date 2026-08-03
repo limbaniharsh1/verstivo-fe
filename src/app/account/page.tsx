@@ -4,8 +4,8 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { AccountView } from "@/features/account/components/account-view";
 
 export const metadata = {
-  title: "Account | BLUPAIR",
-  description: "Manage your personal information, address, and orders at BLUPAIR.",
+  title: "Account | PAIRBORN",
+  description: "Manage your personal information, address, and orders at PAIRBORN.",
 };
 
 export default function AccountPage() {

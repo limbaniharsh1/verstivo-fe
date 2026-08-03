@@ -4,8 +4,8 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { LoginForm } from "@/features/auth";
 
 export const metadata: Metadata = {
-  title: "Log In | Blupair",
-  description: "Log in to your Blupair account.",
+  title: "Log In | Pairborn",
+  description: "Log in to your Pairborn account.",
 };
 
 export default function LoginPage() {

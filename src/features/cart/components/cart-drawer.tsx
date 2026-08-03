@@ -33,7 +33,6 @@ export function CartDrawer() {
       onClose={closeCart}
       title={titleNode}
       position="right"
-      className="max-w-full sm:max-w-[480px] md:max-w-[540px] lg:max-w-[560px] 2xl:max-w-[600px]"
       headerClassName="h-[64px] sm:h-[70px] shrink-0 border-b border-neutral-200 px-3.5 xs:px-5 sm:px-6"
       bodyClassName="flex flex-col flex-1 overflow-hidden"
       closeButtonAriaLabel="Close cart drawer"

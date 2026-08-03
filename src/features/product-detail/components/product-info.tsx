@@ -1,12 +1,16 @@
 "use client";
 
-import { Heart, Minus, Plus, RefreshCw, Truck, Banknote } from "lucide-react";
+import { Minus, Plus, RefreshCw, Truck, Banknote } from "lucide-react";
+import { HeartIcon } from "@/components/common/HeartIcon";
 import Image from "next/image";
 import { useState } from "react";
 import { useCart } from "@/features/cart";
 import { ProductAccordions } from "./product-accordions";
 import { SizeGuideDrawer } from "./size-guide-drawer";
 import type { ProductDetailData } from "../data/product-detail-data";
+import { PAYMENT_METHODS } from "@/constants/payment-methods";
+
+
 
 type ProductInfoProps = {
   product: ProductDetailData;
@@ -104,7 +108,7 @@ export function ProductInfo({
         <span className="text-xl min-[360px]:text-2xl sm:text-3xl xl:text-[34px] font-semibold text-black tracking-tight">
           {product.price}
         </span>
-        <span className="text-xs min-[360px]:text-sm sm:text-base xl:text-2xl font-medium text-neutral-400 line-through">
+        <span className="text-xs min-[360px]:text-sm sm:text-base xl:text-[28px] font-medium text-neutral-400 line-through">
           {product.originalPrice}
         </span>
         <span className="inline-flex items-center rounded-full bg-[#0000D1] px-2 min-[360px]:px-2.5 py-0.5 text-[10px] min-[360px]:text-[11px] xl:text-base font-normal text-white uppercase tracking-wider">
@@ -129,11 +133,10 @@ export function ProductInfo({
                 key={color.id}
                 type="button"
                 onClick={() => handleColorChange(color.id)}
-                className={`relative size-11 min-[360px]:size-12 sm:size-14 xl:size-18 3xl:size-24 rounded-md overflow-hidden border transition-all cursor-pointer bg-white ${
-                  isSelected
+                className={`relative size-11 min-[360px]:size-12 sm:size-14 xl:size-18 3xl:size-24 rounded-md overflow-hidden border transition-all cursor-pointer bg-[#ffffff] focus:outline-none ${isSelected
                     ? "border-black"
-                    : "border-neutral-200 hover:border-neutral-400"
-                }`}
+                    : "border-neutral-200 hover:border-black"
+                  }`}
                 aria-label={`Select color ${color.name}`}
               >
                 <Image
@@ -176,11 +179,10 @@ export function ProductInfo({
                   setSelectedSize(`${size}-${index}`);
                   setSizeError(false);
                 }}
-                className={`flex h-9.5 sm:h-[42px] items-center justify-center rounded-lg border text-[11px] min-[360px]:text-[11.5px] sm:text-[12.5px] lg:text-sm font-semibold transition-all cursor-pointer px-2 whitespace-nowrap ${
-                  isSelected
-                    ? "border-black bg-black text-white shadow-xs"
-                    : "border-border bg-white text-neutral-800 hover:border-black"
-                }`}
+                className={`flex h-9.5 sm:h-[42px] items-center justify-center rounded-lg border text-[11px] min-[360px]:text-[11.5px] sm:text-[12.5px] lg:text-sm font-semibold transition-all cursor-pointer px-2 whitespace-nowrap bg-[#ffffff] ${isSelected
+                    ? "border-black text-black"
+                    : "border-border text-neutral-500 hover:border-black hover:text-black"
+                  }`}
               >
                 {size}
               </button>
@@ -235,89 +237,36 @@ export function ProductInfo({
           className="grid size-10 sm:size-11 place-items-center rounded-full border border-border bg-white text-black hover:bg-surface-muted transition-colors cursor-pointer shrink-0"
           aria-label="Add to wishlist"
         >
-          <Heart
-            className={`size-4.5 sm:size-5 transition-colors ${
-              isWishlisted ? "fill-red-500 text-red-500" : "text-black"
-            }`}
-            strokeWidth={1.6}
+          <HeartIcon
+            filled={isWishlisted}
+            className={`size-4.5 sm:size-5 transition-colors ${isWishlisted ? "text-red-500" : "text-black"
+              }`}
           />
         </button>
       </div>
 
-      {/* Accepted Payment Methods - Responsive Single Line Scroll */}
-      <div className="mt-6 sm:mt-7 flex flex-row items-center justify-between gap-2 overflow-x-auto scrollbar-hidden py-0.5">
+      <div className="mt-6 sm:mt-7 flex flex-row flex-wrap items-center justify-between gap-x-2 gap-y-2.5 py-0.5">
         <span className="text-[12px] sm:text-[13.5px] font-normal text-neutral-500 shrink-0 whitespace-nowrap">
           Accepted Payment Methods
         </span>
-        <div className="flex items-center gap-1 sm:gap-1.5 shrink-0 flex-nowrap">
-          {/* Razorpay */}
-          <div className="h-6.5 sm:h-7 px-1.5 sm:px-2 rounded-md border border-neutral-200/90 bg-white flex items-center justify-center shadow-2xs">
-            <div className="flex items-center gap-1">
-              <svg className="h-2.5 sm:h-3 w-auto" viewBox="0 0 24 24" fill="none">
-                <path d="M10 2L2 22H6L9.5 13H14L16 9H11L13 4H19L20 2H10Z" fill="#0C2340"/>
-                <path d="M6 22L9.5 13H14L12 18H16L14 22H6Z" fill="#0284C7"/>
-              </svg>
-              <span className="text-[10px] sm:text-[11px] font-extrabold italic tracking-tight text-[#0C2340]">Razorpay</span>
+        <div className="flex flex-wrap items-center gap-1 sm:gap-1.5">
+          {PAYMENT_METHODS.map((method) => (
+            <div
+              key={method.name}
+              className="py-1.5 px-1 rounded-sm border border-neutral-200/90 bg-white flex items-center justify-center"
+            >
+              <img
+                src={method.icon}
+                alt={method.name}
+                className="max-h-3 w-auto"
+              />
             </div>
-          </div>
-
-          {/* RuPay */}
-          <div className="h-6.5 sm:h-7 px-1.5 sm:px-2 rounded-md border border-neutral-200/90 bg-white flex items-center justify-center shadow-2xs">
-            <div className="flex items-center gap-0.5">
-              <span className="text-[10.5px] sm:text-[11.5px] font-extrabold italic tracking-tighter text-[#0B2265]">RuPay</span>
-              <svg className="h-2 w-2" viewBox="0 0 16 16" fill="none">
-                <path d="M2 14L8 2H12L6 14H2Z" fill="#00A859"/>
-                <path d="M7 14L13 2H16L10 14H7Z" fill="#EF8123"/>
-              </svg>
-            </div>
-          </div>
-
-          {/* GPay */}
-          <div className="h-6.5 sm:h-7 px-1.5 sm:px-2 rounded-md border border-neutral-200/90 bg-white flex items-center justify-center shadow-2xs">
-            <div className="flex items-center gap-0.5 sm:gap-1">
-              <svg className="h-3 w-3" viewBox="0 0 24 24">
-                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-              </svg>
-              <span className="text-[10.5px] sm:text-[11.5px] font-semibold text-[#5F6368]">Pay</span>
-            </div>
-          </div>
-
-          {/* PhonePe */}
-          <div className="h-6.5 sm:h-7 px-1.5 sm:px-2 rounded-md border border-neutral-200/90 bg-white flex items-center justify-center shadow-2xs">
-            <div className="flex items-center gap-0.5 sm:gap-1">
-              <div className="size-3 rounded-full bg-[#5F259F] flex items-center justify-center text-white text-[7.5px] font-bold">
-                पे
-              </div>
-              <span className="text-[10px] sm:text-[11px] font-bold text-[#5F259F]">PhonePe</span>
-            </div>
-          </div>
-
-          {/* Paytm */}
-          <div className="h-6.5 sm:h-7 px-1.5 sm:px-2 rounded-md border border-neutral-200/90 bg-white flex items-center justify-center shadow-2xs">
-            <div className="flex items-center">
-              <span className="text-[10.5px] sm:text-[11.5px] font-extrabold text-[#002E6E]">pay</span>
-              <span className="text-[10.5px] sm:text-[11.5px] font-extrabold text-[#00BAF2]">tm</span>
-            </div>
-          </div>
-
-          {/* BHIM */}
-          <div className="h-6.5 sm:h-7 px-1.5 sm:px-2 rounded-md border border-neutral-200/90 bg-white flex items-center justify-center shadow-2xs">
-            <div className="flex items-center gap-0.5">
-              <span className="text-[10.5px] sm:text-[11.5px] font-extrabold italic tracking-tighter text-[#002970]">BHIM</span>
-              <svg className="h-2 w-2" viewBox="0 0 16 16" fill="none">
-                <path d="M2 14L8 2H11L5 14H2Z" fill="#00A859"/>
-                <path d="M6.5 14L12.5 2H15.5L9.5 14H6.5Z" fill="#EF8123"/>
-              </svg>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
       {/* Service Features Row */}
-      <div className="mt-6 sm:mt-7 grid grid-cols-3 gap-1.5 min-[360px]:gap-2 border-b border-[#D0D0D0] py-4 sm:py-5 text-center">
+      <div className="mt-6 sm:mt-7 grid grid-cols-3 gap-1.5 min-[360px]:gap-2 border-b border-[#D0D0D0] pt-0 pb-4 sm:pb-5 text-center">
         {/* Free express shipping */}
         <div className="flex flex-col items-center justify-center gap-1.5 min-[360px]:gap-2 px-0.5 min-[360px]:px-1">
           <svg className="size-5 min-[360px]:size-6 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">

@@ -26,8 +26,8 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
         <div
           className={`relative flex items-center h-[46px] sm:h-[48px] w-full rounded-[10px] sm:rounded-[12px] border bg-white px-3.5 sm:px-4 transition-all duration-200 ${
             error
-              ? "border-rose-500 focus-within:border-rose-500 focus-within:ring-1 focus-within:ring-rose-500"
-              : "border-neutral-300/90 focus-within:border-black focus-within:ring-1 focus-within:ring-black"
+              ? "border-rose-500 focus-within:border-rose-500"
+              : "border-neutral-300/90 focus-within:border-primary"
           }`}
         >
           <input

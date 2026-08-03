@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeftRight, CreditCard, Package } from "lucide-react";
+import { PAYMENT_METHODS } from "@/constants/payment-methods";
 
 function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -53,9 +54,9 @@ const FOOTER_LINK_GROUPS = [
     ],
   },
   {
-    title: "Blupair",
+    title: "Pairborn",
     links: [
-      { label: "About Blupair", href: "/about" },
+      { label: "About Pairborn", href: "/about" },
       { label: "Sustainability", href: "/sustainability" },
       { label: "Press", href: "/press" },
       { label: "Our Blog", href: "/blog" },
@@ -75,30 +76,23 @@ const FOOTER_LINK_GROUPS = [
   {
     title: "Service & Help",
     links: [
+      { label: "Shipping & Delivery", href: "/shipping-delivery" },
+      { label: "Cancellation & Refund", href: "/cancellation-refund" },
       { label: "Contact Us", href: "/contact" },
-      { label: "Help & FAQs", href: "/faq" },
     ],
   },
 ] as const;
 
-const PAYMENT_METHODS = [
-  { name: "Razorpay", icon: "/assets/icons/Frame 1261153958.png" },
-  { name: "RuPay", icon: "/assets/icons/Frame 1261153962.png" },
-  { name: "G Pay", icon: "/assets/icons/Frame 1261153960.png" },
-  { name: "PhonePe", icon: "/assets/icons/Frame 1261153961.png" },
-  { name: "Paytm", icon: "/assets/icons/Frame 1261153959.png" },
-  { name: "BHIM", icon: "/assets/icons/Frame 1261153963.png" },
-] as const;
 
 export function SiteFooter() {
   return (
     <footer className="w-full overflow-hidden bg-primary text-white border-t border-white">
       {/* 1. Top Benefits Bar */}
       <div className="grid grid-cols-1 border-b border-white min-[480px]:grid-cols-2 lg:grid-cols-[31%_1fr_1fr_1fr]">
-        {/* Cell 1: Only at blupair.in (Wider box) */}
+        {/* Cell 1: Only at pairborn.in (Wider box) */}
         <div className="flex min-h-[80px] items-center justify-center border-b border-white border-r-0 min-[480px]:border-r lg:border-b-0 px-6 py-4 text-center">
           <span className="text-[17px] sm:text-[19px] lg:text-[21px] font-semibold tracking-tight text-white">
-            Only at blupair.in
+            Only at pairborn.in
           </span>
         </div>
 
@@ -130,7 +124,7 @@ export function SiteFooter() {
       {/* 2. Middle Section: Newsletter (50%) + Links (50%) */}
       <div className="mx-auto grid w-full grid-cols-1 lg:grid-cols-2 border-b border-white">
         {/* Left Newsletter Block (50%) */}
-        <div className="lg:col-span-1 flex flex-col justify-start px-6 sm:px-10 lg:px-16 xl:px-20 py-10 lg:py-16 border-b border-white lg:border-b-0 lg:border-r lg:border-white">
+        <div className="lg:col-span-1 flex flex-col justify-start px-6 sm:px-10 lg:px-16 xl:px-20 py-6 sm:py-10 lg:py-16 border-b border-white lg:border-b-0 lg:border-r lg:border-white">
           <div className="max-w-[420px]">
             <h2 className="text-[22px] min-[390px]:text-[24px] sm:text-[28px] lg:text-[30px] font-medium leading-[1.25] tracking-tight text-white">
               Expert advice, updates, and
@@ -139,7 +133,7 @@ export function SiteFooter() {
             </h2>
             <form
               onSubmit={(e) => e.preventDefault()}
-              className="mt-6 flex h-11 sm:h-12 w-full max-w-[390px] items-center rounded-full border border-white bg-transparent p-1 pl-5"
+              className="mt-6 flex h-11 sm:h-14 w-full max-w-[390px] items-center rounded-full border border-white bg-transparent p-1.5 pl-5"
             >
               <input
                 type="email"
@@ -158,7 +152,7 @@ export function SiteFooter() {
         </div>
 
         {/* Right Navigation Links Block (50%) */}
-        <div className="lg:col-span-1 px-6 sm:px-10 lg:px-14 py-10 lg:py-16">
+        <div className="lg:col-span-1 px-6 sm:px-10 lg:px-14 py-6 sm:py-10 lg:py-16">
           <nav
             className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4"
             aria-label="Footer navigation"
@@ -168,12 +162,12 @@ export function SiteFooter() {
                 <h3 className="text-[15px] sm:text-[16px] font-semibold text-white leading-tight">
                   {group.title}
                 </h3>
-                <ul className="mt-4 space-y-2.5">
+                <ul className="mt-4 space-y-1">
                   {group.links.map((link) => (
                     <li key={link.label}>
                       <Link
                         href={link.href}
-                        className="text-[13px] sm:text-[14px] text-white/80 transition-colors hover:text-white leading-tight block"
+                        className="relative text-[13px] sm:text-[14px] text-white/90 transition-all hover:text-white pb-0.5 leading-tight inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-px after:w-full after:bg-white after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left"
                       >
                         {link.label}
                       </Link>
@@ -187,71 +181,70 @@ export function SiteFooter() {
       </div>
 
       {/* 3. Bottom Logo Section */}
-      <div className="w-full py-6 text-center">
+      <div className="w-full pb-3 pt-5 sm:pb-6 sm:pt-10 text-center">
         <Link
           href="/"
           className="inline-block text-[30px] min-[390px]:text-[35px] sm:text-[40px] lg:text-[48px] font-black tracking-[0.05em] text-white leading-none"
           style={{ fontFamily: "var(--font-monument)" }}
-          aria-label="BLUPAIR homepage"
+          aria-label="PAIRBORN homepage"
         >
-          BLUPAIR
+          PAIRBORN
         </Link>
       </div>
 
       {/* 4. Bottom Legal & Social Bar */}
-      <div className="mx-auto flex w-full max-w-[1720px] flex-col gap-6 px-6 sm:px-10 lg:px-12 py-6 md:flex-row md:items-center md:justify-between text-[13px] text-white/80">
+      <div className="mx-auto flex w-full max-w-[1720px] flex-col gap-4 sm:gap-6 px-6 sm:px-10 lg:px-12 pt-4 pb-8 sm:pt-6 sm:pb-15 lg:flex-row lg:items-center lg:justify-between text-[13px] text-white/80 items-center text-center">
         {/* Payment Icons */}
-        <div className="flex flex-wrap items-center gap-2" aria-label="Accepted payment methods">
+        <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2" aria-label="Accepted payment methods">
           {PAYMENT_METHODS.map((method) => (
             <span
               key={method.name}
-              className="flex items-center justify-center rounded-sm bg-white px-2 py-1 shadow-2xs"
+              className="flex items-center justify-center rounded-sm bg-white shadow-2xs px-1 py-1"
             >
-              <Image
+              <img
                 src={method.icon}
                 alt={method.name}
-                width={36}
-                height={20}
-                className="h-4 w-auto object-contain"
+                className="max-h-[11px] lg:max-h-[14px] w-auto"
               />
             </span>
           ))}
         </div>
 
         {/* Copyright text */}
-        <p className="text-center text-[12px] sm:text-[13px] font-medium">
+        <p className="text-center text-[12px] sm:text-[13px] font-medium lg:text-left">
           © {new Date().getFullYear()} BIRKENSTOCK DIGITAL GMBH All rights reserved.
         </p>
 
-        {/* Legal links + Social Icons */}
-        <div className="flex flex-wrap font-medium items-center justify-center md:justify-end gap-10 text-[13px]">
+        {/* Legal links */}
+        <div className="flex items-center justify-center gap-6 sm:gap-10 font-medium">
           <Link href="/privacy" className="hover:text-white transition-colors">
             Privacy Policy
           </Link>
           <Link href="/terms" className="hover:text-white transition-colors">
             Terms of Service
           </Link>
+        </div>
 
-          <div className="flex items-center gap-4 ml-2">
-            <Link
-              href="https://www.instagram.com/"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Instagram"
-              className="text-white/80 hover:text-white transition-colors"
-            >
-              <InstagramIcon className="size-5" />
-            </Link>
-            <Link
-              href="https://www.facebook.com/"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Facebook"
-              className="text-white/80 hover:text-white transition-colors"
-            >
-              <FacebookIcon className="size-5" />
-            </Link>
-          </div>
+        {/* Social Icons */}
+        <div className="flex items-center justify-center gap-2.5">
+          <Link
+            href="https://www.instagram.com/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Instagram"
+            className="text-white/80 hover:text-white transition-colors"
+          >
+            <InstagramIcon className="size-5.5" />
+          </Link>
+          <Link
+            href="https://www.facebook.com/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Facebook"
+            className="text-white/80 hover:text-white transition-colors"
+          >
+            <FacebookIcon className="size-5.5" />
+          </Link>
         </div>
       </div>
     </footer>

@@ -23,7 +23,7 @@ const SOCIAL_POSTS: SocialPost[] = [
   {
     id: "post-1",
     mediaSrc: "/e2c52b823e60edece1efe3482b5df023fdc14b71.gif",
-    mediaAlt: "Blupair Florida Soft Footbed community style",
+    mediaAlt: "Pairborn Florida Soft Footbed community style",
     productTitle: "Florida Soft Footbed",
     productSubtitle: "FLORIDA SOFT FOOTBED BIRKO-FLOR",
     productPrice: "₹6,293.00",
@@ -33,7 +33,7 @@ const SOCIAL_POSTS: SocialPost[] = [
   {
     id: "post-2",
     mediaSrc: "/e2c52b823e60edece1efe3482b5df023fdc14b71.gif",
-    mediaAlt: "Blupair Florida Soft Footbed community highlight",
+    mediaAlt: "Pairborn Florida Soft Footbed community highlight",
     productTitle: "Florida Soft Footbed",
     productSubtitle: "FLORIDA SOFT FOOTBED BIRKO-FLOR",
     productPrice: "₹6,293.00",
@@ -43,7 +43,7 @@ const SOCIAL_POSTS: SocialPost[] = [
   {
     id: "post-3",
     mediaSrc: "/e2c52b823e60edece1efe3482b5df023fdc14b71.gif",
-    mediaAlt: "Blupair Florida Soft Footbed lifestyle look",
+    mediaAlt: "Pairborn Florida Soft Footbed lifestyle look",
     productTitle: "Florida Soft Footbed",
     productSubtitle: "FLORIDA SOFT FOOTBED BIRKO-FLOR",
     productPrice: "₹6,293.00",
@@ -53,7 +53,7 @@ const SOCIAL_POSTS: SocialPost[] = [
   {
     id: "post-4",
     mediaSrc: "/e2c52b823e60edece1efe3482b5df023fdc14b71.gif",
-    mediaAlt: "Blupair Florida Soft Footbed fashion reel",
+    mediaAlt: "Pairborn Florida Soft Footbed fashion reel",
     productTitle: "Florida Soft Footbed",
     productSubtitle: "FLORIDA SOFT FOOTBED BIRKO-FLOR",
     productPrice: "₹6,293.00",
@@ -63,7 +63,7 @@ const SOCIAL_POSTS: SocialPost[] = [
   {
     id: "post-5",
     mediaSrc: "/f2713d5baed71040d12bc0c237031f6104715403.png",
-    mediaAlt: "Blupair Arizona Soft Footbed summer look",
+    mediaAlt: "Pairborn Arizona Soft Footbed summer look",
     productTitle: "Arizona Soft Footbed",
     productSubtitle: "ARIZONA SUEDE LEATHER ROSE",
     productPrice: "₹8,490.00",
@@ -82,16 +82,16 @@ export function SocialGallery() {
         <div className="w-full lg:w-[38%] xl:w-[36%] shrink-0 px-6 min-[375px]:px-8 sm:px-12 md:px-14 lg:px-16 xl:px-20 py-8 lg:py-12">
           <div className="max-w-[420px]">
             <h2 className="text-[28px] min-[375px]:text-[32px] sm:text-[36px] lg:text-[40px] xl:text-[44px] font-semibold leading-tight tracking-[-0.03em] text-foreground">
-              @blupair.in
+              @pairborn.in
             </h2>
             <p className="mt-3.5 sm:mt-4 text-[13.5px] min-[375px]:text-[14px] sm:text-[15px] lg:text-[15.5px] font-normal leading-relaxed text-foreground/85">
-              Share your BLUPAIR-Style and inspire others! Just mention @blupair.in on Instagram to become part of our highlight gallery.
+              Share your PAIRBORN-Style and inspire others! Just mention @pairborn.in on Instagram to become part of our highlight gallery.
             </p>
             <Link
               href="https://www.instagram.com/"
               target="_blank"
               rel="noreferrer"
-              className="mt-5 sm:mt-6 inline-flex h-10 items-center justify-center rounded-full bg-primary px-6 text-[13.5px] sm:text-[14px] font-semibold text-white !text-white shadow-xs transition-all hover:bg-primary-hover active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              className="mt-5 sm:mt-6 rounded-full bg-primary text-white !text-white shadow-xs transition-all hover:bg-primary-hover active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary btn-banner-size"
             >
               Follow Us
             </Link>

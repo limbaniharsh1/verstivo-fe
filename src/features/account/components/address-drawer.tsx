@@ -139,7 +139,6 @@ export function AddressDrawer({ isOpen, onClose, onSave, initialData }: AddressD
       onClose={onClose}
       title={isEditing ? "Edit address" : "Add a new address"}
       position="right"
-      className="max-w-[420px] sm:max-w-[460px]"
       headerClassName="h-[68px] sm:h-[72px] shrink-0 border-b border-slate-200 px-6 bg-white"
       bodyClassName="px-6 py-5 flex-1 overflow-y-auto"
       closeButtonAriaLabel="Close address drawer"

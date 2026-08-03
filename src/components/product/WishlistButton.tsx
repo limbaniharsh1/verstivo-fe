@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Heart } from "lucide-react";
+import { HeartIcon } from "@/components/common/HeartIcon";
 
 type WishlistButtonProps = {
   productName: string;
@@ -36,14 +36,12 @@ export function WishlistButton({
     <button
       type="button"
       onClick={handleClick}
-      className={`grid size-8 place-items-center rounded-full transition-colors cursor-pointer hover:bg-surface focus-visible:outline-2 focus-visible:outline-primary ${className}`}
+      className={`inline-flex transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-primary ${className}`}
       aria-label={`Add ${productName} to wishlist`}
     >
-      <Heart
-        className={`size-5 transition-colors ${
-          liked ? "fill-black text-black" : "text-black"
-        } ${iconClassName}`}
-        strokeWidth={1.6}
+      <HeartIcon
+        filled={liked}
+        className={`size-4.5 lg:size-5 transition-colors text-black ${iconClassName}`}
       />
     </button>
   );

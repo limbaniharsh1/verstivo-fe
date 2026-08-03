@@ -131,7 +131,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
 
       {/* Main Search Panel */}
       <div
-        className={`relative z-50 w-full bg-white shadow-2xl border-b border-border transition-all duration-300 ease-in-out transform pointer-events-auto ${
+        className={`relative z-50 w-full bg-white shadow-2xl border-b border-border max-h-full overflow-y-auto transition-all duration-300 ease-in-out transform pointer-events-auto ${
           isAnimating ? "translate-y-0 opacity-100" : "-translate-y-6 opacity-0"
         }`}
         role="dialog"
@@ -141,8 +141,8 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
         <div className="mx-auto w-full max-w-[1585px] px-4 py-4 sm:px-6 sm:py-6 lg:px-10">
           {/* Top Search Input Bar */}
           <div className="flex items-center gap-3 sm:gap-6">
-            <div className="relative flex h-10 sm:h-12 w-full min-w-0 items-center rounded-lg border border-black bg-white px-4 transition-colors focus-within:border-black focus-within:ring-1 focus-within:ring-black">
-              <LiaSearchSolid className="size-[18px] sm:size-[22px] shrink-0 text-muted" />
+            <div className="relative flex h-10 w-full min-w-0 items-center rounded-lg border border-neutral-300/90 bg-white px-4 transition-colors focus-within:border-primary">
+              <LiaSearchSolid className="size-[18px] shrink-0 rotate-y-[180deg]" />
               <input
                 ref={inputRef}
                 type="text"
@@ -182,7 +182,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
 
           {/* Tags Section */}
           <div className="mt-4 sm:mt-5 flex flex-wrap items-center gap-2 sm:gap-3">
-            <span className="text-xs sm:text-sm font-semibold text-foreground mr-1">
+            <span className="text-xs sm:text-sm xl:text-base font-medium text-foreground mr-1">
               Most searched
             </span>
 
@@ -194,10 +194,10 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                     key={tag}
                     type="button"
                     onClick={() => handleTagClick(tag)}
-                    className={`rounded-full px-3.5 sm:px-4 py-1 sm:py-1.5 text-xs font-medium transition-all duration-200 cursor-pointer whitespace-nowrap border ${
+                    className={`rounded-full px-3.5 sm:px-4.25 py-1 sm:py-1.5 text-xs xl:text-sm font-medium transition-all duration-200 cursor-pointer whitespace-nowrap border ${
                       isActive
                         ? "bg-foreground text-white border-foreground"
-                        : "bg-surface-muted text-foreground border-transparent hover:bg-neutral-200"
+                        : "bg-white text-foreground border-border hover:bg-surface-muted"
                     }`}
                   >
                     {tag}

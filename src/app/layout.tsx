@@ -7,8 +7,8 @@ import { CartProvider } from "@/features/cart";
 
 export const metadata: Metadata = {
   title: {
-    default: "Blupair",
-    template: "%s | Blupair",
+    default: "Pairborn",
+    template: "%s | Pairborn",
   },
   description: "Built for the ones building.",
 };

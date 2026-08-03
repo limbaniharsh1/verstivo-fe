@@ -49,7 +49,6 @@ export function SizeGuideDrawer({ isOpen, onClose }: SizeGuideDrawerProps) {
       onClose={onClose}
       title="Size Guide"
       position="right"
-      className="min-[400px]:max-w-md min-[480px]:max-w-[440px] sm:max-w-[460px]"
       bodyClassName="px-4 min-[360px]:px-6 py-5 min-[360px]:py-6 scrollbar-hidden"
       closeButtonAriaLabel="Close size guide drawer"
     >
@@ -92,7 +91,7 @@ export function SizeGuideDrawer({ isOpen, onClose }: SizeGuideDrawerProps) {
           </thead>
           <tbody className="divide-y divide-neutral-200 text-[11.5px] min-[360px]:text-xs sm:text-sm text-neutral-800 font-normal">
             {currentSizes.map((row, idx) => (
-              <tr key={`${row.eu}-${idx}`} className="hover:bg-neutral-50/60 transition-colors">
+              <tr key={`${activeTab}-${row.eu}-${idx}`} className="hover:bg-neutral-50/60 transition-colors">
                 <td className="py-3 sm:py-3.5 w-[22%] text-left font-normal text-neutral-900">{row.eu}</td>
                 <td className="py-3 sm:py-3.5 w-[34%] text-left font-normal text-neutral-800">{row.us}</td>
                 <td className="py-3 sm:py-3.5 w-[24%] text-left font-normal text-neutral-800">{row.uk}</td>

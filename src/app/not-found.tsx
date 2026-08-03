@@ -89,7 +89,7 @@ export default function NotFoundPage() {
                   </div>
                   <div>
                     <h3 className="text-sm font-semibold text-black group-hover:text-[#0000C9] transition-colors leading-tight">
-                      Join Blupair
+                      Join Pairborn
                     </h3>
                     <p className="text-xs text-neutral-500 mt-0.5">Create an account for perks</p>
                   </div>

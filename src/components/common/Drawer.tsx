@@ -27,7 +27,7 @@ export function Drawer({
   position = "right",
   children,
   footer,
-  className = "",
+  className = "max-w-full sm:max-w-[500px]",
   headerClassName = "",
   bodyClassName = "",
   closeButtonAriaLabel = "Close drawer",
@@ -55,10 +55,10 @@ export function Drawer({
   if (!isMounted) return null;
 
   const positionClasses = {
-    right: "fixed inset-y-0 right-0 flex max-w-full pl-0 min-[380px]:pl-10 h-[100dvh]",
-    left: "fixed inset-y-0 left-0 flex max-w-full pr-0 min-[380px]:pr-10 h-[100dvh]",
-    bottom: "fixed inset-x-0 bottom-0 flex max-h-full pt-10 h-[100dvh]",
-    top: "fixed inset-x-0 top-0 flex max-h-full pb-10 h-[100dvh]",
+    right: "fixed inset-y-0 right-0 flex w-full max-w-full pl-0 min-[380px]:pl-10 h-[100dvh] justify-end",
+    left: "fixed inset-y-0 left-0 flex w-full max-w-full pr-0 min-[380px]:pr-10 h-[100dvh] justify-start",
+    bottom: "fixed inset-x-0 bottom-0 flex w-full max-h-full pt-10 h-[100dvh] items-end",
+    top: "fixed inset-x-0 top-0 flex w-full max-h-full pb-10 h-[100dvh] items-start",
   };
 
   const getTranslationClass = (pos: DrawerPosition) => {
@@ -87,10 +87,11 @@ export function Drawer({
         aria-hidden="true"
       />
 
-      <div className={positionClasses[position]}>
+      <div className={positionClasses[position]} onClick={onClose}>
         {/* Drawer Panel */}
         <div
-          className={`w-screen max-w-full bg-white shadow-2xl flex flex-col transition-transform duration-300 ease-in-out h-full max-h-[100dvh] overscroll-contain ${
+          onClick={(e) => e.stopPropagation()}
+          className={`w-full bg-white shadow-2xl flex flex-col transition-transform duration-300 ease-in-out h-full max-h-[100dvh] overscroll-contain ${
             isVisible ? "translate-x-0 translate-y-0" : getTranslationClass(position)
           } ${className}`}
         >
@@ -110,7 +111,7 @@ export function Drawer({
               <button
                 type="button"
                 onClick={onClose}
-                className="grid size-8 min-[360px]:size-9 place-items-center rounded-full text-neutral-500 hover:text-black hover:bg-neutral-100 transition-colors cursor-pointer"
+                className="grid size-8 min-[360px]:size-9 place-items-center rounded-full text-neutral-500 hover:text-white hover:bg-black transition-all duration-300 ease-in-out cursor-pointer"
                 aria-label={closeButtonAriaLabel}
               >
                 <X size={20} className="sm:size-5.5" strokeWidth={1.8} />

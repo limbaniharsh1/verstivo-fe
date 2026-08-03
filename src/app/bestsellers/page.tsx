@@ -9,9 +9,9 @@ import {
 } from "@/features/bestsellers";
 
 export const metadata = {
-  title: "Bestsellers | BLUPAIR",
+  title: "Bestsellers | PAIRBORN",
   description:
-    "Explore BLUPAIR's top-selling iconic footwear including Florida Soft Footbed Birko-Flor sandals.",
+    "Explore PAIRBORN's top-selling iconic footwear including Florida Soft Footbed Birko-Flor sandals.",
 };
 
 export default function BestsellersPage() {

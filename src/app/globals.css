@@ -97,6 +97,121 @@
   --breakpoint-3xl: 103.125rem;
 }
 
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    border-color: var(--color-border);
+  }
+
+  /* Disable focus outlines and rings globally on inputs, textareas, and selects */
+  input:focus,
+  textarea:focus,
+  select:focus,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: none !important;
+    --tw-ring-offset-shadow: 0 0 #0000 !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+    box-shadow: none !important;
+  }
+}
+
+@layer utilities {
+  /* Blue buttons hover effect */
+  button.bg-primary,
+  a.bg-primary {
+    border: 1px solid var(--brand-primary) !important;
+  }
+
+  button.bg-primary,
+  button.bg-primary *,
+  a.bg-primary,
+  a.bg-primary * {
+    transition: all 0.3s ease-in-out !important;
+  }
+
+  button.bg-primary:hover,
+  a.bg-primary:hover {
+    background-color: #ffffff !important;
+    color: var(--brand-primary) !important;
+    border-color: var(--color-border) !important;
+    box-shadow: none !important;
+  }
+
+  button.bg-primary:hover *,
+  a.bg-primary:hover * {
+    color: var(--brand-primary) !important;
+  }
+
+  button.bg-primary:hover span.bg-white,
+  a.bg-primary:hover span.bg-white {
+    background-color: var(--brand-primary) !important;
+    color: #ffffff !important;
+  }
+
+  /* White buttons hover effect */
+  button.bg-surface,
+  a.bg-surface,
+  button.bg-white,
+  a.bg-white {
+    border: 1px solid var(--color-border) !important;
+  }
+
+  button.bg-surface,
+  button.bg-surface *,
+  a.bg-surface,
+  a.bg-surface *,
+  button.bg-white,
+  button.bg-white *,
+  a.bg-white,
+  a.bg-white * {
+    transition: all 0.3s ease-in-out !important;
+  }
+
+  button.bg-surface:hover,
+  a.bg-surface:hover,
+  button.bg-white:hover,
+  a.bg-white:hover {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border-color: #000000 !important;
+    box-shadow: none !important;
+  }
+
+  button.bg-surface:hover *,
+  a.bg-surface:hover *,
+  button.bg-white:hover *,
+  a.bg-white:hover * {
+    color: #ffffff !important;
+  }
+
+  /* Black buttons hover effect */
+  button.bg-black,
+  a.bg-black {
+    border: 1px solid #000000 !important;
+  }
+
+  button.bg-black,
+  button.bg-black *,
+  a.bg-black,
+  a.bg-black * {
+    transition: all 0.3s ease-in-out !important;
+  }
+
+  button.bg-black:hover,
+  a.bg-black:hover {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-color: #000000 !important;
+    box-shadow: none !important;
+  }
+
+  button.bg-black:hover *,
+  a.bg-black:hover * {
+    color: #000000 !important;
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -155,7 +270,7 @@ a {
   grid-template-rows: minmax(0, 1fr) auto auto auto;
   overflow: hidden;
   background: var(--surface);
-  min-height: 275px;
+  /* min-height: 275px; */
 }
 
 .product-card::before {
@@ -213,6 +328,10 @@ a {
 
 .text-responsive-lg {
   @apply text-[14px] xl:text-[16px] 3xl:text-[1.125rem];
+}
+
+.btn-banner-size {
+  @apply inline-flex items-center justify-center px-6 py-3 text-[13px] sm:text-[15px] lg:text-[16px] font-normal;
 }
 
 .container-main {

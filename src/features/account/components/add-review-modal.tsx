@@ -58,7 +58,7 @@ export function AddReviewModal({ isOpen, onClose, product }: AddReviewModalProps
           <button
             type="button"
             onClick={onClose}
-            className="text-slate-400 hover:text-slate-600 transition-colors p-1 rounded-lg cursor-pointer"
+            className="grid size-8 place-items-center rounded-full text-slate-400 hover:bg-black hover:text-white transition-all duration-300 ease-in-out cursor-pointer"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />

@@ -144,7 +144,7 @@ export function OrderHistoryTab() {
           Order History
         </h3>
         <p className="text-xs sm:text-sm text-slate-500 font-normal">
-          You haven’t purchased anything from Blupair yet.
+          You haven’t purchased anything from Pairborn yet.
         </p>
       </div>
     );

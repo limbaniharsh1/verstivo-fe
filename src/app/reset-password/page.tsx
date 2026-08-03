@@ -4,8 +4,8 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { ResetPasswordForm } from "@/features/auth";
 
 export const metadata: Metadata = {
-  title: "Reset Password | Blupair",
-  description: "Reset your Blupair account password.",
+  title: "Reset Password | Pairborn",
+  description: "Reset your Pairborn account password.",
 };
 
 export default function ResetPasswordPage() {

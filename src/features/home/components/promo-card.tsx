@@ -41,7 +41,7 @@ export function PromoCard({
           </p>
           <Link
             href={href}
-            className="promo-cta mt-3.5 font-medium min-[375px]:mt-4 sm:mt-5 xl:mt-6.5 3xl:mt-7.5 inline-flex h-9 min-[375px]:h-9.5 sm:h-10 3xl:h-12 items-center justify-center rounded-full bg-surface px-4.5 min-[375px]:px-5 sm:px-5 3xl:px-6 text-responsive-lg text-foreground transition-all hover:bg-surface-muted active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-contrast shadow-sm"
+            className="promo-cta mt-3.5 min-[375px]:mt-4 sm:mt-5 xl:mt-6.5 3xl:mt-7.5 rounded-full bg-surface text-foreground transition-all hover:bg-surface-muted active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-contrast shadow-sm btn-banner-size"
           >
             {linkLabel}
           </Link>

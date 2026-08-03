@@ -145,7 +145,7 @@ export const SAMPLE_PRODUCT_DETAIL: ProductDetailData = {
   returnsAndExchange:
     "We offer a 14-day hassle-free return and exchange policy for all unworn items in original packaging with original tags attached.",
   customerCare:
-    "Need help with sizing or care instructions? Contact our customer support team 24/7 at support@blupair.com or call +91 (800) 123-4567.",
+    "Need help with sizing or care instructions? Contact our customer support team 24/7 at support@pairborn.com or call +91 (800) 123-4567.",
 };
 
 export function getProductDetailById(id: string): ProductDetailData {
