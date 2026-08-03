@@ -204,7 +204,7 @@ export function SiteFooter() {
               <img
                 src={method.icon}
                 alt={method.name}
-                className="max-h-[11px] lg:max-h-[14px] w-auto"
+                className="h-[11px] lg:h-[12px] w-auto"
               />
             </span>
           ))}

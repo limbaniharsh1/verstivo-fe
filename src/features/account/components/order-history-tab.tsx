@@ -285,7 +285,7 @@ export function OrderHistoryTab() {
                           <button
                             type="button"
                             onClick={() => handleViewOrder(order)}
-                            className="px-5 py-2 sm:px-6 sm:py-2.5 rounded-full bg-black hover:bg-slate-800 text-white text-sm lg:text-[18px] font-medium transition-colors shadow-2xs cursor-pointer"
+                            className="btn-banner-size rounded-full bg-black text-white hover:bg-slate-800 transition-colors cursor-pointer"
                           >
                             View Order
                           </button>
@@ -294,7 +294,7 @@ export function OrderHistoryTab() {
                             <button
                               type="button"
                               onClick={() => handleTrackOrder(order.orderNumber)}
-                              className="px-5 py-2 sm:px-6 sm:py-2.5 rounded-full bg-primary hover:bg-primary-hover text-white text-sm lg:text-[18px] font-medium transition-colors shadow-2xs cursor-pointer"
+                              className="btn-banner-size rounded-full bg-primary text-white hover:bg-primary-hover transition-colors cursor-pointer"
                             >
                               Track Order
                             </button>
@@ -302,7 +302,7 @@ export function OrderHistoryTab() {
                             <button
                               type="button"
                               onClick={() => handleWriteReview(item)}
-                              className="px-5 py-2 sm:px-6 sm:py-2.5 rounded-full bg-primary hover:bg-primary-hover text-white text-sm lg:text-[18px] font-medium transition-colors shadow-2xs cursor-pointer"
+                              className="btn-banner-size rounded-full bg-primary text-white hover:bg-primary-hover transition-colors cursor-pointer"
                             >
                               Write a review
                             </button>

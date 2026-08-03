@@ -76,6 +76,7 @@
   --promo-overlay-middle: rgb(0 0 0 / 12%);
   --font-reyhan: "Reyhan", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
   --font-monument: "Monument Extended", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  --gray-custom: #6A6A6A;
 }
 
 @theme inline {
@@ -92,6 +93,7 @@
   --color-on-primary-muted: var(--text-on-primary-muted);
   --color-border: var(--border);
   --color-hero: var(--hero-background);
+  --color-gray-custom: var(--gray-custom);
   --font-sans: var(--font-reyhan);
   --font-monument: var(--font-monument);
   --breakpoint-3xl: 103.125rem;

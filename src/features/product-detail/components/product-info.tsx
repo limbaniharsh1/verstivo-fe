@@ -258,7 +258,7 @@ export function ProductInfo({
               <img
                 src={method.icon}
                 alt={method.name}
-                className="max-h-3 w-auto"
+                className="h-2.5 sm:h-3 w-auto"
               />
             </div>
           ))}

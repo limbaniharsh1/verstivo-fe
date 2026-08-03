@@ -167,11 +167,11 @@ export function PersonalInfoTab() {
               </div>
             </div>
 
-            {/* Confirm Button (18px font size) */}
+            {/* Confirm Button */}
             <button
               type="submit"
               disabled={isSubmittingInfo}
-              className="px-8 py-3 rounded-full bg-primary hover:bg-primary-hover disabled:opacity-70 text-white text-sm sm:text-base lg:text-[18px] font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-primary shadow-xs cursor-pointer"
+              className="btn-banner-size rounded-full bg-primary text-white hover:bg-primary-hover disabled:opacity-70 transition-colors focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer"
             >
               {isSubmittingInfo ? "Saving..." : "Confirm"}
             </button>
@@ -301,11 +301,11 @@ export function PersonalInfoTab() {
               </div>
             </div>
 
-            {/* Confirm Button (18px font size) */}
+            {/* Confirm Button */}
             <button
               type="submit"
               disabled={isSubmittingPassword}
-              className="px-8 py-3 rounded-full bg-primary hover:bg-primary-hover disabled:opacity-70 text-white text-sm sm:text-base lg:text-[18px] font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-primary shadow-xs cursor-pointer"
+              className="btn-banner-size rounded-full bg-primary text-white hover:bg-primary-hover disabled:opacity-70 transition-colors focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer"
             >
               {isSubmittingPassword ? "Saving..." : "Confirm"}
             </button>

@@ -42,12 +42,12 @@ export function OrderDetailsModal({ isOpen, onClose, order }: OrderDetailsModalP
       {/* Centered Modal Container (Wider Box with Darker Divider Borders) */}
       <div className="relative w-full max-w-[740px] sm:max-w-[780px] lg:max-w-[820px] bg-white rounded-none shadow-2xl overflow-hidden z-10 animate-in fade-in zoom-in-95 duration-200">
         {/* Modal Header */}
-        <div className="px-6 py-5 sm:px-8 sm:py-6 border-b border-slate-200 flex items-start justify-between">
+        <div className="px-6 py-5 sm:px-7 sm:py-6 border-b border-slate-200 flex items-start justify-between">
           <div>
             <h3 className="text-lg sm:text-xl font-semibold text-slate-900">
               Order Details
             </h3>
-            <p className="text-xs sm:text-sm text-slate-600 mt-1 font-normal">
+            <p className="text-sm sm:text-base mt-0.25 font-normal">
               Order Number # {order.orderNumber} was placed on {order.orderDate}
             </p>
           </div>
@@ -63,17 +63,27 @@ export function OrderDetailsModal({ isOpen, onClose, order }: OrderDetailsModalP
         </div>
 
         {/* Modal Body - Section 1: Info Grid (Payment, Address, Delivery) */}
-        <div className="p-6 sm:p-8 border-b border-slate-200 grid grid-cols-1 sm:grid-cols-3 gap-6 text-xs sm:text-sm">
+        <div className="p-6 sm:p-7 border-b grid grid-cols-1 sm:grid-cols-3 gap-6 text-xs sm:text-sm">
           {/* Payment Method */}
           <div>
-            <h4 className="font-semibold text-slate-900 mb-2">
+            <h4 className="font-medium mb-2 text-responsive-subtitle">
               Payment method
             </h4>
-            <div className="flex items-center gap-2">
-              <span className="px-1.5 py-0.5 bg-[#0000C9] text-white font-bold text-[10px] rounded italic tracking-wider">
-                {order.paymentMethod.brand}
-              </span>
-              <span className="text-slate-700 font-medium text-xs sm:text-sm">
+            <div className="flex items-center gap-3">
+              {order.paymentMethod.brand.toLowerCase() === "visa" ? (
+                <div className="flex items-center justify-center bg-[#F3F4F6] rounded px-2.5 py-1.5 h-7">
+                  <img
+                    src="/assets/icons/svg/visa.png"
+                    alt="Visa"
+                    className="h-3 sm:h-2.5 w-auto object-contain"
+                  />
+                </div>
+              ) : (
+                <span className="px-1.5 py-0.5 bg-[#0000C9] text-white font-bold text-[10px] rounded italic tracking-wider">
+                  {order.paymentMethod.brand}
+                </span>
+              )}
+              <span className="text-gray-custom font-normal text-responsive-subtitle">
                 **** **** **** {order.paymentMethod.last4}
               </span>
             </div>
@@ -81,22 +91,22 @@ export function OrderDetailsModal({ isOpen, onClose, order }: OrderDetailsModalP
 
           {/* Address */}
           <div>
-            <h4 className="font-semibold text-slate-900 mb-2">
+            <h4 className="font-medium mb-2 text-responsive-subtitle">
               Address
             </h4>
-            <div className="text-xs text-slate-600 leading-relaxed font-normal space-y-0.5">
-              <p className="font-medium text-slate-800">{order.address.name}</p>
-              <p>{order.address.line1}</p>
-              <p>{order.address.cityStateZip}</p>
-            </div>
+            <p className="text-xs text-gray-custom leading-tight font-normal text-responsive-subtitle">
+              <span>{order.address.name}</span>
+              <span>{order.address.line1}</span>
+              <span>{order.address.cityStateZip}</span>
+            </p>
           </div>
 
           {/* Delivery Method */}
           <div>
-            <h4 className="font-semibold text-slate-900 mb-2">
+            <h4 className="font-medium text-responsive-subtitle mb-2">
               Delivery method
             </h4>
-            <p className="text-xs text-slate-600 leading-relaxed font-normal">
+            <p className="text-responsive-subtitle text-gray-custom leading-tight font-normal">
               {order.deliveryMethod}
             </p>
           </div>
@@ -107,27 +117,27 @@ export function OrderDetailsModal({ isOpen, onClose, order }: OrderDetailsModalP
           <div className="max-w-[340px] ml-auto space-y-3">
             {/* Subtotal */}
             <div className="flex items-center justify-between text-xs sm:text-sm">
-              <span className="font-semibold text-slate-900">Subtotal</span>
-              <span className="font-semibold text-slate-900">{order.subtotal}</span>
+              <span className="font-medium text-responsive-subtitle">Subtotal</span>
+              <span className="font-medium text-responsive-subtitle">{order.subtotal}</span>
             </div>
 
             {/* Shipping */}
             <div className="flex items-center justify-between text-xs sm:text-sm pb-3 border-b border-slate-200">
-              <span className="font-semibold text-slate-900">Shipping</span>
-              <span className="font-semibold text-slate-900">{order.shipping}</span>
+              <span className="font-medium text-responsive-subtitle">Shipping</span>
+              <span className="font-medium text-responsive-subtitle">{order.shipping}</span>
             </div>
 
             {/* Total */}
-            <div className="flex items-start justify-between pt-1">
+            <div className="flex items-start justify-between">
               <div>
-                <span className="font-semibold text-slate-900 text-sm sm:text-base block">
+                <span className="font-medium text-responsive-subtitle block">
                   Total
                 </span>
-                <span className="text-[11px] text-slate-400 font-normal block mt-0.5">
+                <span className="text-sm sm:text-sm text-slate-400 font-normal block">
                   Including all taxes
                 </span>
               </div>
-              <span className="font-semibold text-slate-900 text-sm sm:text-base">
+              <span className="font-medium text-responsive-subtitle">
                 {order.total}
               </span>
             </div>
