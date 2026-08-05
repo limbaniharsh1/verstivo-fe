@@ -46,7 +46,7 @@ export function MegaMenuDropdown({
                     <li key={link.label}>
                       <Link
                         href={link.href}
-                        className="relative pb-0.5 inline-block text-[15px] xl:text-[16px] 2xl:text-[18px] font-medium text-[#18181b] transition-colors hover:text-primary after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-px after:w-full after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left"
+                        className="relative leading-snug inline-block text-[15px] xl:text-[16px] 2xl:text-[18px] font-medium text-[#18181b] transition-colors after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-px after:w-full after:bg-[#18181b] after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left"
                         onClick={onClose}
                       >
                         {link.label}

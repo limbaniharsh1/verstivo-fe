@@ -79,7 +79,7 @@ export function CartItemCard({ item }: CartItemCardProps) {
                     {formattedOriginalTotal}
                   </span>
                 )}
-                <span className="text-responsive-lg font-bold text-[#0000d6]">
+                <span className="text-responsive-lg font-bold text-primary">
                   {formattedItemTotal}
                 </span>
               </div>

@@ -141,7 +141,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
         <div className="mx-auto w-full max-w-[1585px] px-4 py-4 sm:px-6 sm:py-6 lg:px-10">
           {/* Top Search Input Bar */}
           <div className="flex items-center gap-3 sm:gap-6">
-            <div className="relative flex h-10 w-full min-w-0 items-center rounded-lg border border-neutral-300/90 bg-white px-4 transition-colors focus-within:border-primary">
+            <div className="relative flex h-10 w-full min-w-0 items-center rounded-lg border border-neutral-300/90 bg-white px-4 transition-colors focus-within:border-black">
               <LiaSearchSolid className="size-[18px] shrink-0 rotate-y-[180deg]" />
               <input
                 ref={inputRef}
@@ -196,8 +196,8 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                     onClick={() => handleTagClick(tag)}
                     className={`rounded-full px-3.5 sm:px-4.25 py-1 sm:py-1.5 text-xs xl:text-sm font-medium transition-all duration-200 cursor-pointer whitespace-nowrap border ${
                       isActive
-                        ? "bg-foreground text-white border-foreground"
-                        : "bg-white text-foreground border-border hover:bg-surface-muted"
+                        ? "bg-foreground text-primary-contrast border-foreground"
+                        : "bg-white text-foreground border-border only-border-hover"
                     }`}
                   >
                     {tag}
@@ -216,7 +216,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                   type="button"
                   onClick={() => handleScroll("left")}
                   disabled={!canScrollLeft}
-                  className="absolute -left-3 sm:-left-4 top-[37.5%] -translate-y-1/2 z-20 grid size-8 sm:size-9 place-items-center rounded-full bg-white text-foreground shadow-md border border-neutral-200 transition-all hover:bg-black hover:text-white active:bg-black active:text-white focus:bg-black focus:text-white disabled:opacity-0 disabled:pointer-events-none cursor-pointer"
+                  className="absolute -left-3 sm:-left-4 top-[37.5%] -translate-y-1/2 z-20 grid size-8 sm:size-9 place-items-center rounded-full border border-border bg-white text-foreground shadow-md transition-colors only-border-hover disabled:opacity-0 disabled:pointer-events-none cursor-pointer"
                   aria-label="Scroll left"
                 >
                   <ChevronLeft size={20} />
@@ -225,7 +225,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                   type="button"
                   onClick={() => handleScroll("right")}
                   disabled={!canScrollRight}
-                  className="absolute -right-3 sm:-right-4 top-[37.5%] -translate-y-1/2 z-20 grid size-8 sm:size-9 place-items-center rounded-full bg-white text-foreground shadow-md border border-neutral-200 transition-all hover:bg-black hover:text-white active:bg-black active:text-white focus:bg-black focus:text-white disabled:opacity-0 disabled:pointer-events-none cursor-pointer"
+                  className="absolute -right-3 sm:-right-4 top-[37.5%] -translate-y-1/2 z-20 grid size-8 sm:size-9 place-items-center rounded-full border border-border bg-white text-foreground shadow-md transition-colors only-border-hover disabled:opacity-0 disabled:pointer-events-none cursor-pointer"
                   aria-label="Scroll right"
                 >
                   <ChevronRight size={20} />

@@ -111,7 +111,7 @@ export function ProductInfo({
         <span className="text-xs min-[360px]:text-sm sm:text-base xl:text-[28px] font-medium text-neutral-400 line-through">
           {product.originalPrice}
         </span>
-        <span className="inline-flex items-center rounded-full bg-[#0000D1] px-2 min-[360px]:px-2.5 py-0.5 text-[10px] min-[360px]:text-[11px] xl:text-base font-normal text-white uppercase tracking-wider">
+        <span className="inline-flex items-center rounded-full bg-primary px-2 min-[360px]:px-3 py-1 text-[10px] min-[360px]:text-[11px] xl:text-sm font-normal text-white uppercase tracking-wider">
           {product.discountBadge}
         </span>
       </div>
@@ -161,7 +161,7 @@ export function ProductInfo({
           <button
             type="button"
             onClick={() => setIsSizeGuideOpen(true)}
-            className="text-[#0000D1] font-medium hover:underline text-[11.5px] sm:text-[13px] xl:text-base cursor-pointer"
+            className="text-primary font-medium hover:underline text-[11.5px] sm:text-[13px] xl:text-base cursor-pointer"
           >
             Size Guide
           </button>
@@ -225,7 +225,7 @@ export function ProductInfo({
         <button
           type="button"
           onClick={handleAddToCart}
-          className="flex h-10 sm:h-11 flex-1 min-w-[130px] items-center justify-center rounded-full bg-[#0000D1] hover:bg-[#0000A8] active:scale-[0.99] text-white font-semibold text-[13px] sm:text-[14.5px] transition-all cursor-pointer shadow-sm"
+          className="flex h-10 sm:h-11 flex-1 min-w-[130px] items-center justify-center rounded-full bg-primary hover:bg-primary-hover active:scale-[0.99] text-white font-semibold text-[13px] sm:text-[14.5px] transition-all cursor-pointer shadow-sm"
         >
           {selectedSize ? "Add to Cart" : "Select Size"}
         </button>

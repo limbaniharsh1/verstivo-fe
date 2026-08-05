@@ -4,12 +4,12 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Check } from "lucide-react";
-import { CartIcon } from "@/components/common/CartIcon";
 import { toast } from "sonner";
 import { useCart } from "@/features/cart";
 import { parseNumericPrice, formatDisplayPrice } from "@/lib/price";
 import { ProductBadge } from "./ProductBadge";
 import { WishlistButton } from "./WishlistButton";
+import { AddButton } from "./AddButton";
 import type { BaseProduct } from "@/types/product";
 
 export type ProductCardVariant = "default" | "search" | "horizontal";
@@ -65,10 +65,10 @@ export function BaseProductCard({
 
   if (variant === "horizontal") {
     return (
-      <div className="flex items-center justify-between gap-3 sm:gap-4 py-1 group">
+      <div className="flex items-center justify-between gap-3 sm:gap-4 py-1">
         <Link
           href={productUrl}
-          className="relative size-[90px] xs:size-[100px] sm:size-[110px] shrink-0 overflow-hidden bg-[#f4f4f4] rounded-sm flex items-center justify-center cursor-pointer"
+          className="group relative size-[90px] xs:size-[100px] sm:size-[110px] shrink-0 overflow-hidden bg-[#f4f4f4] rounded-sm flex items-center justify-center cursor-pointer"
         >
           <Image
             src={product.image}
@@ -91,31 +91,18 @@ export function BaseProductCard({
           </p>
         </Link>
  
-        <button
-          type="button"
-          onClick={handleAddToCart}
-          className={`group/btn shrink-0 flex h-6.5 sm:h-7.5 md:h-7.5 xl:h-9 cursor-pointer items-center justify-center rounded-full px-2.5 min-[375px]:px-3 md:px-3.5 xl:px-4.5 text-responsive-lg font-medium shadow-sm transition-all active:scale-95 ${isAdded
-              ? "bg-emerald-600 text-white shadow-xs scale-95"
-              : "bg-black text-white hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        <div className="shrink-0 flex items-center justify-end w-[72px] min-[375px]:w-[78px] sm:w-[85px] md:w-[90px] xl:w-[100px]">
+          <AddButton
+            isAdded={isAdded}
+            onClick={handleAddToCart}
+            className={`group/btn flex h-6.5 sm:h-7.5 md:h-7.5 xl:h-9 cursor-pointer items-center justify-center rounded-full px-2.5 min-[375px]:px-3 md:px-3.5 xl:px-4.5 text-responsive-lg font-medium shadow-sm transition-all only-border-hover ${
+              isAdded
+                ? "bg-emerald-600 text-white shadow-xs"
+                : "bg-black text-white hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             }`}
-          aria-label={`Add ${product.name} to cart`}
-        >
-          {isAdded ? (
-            <span className="flex items-center justify-center gap-1.5">
-              <Check size={14} strokeWidth={2.5} />
-              <span>Added</span>
-            </span>
-          ) : (
-            <span className="relative flex items-center justify-center pl-0 transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover/btn:pl-6">
-              <span className="absolute left-1/2 -translate-x-1/2 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover/btn:left-0 group-hover/btn:translate-x-0 group-hover/btn:opacity-100 shrink-0 flex items-center justify-center">
-                <CartIcon className="h-[1.05em] w-[1.05em]" />
-              </span>
-              <span className="shrink-0">
-                Add
-              </span>
-            </span>
-          )}
-        </button>
+            ariaLabel={`Add ${product.name} to cart`}
+          />
+        </div>
       </div>
     );
   }
@@ -157,7 +144,7 @@ export function BaseProductCard({
           <button
             type="button"
             onClick={handleAddToCart}
-            className="absolute bottom-2.5 right-2.5 z-10 flex h-7 sm:h-7.5 items-center justify-center rounded-full bg-black px-3.5 sm:px-4 text-[11px] sm:text-[12px] font-medium text-white shadow-xs transition-all hover:bg-neutral-800 active:scale-95 focus-visible:outline-2 focus-visible:outline-primary"
+            className="absolute bottom-2.5 right-2.5 z-10 flex h-7 sm:h-7.5 items-center justify-center rounded-full bg-black px-3.5 sm:px-4 text-[11px] sm:text-[12px] font-medium text-white shadow-xs transition-all hover:bg-neutral-800 focus-visible:outline-2 focus-visible:outline-primary"
             aria-label={`Add ${product.name} to cart`}
           >
             Add
@@ -211,21 +198,11 @@ export function BaseProductCard({
         />
       </Link>
 
-      <button
-        type="button"
+      <AddButton
         onClick={handleAddToCart}
-        className="group/btn z-10 col-start-1 row-start-1 m-1.5 min-[375px]:m-2 sm:m-2.5 lg:m-3 flex h-7.75 xl:h-9 cursor-pointer items-center justify-center rounded-full bg-foreground px-4.5 text-responsive-lg font-medium text-primary-contrast shadow-sm transition-all active:scale-95 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary self-end justify-self-end"
-        aria-label={`Add ${product.name} to cart`}
-      >
-        <span className="relative flex items-center justify-center pl-0 transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover/btn:pl-6">
-          <span className="absolute left-1/2 -translate-x-1/2 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover/btn:left-0 group-hover/btn:translate-x-0 group-hover/btn:opacity-100 shrink-0 flex items-center justify-center">
-            <CartIcon className="h-[1.05em] w-[1.05em]" />
-          </span>
-          <span className="shrink-0">
-            Add
-          </span>
-        </span>
-      </button>
+        className="group/btn z-10 col-start-1 row-start-1 m-1.5 min-[375px]:m-2 sm:m-2.5 lg:m-3 flex h-7.75 xl:h-9 cursor-pointer items-center justify-center rounded-full bg-foreground px-4.5 text-responsive-lg font-medium text-primary-contrast shadow-sm transition-all hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary self-end justify-self-end"
+        ariaLabel={`Add ${product.name} to cart`}
+      />
 
       <h3 className="product-title col-start-1 row-start-2 px-2 min-[375px]:px-2.5 sm:px-3.5 md:px-4 pt-1.5 sm:pt-2.5 xl:pt-4 leading-tight font-semibold text-responsive-lg truncate pointer-events-none" title={product.name}>
         {product.name}

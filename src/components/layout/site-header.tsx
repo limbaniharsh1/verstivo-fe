@@ -106,10 +106,10 @@ export function SiteHeader() {
                     >
                       <Link
                         href={href}
-                        className={`relative pb-1 inline-flex items-start whitespace-nowrap text-[12px] lg:text-[13px] xl:text-[14.5px] 2xl:text-[16px] 3xl:text-[18px] font-medium transition-colors after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-px after:w-full after:bg-primary after:transition-transform after:duration-300 after:origin-left ${
+                        className={`relative leading-tight inline-flex items-start whitespace-nowrap text-[12px] lg:text-[13px] xl:text-[14.5px] 2xl:text-[16px] 3xl:text-[18px] font-medium transition-colors after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-px after:w-full after:bg-black after:transition-transform after:duration-300 after:origin-left ${
                           isActive
-                            ? "text-primary font-semibold after:scale-x-100"
-                            : "hover:text-primary after:scale-x-0 hover:after:scale-x-100"
+                            ? "font-semibold after:scale-x-100"
+                            : "after:scale-x-0 hover:after:scale-x-100"
                         }`}
                       >
                         <span>{label}</span>

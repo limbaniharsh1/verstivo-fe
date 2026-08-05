@@ -57,8 +57,8 @@
 }
 
 :root {
-  --brand-primary: #0000C9;
-  --brand-primary-hover: #0600b8;
+  --brand-primary: #0101FF;
+  --brand-primary-hover: #0000E6;
   --brand-primary-contrast: #ffffff;
   --brand-primary-border: rgb(255 255 255 / 28%);
   --surface: #ffffff;
@@ -205,6 +205,18 @@
     color: #ffffff !important;
   }
 
+  /* Override: Button hover only changes border to black, keeps white background */
+  button.only-border-hover:hover,
+  a.only-border-hover:hover {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-color: #000000 !important;
+  }
+  button.only-border-hover:hover *,
+  a.only-border-hover:hover * {
+    color: #000000 !important;
+  }
+
   /* Black buttons hover effect */
   button.bg-black,
   a.bg-black {
@@ -229,6 +241,19 @@
   button.bg-black:hover *,
   a.bg-black:hover * {
     color: #000000 !important;
+  }
+
+  /* Override: Add button hover does not turn white, keeps background black */
+  button.btn-add:hover,
+  a.btn-add:hover {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border-color: #000000 !important;
+    opacity: 0.9 !important;
+  }
+  button.btn-add:hover *,
+  a.btn-add:hover * {
+    color: #ffffff !important;
   }
 }
 

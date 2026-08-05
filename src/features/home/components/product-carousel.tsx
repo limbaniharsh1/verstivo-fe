@@ -19,7 +19,7 @@ type ProductCarouselProps = {
 };
 
 const scrollButtonClassName =
-  "absolute top-[33%] sm:top-[34%] z-20 hidden size-9 translate-y-1/2 cursor-pointer place-items-center rounded-full bg-surface shadow-md transition-colors hover:bg-foreground hover:text-primary-contrast active:bg-foreground active:text-primary-contrast focus-visible:bg-foreground focus-visible:text-primary-contrast focus-visible:outline-2 focus-visible:outline-primary sm:grid disabled:opacity-30 disabled:pointer-events-none";
+  "absolute top-[33%] sm:top-[34%] z-20 hidden size-9 translate-y-1/2 cursor-pointer place-items-center rounded-full bg-white text-black shadow-md border border-border transition-colors only-border-hover focus-visible:outline-2 focus-visible:outline-primary sm:grid disabled:opacity-30 disabled:pointer-events-none";
 
 export function ProductCarousel({
   heading,
@@ -72,8 +72,8 @@ export function ProductCarousel({
                     onClick={() => setSelectedGender(gender)}
                     className={
                       isSelected
-                        ? "inline-flex h-8 min-[375px]:h-8.5 sm:h-9 items-center justify-center rounded-full bg-foreground px-4 min-[375px]:px-4.5 sm:px-5 text-[11.5px] min-[375px]:text-[12px] sm:text-[12.5px] lg:text-[13px] font-semibold capitalize text-primary-contrast transition-all shadow-xs border border-foreground"
-                        : "inline-flex h-8 min-[375px]:h-8.5 sm:h-9 items-center justify-center rounded-full border border-border bg-surface px-4 min-[375px]:px-4.5 sm:px-5 text-[11.5px] min-[375px]:text-[12px] sm:text-[12.5px] lg:text-[13px] font-medium capitalize text-foreground transition-all hover:border-foreground/50 hover:bg-surface-muted"
+                        ? "inline-flex h-8 min-[375px]:h-8.5 sm:h-9 items-center justify-center rounded-full bg-foreground px-4 min-[375px]:px-4.5 sm:px-5 text-[11.5px] min-[375px]:text-[12px] sm:text-[12.5px] lg:text-[13px] font-semibold capitalize text-primary-contrast transition-all shadow-xs border border-foreground cursor-pointer"
+                        : "inline-flex h-8 min-[375px]:h-8.5 sm:h-9 items-center justify-center rounded-full border border-border bg-white px-4 min-[375px]:px-4.5 sm:px-5 text-[11.5px] min-[375px]:text-[12px] sm:text-[12.5px] lg:text-[13px] font-medium capitalize text-foreground transition-colors only-border-hover cursor-pointer"
                     }
                   >
                     {gender}

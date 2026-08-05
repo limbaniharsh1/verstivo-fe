@@ -59,8 +59,8 @@ export function SizeGuideDrawer({ isOpen, onClose }: SizeGuideDrawerProps) {
           onClick={() => setActiveTab("men")}
           className={`px-3.5 min-[360px]:px-5 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all cursor-pointer whitespace-nowrap ${
             activeTab === "men"
-              ? "bg-black text-white shadow-xs"
-              : "bg-white text-black border border-neutral-300 hover:border-black"
+              ? "bg-foreground text-primary-contrast border border-foreground shadow-xs"
+              : "bg-white text-black border border-neutral-300 only-border-hover"
           }`}
         >
           Men Size
@@ -70,8 +70,8 @@ export function SizeGuideDrawer({ isOpen, onClose }: SizeGuideDrawerProps) {
           onClick={() => setActiveTab("women")}
           className={`px-3.5 min-[360px]:px-5 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all cursor-pointer whitespace-nowrap ${
             activeTab === "women"
-              ? "bg-black text-white shadow-xs"
-              : "bg-white text-black border border-neutral-300 hover:border-black"
+              ? "bg-foreground text-primary-contrast border border-foreground shadow-xs"
+              : "bg-white text-black border border-neutral-300 only-border-hover"
           }`}
         >
           Women Size

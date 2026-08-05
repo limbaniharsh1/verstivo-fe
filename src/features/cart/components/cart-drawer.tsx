@@ -21,7 +21,7 @@ export function CartDrawer() {
       <span className="text-[18px] sm:text-[20px] font-semibold text-black tracking-tight">
         Cart
       </span>
-      <span className="grid size-5 place-items-center rounded-full bg-[#0000d6] text-[11px] font-bold text-white">
+      <span className="grid size-5 place-items-center rounded-full bg-primary text-[11px] font-bold text-white">
         {totalCount}
       </span>
     </div>
@@ -54,7 +54,7 @@ export function CartDrawer() {
               <button
                 type="button"
                 onClick={() => setEditingSizeItemId(null)}
-                className="w-full h-11 sm:h-12 rounded-full bg-[#b2b5f7] hover:bg-[#0000d6] active:scale-[0.99] text-white font-semibold text-[14px] sm:text-[15px] flex items-center justify-center transition-all cursor-pointer shadow-xs"
+                className="w-full h-11 sm:h-12 rounded-full bg-[#b2b5f7] hover:bg-primary-hover active:scale-[0.99] text-white font-semibold text-[14px] sm:text-[15px] flex items-center justify-center transition-all cursor-pointer shadow-xs"
               >
                 Select size
               </button>
@@ -98,7 +98,7 @@ export function CartDrawer() {
                   onClick={() => {
                     alert("Proceeding to Checkout!");
                   }}
-                  className="w-full h-11 sm:h-12 rounded-full bg-[#0000d6] hover:bg-[#0000b8] active:scale-[0.99] text-white font-medium text-[14px] sm:text-[15px] flex items-center justify-center transition-all cursor-pointer"
+                  className="w-full h-11 sm:h-12 rounded-full bg-primary text-white !text-white font-medium text-[14px] sm:text-[15px] flex items-center justify-center transition-all cursor-pointer"
                 >
                   Continue to Checkout
                 </button>

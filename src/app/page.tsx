@@ -18,8 +18,8 @@ export default function HomePage() {
         <TrendingProducts />
         <PromotionalSplit />
         <ShopByProduct />
-        <CraftsmanshipSection />
         <MostLovedProducts />
+        <CraftsmanshipSection />
         <SocialGallery />
         <BenefitsBar />
       </main>

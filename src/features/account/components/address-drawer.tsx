@@ -180,7 +180,7 @@ export function AddressDrawer({ isOpen, onClose, onSave, initialData }: AddressD
                     className={`w-full h-11 px-4 rounded-xl border text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none transition-all ${
                       errors.firstName
                         ? "border-red-400 focus:border-red-500 focus:ring-1 focus:ring-red-500 bg-red-50/20"
-                        : "border-slate-300 focus:border-primary focus:ring-1 focus:ring-primary"
+                        : "border-slate-300 focus:border-black focus:ring-1 focus:ring-black"
                     }`}
                   />
                   {errors.firstName && (
@@ -198,7 +198,7 @@ export function AddressDrawer({ isOpen, onClose, onSave, initialData }: AddressD
                     className={`w-full h-11 px-4 rounded-xl border text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none transition-all ${
                       errors.lastName
                         ? "border-red-400 focus:border-red-500 focus:ring-1 focus:ring-red-500 bg-red-50/20"
-                        : "border-slate-300 focus:border-primary focus:ring-1 focus:ring-primary"
+                        : "border-slate-300 focus:border-black focus:ring-1 focus:ring-black"
                     }`}
                   />
                   {errors.lastName && (
@@ -234,7 +234,7 @@ export function AddressDrawer({ isOpen, onClose, onSave, initialData }: AddressD
                   type="text"
                   placeholder="Address 2"
                   {...register("address2")}
-                  className="w-full h-11 px-4 rounded-xl border border-slate-300 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                  className="w-full h-11 px-4 rounded-xl border border-slate-300 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-all"
                 />
               </div>
 
@@ -268,7 +268,7 @@ export function AddressDrawer({ isOpen, onClose, onSave, initialData }: AddressD
                     } ${
                       errors.province
                         ? "border-red-400 focus:border-red-500 focus:ring-1 focus:ring-red-500 bg-red-50/20"
-                        : "border-slate-300 focus:border-primary focus:ring-1 focus:ring-primary"
+                        : "border-slate-300 focus:border-black focus:ring-1 focus:ring-black"
                     }`}
                   >
                     <option value="" disabled hidden>
@@ -325,7 +325,7 @@ export function AddressDrawer({ isOpen, onClose, onSave, initialData }: AddressD
                     className={`w-full h-11 pl-12 pr-4 rounded-xl border text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none transition-all ${
                       errors.phone
                         ? "border-red-400 focus:border-red-500 focus:ring-1 focus:ring-red-500 bg-red-50/20"
-                        : "border-slate-300 focus:border-primary focus:ring-1 focus:ring-primary"
+                        : "border-slate-300 focus:border-black focus:ring-1 focus:ring-black"
                     }`}
                   />
                 </div>

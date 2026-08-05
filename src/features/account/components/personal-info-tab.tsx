@@ -90,7 +90,7 @@ export function PersonalInfoTab() {
                   className={`w-full h-[54px] px-4 rounded-xl border text-sm sm:text-base lg:text-[18px] text-slate-900 placeholder:text-slate-400 focus:outline-none transition-all ${
                     errorsInfo.firstName
                       ? "border-red-400 focus:border-red-500 focus:ring-1 focus:ring-red-500 bg-red-50/20"
-                      : "border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary"
+                      : "border-slate-200 focus:border-black focus:ring-1 focus:ring-black"
                   }`}
                 />
                 {errorsInfo.firstName && (
@@ -108,7 +108,7 @@ export function PersonalInfoTab() {
                   className={`w-full h-[54px] px-4 rounded-xl border text-sm sm:text-base lg:text-[18px] text-slate-900 placeholder:text-slate-400 focus:outline-none transition-all ${
                     errorsInfo.lastName
                       ? "border-red-400 focus:border-red-500 focus:ring-1 focus:ring-red-500 bg-red-50/20"
-                      : "border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary"
+                      : "border-slate-200 focus:border-black focus:ring-1 focus:ring-black"
                   }`}
                 />
                 {errorsInfo.lastName && (
@@ -129,7 +129,7 @@ export function PersonalInfoTab() {
                   className={`w-full h-[54px] px-4 rounded-xl border text-sm sm:text-base lg:text-[18px] text-slate-900 placeholder:text-slate-400 focus:outline-none transition-all ${
                     errorsInfo.email
                       ? "border-red-400 focus:border-red-500 focus:ring-1 focus:ring-red-500 bg-red-50/20"
-                      : "border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary"
+                      : "border-slate-200 focus:border-black focus:ring-1 focus:ring-black"
                   }`}
                 />
                 {errorsInfo.email && (
@@ -155,7 +155,7 @@ export function PersonalInfoTab() {
                     className={`w-full h-[54px] pl-13 sm:pl-14 lg:pl-[60px] pr-4 rounded-xl border text-sm sm:text-base lg:text-[18px] text-slate-900 placeholder:text-slate-400 focus:outline-none transition-all ${
                       errorsInfo.phone
                         ? "border-red-400 focus:border-red-500 focus:ring-1 focus:ring-red-500 bg-red-50/20"
-                        : "border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary"
+                        : "border-slate-200 focus:border-black focus:ring-1 focus:ring-black"
                     }`}
                   />
                 </div>
@@ -205,7 +205,7 @@ export function PersonalInfoTab() {
                   className={`w-full h-[54px] pl-4 pr-11 rounded-xl border text-sm sm:text-base lg:text-[18px] text-slate-900 placeholder:text-slate-400 focus:outline-none transition-all ${
                     errorsPassword.currentPassword
                       ? "border-red-400 focus:border-red-500 focus:ring-1 focus:ring-red-500 bg-red-50/20"
-                      : "border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary"
+                      : "border-slate-200 focus:border-black focus:ring-1 focus:ring-black"
                   }`}
                 />
                 <button
@@ -241,7 +241,7 @@ export function PersonalInfoTab() {
                     className={`w-full h-[54px] pl-4 pr-11 rounded-xl border text-sm sm:text-base lg:text-[18px] text-slate-900 placeholder:text-slate-400 focus:outline-none transition-all ${
                       errorsPassword.newPassword
                         ? "border-red-400 focus:border-red-500 focus:ring-1 focus:ring-red-500 bg-red-50/20"
-                        : "border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary"
+                        : "border-slate-200 focus:border-black focus:ring-1 focus:ring-black"
                     }`}
                   />
                   <button
@@ -275,7 +275,7 @@ export function PersonalInfoTab() {
                     className={`w-full h-[54px] pl-4 pr-11 rounded-xl border text-sm sm:text-base lg:text-[18px] text-slate-900 placeholder:text-slate-400 focus:outline-none transition-all ${
                       errorsPassword.confirmNewPassword
                         ? "border-red-400 focus:border-red-500 focus:ring-1 focus:ring-red-500 bg-red-50/20"
-                        : "border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary"
+                        : "border-slate-200 focus:border-black focus:ring-1 focus:ring-black"
                     }`}
                   />
                   <button
