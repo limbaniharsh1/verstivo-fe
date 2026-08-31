@@ -1,0 +1,564 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Monument Extended";
+  src: url("/assets/fonts/MonumentExtended-Regular.otf") format("opentype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Reyhan";
+  src: url("/assets/fonts/Reyhan Font/Reyhan-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Reyhan";
+  src: url("/assets/fonts/Reyhan Font/Reyhan-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Reyhan";
+  src: url("/assets/fonts/Reyhan Font/Reyhan-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Reyhan";
+  src: url("/assets/fonts/Reyhan Font/Reyhan-Semibold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Reyhan";
+  src: url("/assets/fonts/Reyhan Font/Reyhan-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Reyhan";
+  src: url("/assets/fonts/Reyhan Font/Reyhan-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --brand-primary: #0101FF;
+  --brand-primary-hover: #0000E6;
+  --brand-primary-contrast: #ffffff;
+  --brand-primary-border: rgb(255 255 255 / 28%);
+  --surface: #ffffff;
+  --surface-muted: #f5f5f5;
+  --surface-soft: #f4f4ff;
+  --text-primary: #0a0a0a;
+  --text-muted: #5d5d5d;
+  --text-on-dark-muted: #a8a8a8;
+  --text-on-primary-muted: #d9d8ff;
+  --border: #D0D0D0;
+  --hero-background: #526145;
+  --hero-background-soft: rgb(82 97 69 / 82%);
+  --hero-background-mobile: rgb(23 28 19 / 68%);
+  --promo-overlay-start: rgb(0 0 0 / 58%);
+  --promo-overlay-middle: rgb(0 0 0 / 12%);
+  --font-reyhan: "Reyhan", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  --font-monument: "Monument Extended", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  --gray-custom: #6A6A6A;
+  --dawn-pink: #EBEBEB;
+}
+
+@theme inline {
+  --color-primary: var(--brand-primary);
+  --color-primary-hover: var(--brand-primary-hover);
+  --color-primary-contrast: var(--brand-primary-contrast);
+  --color-primary-border: var(--brand-primary-border);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-soft-surface: var(--surface-soft);
+  --color-foreground: var(--text-primary);
+  --color-muted: var(--text-muted);
+  --color-dark-muted: var(--text-on-dark-muted);
+  --color-on-primary-muted: var(--text-on-primary-muted);
+  --color-border: var(--border);
+  --color-hero: var(--hero-background);
+  --color-gray-custom: var(--gray-custom);
+  --color-dawn-pink: var(--dawn-pink) --font-sans: var(--font-reyhan);
+  --font-monument: var(--font-monument);
+  --breakpoint-3xl: 103.125rem;
+
+  --shadow-2xs: none;
+  --shadow-xs: none;
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-xl: none;
+  --shadow-2xl: none;
+  --shadow-3xl: none;
+  --shadow-inner: none;
+
+  --drop-shadow-xs: none;
+  --drop-shadow-sm: none;
+  --drop-shadow-md: none;
+  --drop-shadow-lg: none;
+  --drop-shadow-xl: none;
+  --drop-shadow-2xl: none;
+  --drop-shadow-3xl: none;
+}
+
+@layer base {
+
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-border);
+  }
+
+  /* Disable focus outlines and rings globally on inputs, textareas, and selects */
+  input:focus,
+  textarea:focus,
+  select:focus,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: none !important;
+    --tw-ring-offset-shadow: 0 0 #0000 !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+    box-shadow: none !important;
+  }
+}
+
+@layer utilities {
+
+  /* Blue buttons hover effect */
+  button.bg-primary,
+  a.bg-primary {
+    border: 1px solid var(--brand-primary) !important;
+  }
+
+  button.bg-primary,
+  button.bg-primary *,
+  a.bg-primary,
+  a.bg-primary * {
+    transition: all 0.3s ease-in-out !important;
+  }
+
+  button.bg-primary:hover,
+  a.bg-primary:hover {
+    background-color: #ffffff !important;
+    color: var(--brand-primary) !important;
+    border-color: var(--color-border) !important;
+    box-shadow: none !important;
+  }
+
+  button.bg-primary:hover *,
+  a.bg-primary:hover * {
+    color: var(--brand-primary) !important;
+  }
+
+  button.bg-primary:hover span.bg-white,
+  a.bg-primary:hover span.bg-white {
+    background-color: var(--brand-primary) !important;
+    color: #ffffff !important;
+  }
+
+  /* White buttons hover effect */
+  button.bg-surface,
+  a.bg-surface,
+  button.bg-white,
+  a.bg-white {
+    border: 1px solid var(--color-border) !important;
+  }
+
+  button.bg-surface,
+  button.bg-surface *,
+  a.bg-surface,
+  a.bg-surface *,
+  button.bg-white,
+  button.bg-white *,
+  a.bg-white,
+  a.bg-white * {
+    transition: all 0.3s ease-in-out !important;
+  }
+
+  button.bg-surface:hover,
+  a.bg-surface:hover,
+  button.bg-white:hover,
+  a.bg-white:hover {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border-color: #000000 !important;
+    box-shadow: none !important;
+  }
+
+  button.bg-surface:hover *,
+  a.bg-surface:hover *,
+  button.bg-white:hover *,
+  a.bg-white:hover * {
+    color: #ffffff !important;
+  }
+
+  /* Override: Button hover only changes border to black, keeps white background */
+  button.only-border-hover:hover,
+  a.only-border-hover:hover {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-color: #000000 !important;
+  }
+
+  button.only-border-hover:hover *,
+  a.only-border-hover:hover * {
+    color: #000000 !important;
+  }
+
+  /* Black buttons hover effect */
+  button.bg-black,
+  a.bg-black {
+    border: 1px solid #000000 !important;
+  }
+
+  button.bg-black,
+  button.bg-black *,
+  a.bg-black,
+  a.bg-black * {
+    transition: all 0.3s ease-in-out !important;
+  }
+
+  button.bg-black:hover,
+  a.bg-black:hover {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-color: #000000 !important;
+    box-shadow: none !important;
+  }
+
+  button.bg-black:hover *,
+  a.bg-black:hover * {
+    color: #000000 !important;
+  }
+
+  /* Override: Add button hover does not turn white, keeps background black */
+  button.btn-add:hover,
+  a.btn-add:hover {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border-color: #000000 !important;
+    opacity: 0.9 !important;
+  }
+
+  button.btn-add:hover *,
+  a.btn-add:hover * {
+    color: #ffffff !important;
+  }
+
+  /* ─── Phone Input Custom Styles ───────────────────────────────────────────── */
+  .phone-input-wrapper {
+    @apply flex items-center h-14 overflow-hidden;
+  }
+
+  .phone-input-field {
+    @apply flex items-center w-full h-full gap-0;
+  }
+
+  /* Country select */
+  .phone-input-field .PhoneInputCountry {
+    @apply flex items-center gap-1.5 pl-4 pr-3 h-full bg-transparent cursor-pointer;
+    border-right: 1px solid var(--border);
+  }
+
+  .phone-input-field .PhoneInputCountryIcon {
+    @apply w-[22px] h-4 rounded-sm overflow-hidden !shadow-none !bg-transparent;
+  }
+
+  .phone-input-field .PhoneInputCountryIcon--border {
+    @apply !shadow-none !bg-transparent;
+  }
+
+  .phone-input-field .PhoneInputCountrySelectArrow {
+    @apply w-1.5 h-1.5 opacity-70;
+    border-color: var(--text-muted);
+  }
+
+  /* Phone number input */
+  .phone-input-field input {
+    @apply flex-1 h-full border-none outline-none px-4 text-sm bg-transparent;
+    color: var(--text-primary);
+    font-family: var(--font-reyhan);
+  }
+
+  .phone-input-field input::placeholder {
+    color: var(--text-muted);
+  }
+
+  /* Country select dropdown */
+  .phone-input-field .PhoneInputCountrySelect {
+    @apply text-sm;
+    font-family: var(--font-reyhan);
+  }
+
+  /* Focus state for wrapper */
+  .phone-input-wrapper:focus-within {
+    border-color: #222222;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+  overscroll-behavior-y: none;
+  background-color: var(--surface);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: var(--surface);
+  color: var(--text-primary);
+  font-family: var(--font-reyhan);
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+  overscroll-behavior-y: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--brand-primary);
+  color: var(--brand-primary-contrast);
+}
+
+.site-header-grid {
+  grid-template-columns: 500px 1fr 500px;
+}
+
+@media (min-width: 1650px) {
+  .site-header-grid {
+    grid-template-columns: 580px 1fr 580px;
+  }
+}
+
+.scrollbar-hidden {
+  scrollbar-width: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.product-card {
+  display: grid;
+  width: 100%;
+  aspect-ratio: 0.76;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto auto auto;
+  overflow: hidden;
+  background: var(--surface);
+  /* min-height: 275px; */
+}
+
+.product-card::before {
+  content: "";
+  z-index: 0;
+  grid-row: 1;
+  grid-column: 1;
+  background: var(--surface-muted);
+}
+
+
+
+
+.promo-overlay {
+  background: linear-gradient(to top,
+      var(--promo-overlay-start) 0%,
+      var(--promo-overlay-middle) 42%,
+      transparent 72%);
+}
+
+.promo-cta {
+  color: var(--text-primary);
+}
+
+.primary-cta {
+  color: var(--brand-primary-contrast);
+}
+
+.footer-email-input {
+  color: var(--brand-primary-contrast);
+  caret-color: var(--brand-primary-contrast);
+}
+
+.footer-email-input:-webkit-autofill,
+.footer-email-input:-webkit-autofill:hover,
+.footer-email-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--brand-primary-contrast);
+  box-shadow: 0 0 0 1000px var(--brand-primary) inset;
+  caret-color: var(--brand-primary-contrast);
+}
+
+.bg-hero-overlay {
+  background: var(--hero-background-mobile);
+}
+
+@media (min-width: 640px) {
+  .bg-hero-overlay {
+    background: linear-gradient(90deg,
+        var(--hero-background) 0%,
+        var(--hero-background) 17%,
+        var(--hero-background-soft) 42%,
+        transparent 72%);
+  }
+}
+
+.text-responsive-lg {
+  @apply text-[14px] xl:text-[16px] 3xl:text-[1.125rem];
+}
+
+.btn-banner-size {
+  @apply inline-flex items-center justify-center px-6 py-3 text-[13px] sm:text-[15px] lg:text-[16px] font-normal;
+}
+
+.container-main {
+  width: 100%;
+  max-width: 1750px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+@media (min-width: 640px) {
+  .container-main {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container-main {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-main {
+    padding-left: 52px;
+    padding-right: 52px;
+  }
+}
+
+@media (min-width: 1650px) {
+  .container-main {
+    padding-left: 58px;
+    padding-right: 58px;
+  }
+}
+
+.text-responsive-subtitle {
+  @apply text-[11px] xl:text-[14px] 3xl:text-[16px];
+}
+
+/* Swiper SSR Fallback Layout */
+.swiper:not(.swiper-initialized) .swiper-wrapper {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 8px !important;
+}
+
+.swiper:not(.swiper-initialized) .swiper-slide {
+  flex-shrink: 0 !important;
+  width: calc((100% - 8px) / 1.5) !important;
+}
+
+@media (min-width: 480px) {
+  .swiper:not(.swiper-initialized) .swiper-slide {
+    width: calc((100% - 8px) / 1.8) !important;
+  }
+}
+
+@media (min-width: 640px) {
+  .swiper:not(.swiper-initialized) .swiper-slide {
+    width: calc((100% - 8px) / 2.3) !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .swiper:not(.swiper-initialized) .swiper-slide {
+    width: calc((100% - 16px) / 3) !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .swiper:not(.swiper-initialized) .swiper-slide {
+    width: calc((100% - 24px) / 3.2) !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .swiper:not(.swiper-initialized) .swiper-slide {
+    width: calc((100% - 24px) / 3.5) !important;
+  }
+}
+
+@media (min-width: 1650px) {
+  .swiper:not(.swiper-initialized) .swiper-slide {
+    width: calc((100% - 32px) / 4.5) !important;
+  }
+}
+
+/* Social Gallery Swiper SSR Fallback */
+.swiper:not(.swiper-initialized) .social-gallery-slide {
+  flex-shrink: 0 !important;
+  width: calc((100% - 10px) / 1.5) !important;
+}
+
+@media (min-width: 390px) {
+  .swiper:not(.swiper-initialized) .social-gallery-slide {
+    width: calc((100% - 10px) / 1.5) !important;
+  }
+}
+
+@media (min-width: 480px) {
+  .swiper:not(.swiper-initialized) .social-gallery-slide {
+    width: calc((100% - 10px) / 1.8) !important;
+  }
+}
+
+@media (min-width: 640px) {
+  .swiper:not(.swiper-initialized) .social-gallery-slide {
+    width: calc((100% - 10px) / 2.2) !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .swiper:not(.swiper-initialized) .social-gallery-slide {
+    width: calc((100% - 20px) / 3.2) !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .swiper:not(.swiper-initialized) .social-gallery-slide {
+    width: calc((100% - 20px) / 3.5) !important;
+  }
+}

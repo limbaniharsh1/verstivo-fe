@@ -1,0 +1,49 @@
+{
+  "dependencies": {
+    "@hookform/resolvers": "^5.4.0",
+    "@tanstack/react-query": "^5.101.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "formik": "^2.4.9",
+    "libphonenumber-js": "^1.13.11",
+    "lucide-react": "^1.25.0",
+    "next": "^16.2.10",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-hook-form": "^7.82.0",
+    "react-icons": "^5.7.0",
+    "react-phone-number-input": "^3.4.17",
+    "sonner": "^2.0.7",
+    "swiper": "^14.0.7",
+    "tailwind-merge": "^3.6.0",
+    "yup": "^1.7.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^26.1.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.2.10",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3"
+  },
+  "name": "blupair-fe",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Blupair storefront",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "overrides": {
+    "postcss": "^8.5.10"
+  }
+}
