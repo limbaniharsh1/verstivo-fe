@@ -16,3 +16,4 @@ export const BESTSELLER_PRODUCTS: readonly Product[] = Array.from({ length: 12 }
   id: `bestseller-florida-${index + 1}`,
   ...productBase,
 }));
+

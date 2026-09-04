@@ -21,10 +21,14 @@ export interface CartContextType {
   items: CartItem[];
   isOpen: boolean;
   editingSizeItemId: string | null;
+  sizeDrawerProduct: any | null;
+  isSizeDrawerOpen: boolean;
+  openSizeDrawer: (product: any) => void;
+  closeSizeDrawer: () => void;
   openCart: () => void;
   closeCart: () => void;
   toggleCart: () => void;
-  addItem: (product: ProductItem) => void;
+  addItem: (product: ProductItem, quantity?: number) => Promise<boolean>;
   removeItem: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
   updateSize: (productId: string, size: string) => void;

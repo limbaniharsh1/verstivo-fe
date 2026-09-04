@@ -37,8 +37,19 @@ export function BestsellerItemCard({
             alt={product.imageAlt}
             width={90}
             height={90}
-            className="object-contain p-1 transition-transform duration-300 group-hover:scale-105"
+            className={`w-full h-full object-contain transition-opacity duration-300 ${
+              product.hoverImage ? "group-hover:opacity-0" : ""
+            }`}
           />
+          {product.hoverImage && (
+            <Image
+              src={product.hoverImage}
+              alt={product.imageAlt}
+              width={90}
+              height={90}
+              className="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            />
+          )}
         </Link>
  
         {/* Info */}

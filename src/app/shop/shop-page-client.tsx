@@ -5,6 +5,7 @@ import { BestsellerToolbar } from "@/features/bestsellers/components/bestseller-
 import { BestsellerGrid } from "@/features/bestsellers/components/bestseller-grid";
 import { useProducts } from "@/hooks/use-products";
 import { ProductGridSkeleton } from "@/components/product/ProductSkeleton";
+import { getProductCardImages } from "@/lib/product";
 
 export default function ShopPageClient() {
   const { data, isLoading, error } = useProducts({ limit: 40 });
@@ -35,6 +36,7 @@ export default function ShopPageClient() {
     let defaultColorSlug = "";
     let defaultColorId = "";
     let defaultSize = undefined as number | undefined;
+    let selectedVariant = prod.colorVariants?.[0];
 
     if (prod.colorVariants) {
       for (const variant of prod.colorVariants) {
@@ -44,6 +46,7 @@ export default function ShopPageClient() {
           defaultColorId = colorObj?._id || colorObj?.id || variant._id;
           defaultColorSlug = colorObj?.slug || colorObj?.name?.toLowerCase().trim().replace(/[^\w\s-]/g, "").replace(/[\s_-]+/g, "-");
           defaultSize = firstInStockSize.size;
+          selectedVariant = variant;
           break;
         }
       }
@@ -53,7 +56,16 @@ export default function ShopPageClient() {
         defaultColorId = colorObj?._id || colorObj?.id || prod.colorVariants[0]._id;
         defaultColorSlug = colorObj?.slug || colorObj?.name?.toLowerCase().trim().replace(/[^\w\s-]/g, "").replace(/[\s_-]+/g, "-");
         defaultSize = prod.colorVariants[0].stockBySize?.[0]?.size;
+        selectedVariant = prod.colorVariants[0];
       }
+    }
+
+    const cardImages = getProductCardImages(selectedVariant);
+
+    // Extract sizes from the selected variant
+    let sizes: number[] = [];
+    if (selectedVariant?.stockBySize) {
+      sizes = selectedVariant.stockBySize.map((s: any) => s.size).sort((a: number, b: number) => a - b);
     }
 
     return {
@@ -65,13 +77,15 @@ export default function ShopPageClient() {
       originalPrice: prod.originalPrice 
         ? (typeof prod.originalPrice === "number" ? `₹${prod.originalPrice.toLocaleString("en-IN")}` : String(prod.originalPrice))
         : undefined,
-      image: prod.colorVariants?.[0]?.images?.[0]?.medium || prod.colorVariants?.[0]?.images?.[0]?.low || prod.colorVariants?.[0]?.images?.[0]?.high || "",
-      imageAlt: prod.colorVariants?.[0]?.images?.[0]?.alt || prod.name,
+      image: cardImages.image,
+      hoverImage: cardImages.hoverImage,
+      imageAlt: cardImages.imageAlt || prod.name,
       category: typeof prod.category === "object" ? prod.category?.name : prod.category || "",
       defaultColorSlug,
       defaultColorId,
       defaultSize,
       badge,
+      sizes,
     };
   }) as any[];
 

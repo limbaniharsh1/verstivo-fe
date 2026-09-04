@@ -17,6 +17,8 @@ export function CartDrawer() {
     setEditingSizeItemId,
   } = useCart();
   const { user, openAuth } = useAuth();
+  const { useRouter } = require("next/navigation");
+  const router = useRouter();
 
   const titleNode = (
     <div className="flex items-center gap-2">
@@ -102,7 +104,8 @@ export function CartDrawer() {
                       closeCart();
                       openAuth();
                     } else {
-                      alert("Proceeding to Checkout!");
+                      closeCart();
+                      router.push('/checkout');
                     }
                   }}
                   className="w-full h-11 sm:h-12 rounded-full bg-primary text-white !text-white font-medium text-[14px] sm:text-[15px] flex items-center justify-center transition-all cursor-pointer"

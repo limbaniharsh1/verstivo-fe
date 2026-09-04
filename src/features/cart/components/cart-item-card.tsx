@@ -24,6 +24,28 @@ const AVAILABLE_SIZES = [
   "UK 4 / EU 40",
 ];
 
+const getEuSize = (ukSize: number) => {
+  const mapping: Record<number, number> = {
+    4: 38,
+    5: 39,
+    6: 40,
+    7: 41,
+    8: 42,
+    9: 43,
+    10: 44,
+    11: 45,
+    12: 46,
+  };
+  return mapping[ukSize] || ukSize + 34;
+};
+
+const formatSizeButtonText = (sz: number | string) => {
+  if (typeof sz === "string" && sz.includes("/")) return sz;
+  const num = typeof sz === "number" ? sz : Number(String(sz).match(/\d+/)?.[0] || 0);
+  if (!num) return String(sz);
+  return `UK ${num} / EU ${getEuSize(num)}`;
+};
+
 export function CartItemCard({ item }: CartItemCardProps) {
   const {
     updateQuantity,
@@ -43,10 +65,10 @@ export function CartItemCard({ item }: CartItemCardProps) {
     ? `₹${(product.originalPrice * quantity).toLocaleString("en-IN")}.00`
     : product.formattedOriginalPrice;
 
-  // Use product available sizes, default to a fallback list if not present
+  // Use product available sizes, default to AVAILABLE_SIZES list if not present
   const availableSizes = product.sizes && product.sizes.length > 0
     ? product.sizes
-    : [4, 5, 6, 7, 8, 9, 10, 11, 12];
+    : AVAILABLE_SIZES;
 
   const getCurrentSizeNum = () => {
     if (!product.size) return null;
@@ -66,7 +88,7 @@ export function CartItemCard({ item }: CartItemCardProps) {
             alt={product.imageAlt}
             width={100}
             height={100}
-            className="object-contain"
+            className="w-full h-full object-contain"
           />
         </div>
 
@@ -77,12 +99,12 @@ export function CartItemCard({ item }: CartItemCardProps) {
             <h4 className="text-responsive-lg font-semibold text-black tracking-tight leading-snug line-clamp-1">
               {product.name}
             </h4>
- 
+
             {/* Subtitle */}
             <p className="text-responsive-subtitle font-normal text-neutral-500 uppercase tracking-normal mt-0.5 line-clamp-1">
               {product.subtitle}
             </p>
- 
+
             {/* Price & Delete Button */}
             <div className="flex items-center justify-between mt-1 sm:mt-1.5">
               <div className="flex items-baseline gap-1.5 sm:gap-2">
@@ -135,23 +157,23 @@ export function CartItemCard({ item }: CartItemCardProps) {
       {/* Size View / Size Grid Section */}
       {isEditingSize ? (
         <div className="pt-1">
-          <div className="grid grid-cols-2 min-[360px]:grid-cols-3 sm:grid-cols-4 gap-2 sm:gap-2.5">
-            {availableSizes.map((sz) => {
-              const isSelected = currentSizeNum === sz;
+          <div className="grid grid-cols-4 gap-2 sm:gap-2.5">
+            {availableSizes.map((sz, idx) => {
+              const isSelected = idx === 0 || (typeof sz === "number" ? currentSizeNum === sz : false);
               return (
                 <button
                   key={sz}
                   type="button"
                   onClick={() => {
-                    updateSize(product.id, `UK ${sz}`);
+                    updateSize(product.id, typeof sz === "number" ? `UK ${sz}` : String(sz));
                   }}
-                  className={`min-h-[38px] sm:min-h-[40px] py-1 px-1 flex items-center justify-center rounded-[5px] border text-[11.5px] min-[360px]:text-[12px] sm:text-[13px] font-semibold tracking-tight transition-all cursor-pointer text-center leading-tight whitespace-nowrap bg-[#ffffff] ${
+                  className={`h-9 sm:h-10 px-1 flex items-center justify-center rounded-[6px] text-[11px] min-[360px]:text-[11.5px] sm:text-[12px] tracking-tight transition-all cursor-pointer text-center leading-tight whitespace-nowrap bg-transparent ${
                     isSelected
-                      ? "border-black text-black"
-                      : "border-neutral-200 text-neutral-500 hover:border-black hover:text-black"
+                      ? "border-2 border-black text-black font-semibold shadow-2xs"
+                      : "border border-neutral-200 text-neutral-500 font-normal hover:border-black hover:text-black"
                   }`}
                 >
-                  UK {sz}
+                  {typeof sz === "string" ? sz : formatSizeButtonText(sz)}
                 </button>
               );
             })}

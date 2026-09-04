@@ -13,6 +13,7 @@ export interface BaseProduct {
   price: string | number;
   originalPrice?: string | number;
   image: string;
+  hoverImage?: string;
   imageAlt: string;
   badge?: string | ProductBadge;
   category?: string;
@@ -21,4 +22,5 @@ export interface BaseProduct {
   defaultColorSlug?: string;
   defaultColorId?: string;
   defaultSize?: number;
+  sizes?: number[] | string[];
 }

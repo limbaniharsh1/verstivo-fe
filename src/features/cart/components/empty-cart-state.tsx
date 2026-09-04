@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useProducts } from "@/hooks/use-products";
 import { BestsellerItemCard } from "./bestseller-item-card";
+import { getProductCardImages } from "@/lib/product";
 import { useCart } from "../context/cart-context";
 import { useAuth } from "@/components/providers/auth-context";
 
@@ -19,6 +20,7 @@ export function EmptyCartState() {
     let defaultColorSlug = "";
     let defaultColorId = "";
     let defaultSize = undefined as number | undefined;
+    let selectedVariant = prod.colorVariants?.[0];
 
     if (prod.colorVariants) {
       for (const variant of prod.colorVariants) {
@@ -28,6 +30,7 @@ export function EmptyCartState() {
           defaultColorId = colorObj?._id || colorObj?.id || variant._id;
           defaultColorSlug = colorObj?.slug || colorObj?.name?.toLowerCase().trim().replace(/[^\w\s-]/g, "").replace(/[\s_-]+/g, "-");
           defaultSize = firstInStockSize.size;
+          selectedVariant = variant;
           break;
         }
       }
@@ -37,12 +40,15 @@ export function EmptyCartState() {
         defaultColorId = colorObj?._id || colorObj?.id || prod.colorVariants[0]._id;
         defaultColorSlug = colorObj?.slug || colorObj?.name?.toLowerCase().trim().replace(/[^\w\s-]/g, "").replace(/[\s_-]+/g, "-");
         defaultSize = prod.colorVariants[0].stockBySize?.[0]?.size;
+        selectedVariant = prod.colorVariants[0];
       }
     }
 
     const sizesList = prod.colorVariants?.[0]?.stockBySize
       ? prod.colorVariants[0].stockBySize.filter((s: any) => s.stock > 0).map((s: any) => s.size)
       : [4, 5, 6, 7, 8, 9, 10];
+
+    const cardImages = getProductCardImages(selectedVariant);
 
     return {
       id: prod._id || prod.id,
@@ -53,8 +59,9 @@ export function EmptyCartState() {
       originalPrice: prod.originalPrice,
       formattedPrice: `₹${prod.price.toLocaleString("en-IN")}`,
       formattedOriginalPrice: prod.originalPrice ? `₹${prod.originalPrice.toLocaleString("en-IN")}` : undefined,
-      image: prod.colorVariants?.[0]?.images?.[0]?.medium || prod.colorVariants?.[0]?.images?.[0]?.low || prod.colorVariants?.[0]?.images?.[0]?.high || "",
-      imageAlt: prod.name,
+      image: cardImages.image,
+      hoverImage: cardImages.hoverImage,
+      imageAlt: cardImages.imageAlt || prod.name,
       defaultColorSlug,
       defaultColorId,
       defaultSize,

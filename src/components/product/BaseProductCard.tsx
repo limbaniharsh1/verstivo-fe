@@ -35,7 +35,7 @@ export function BaseProductCard({
   onWishlistToggle,
   productUrl: customUrl,
 }: BaseProductCardProps) {
-  const { addItem } = useCart();
+  const { openSizeDrawer } = useCart();
   const { user, openAuth } = useAuth();
   const [isAdded, setIsAdded] = useState(false);
 
@@ -53,29 +53,7 @@ export function BaseProductCard({
       return;
     }
 
-    const numericPrice = parseNumericPrice(product.price);
-    const colorId = product.defaultColorId || "";
-    const size = product.defaultSize || "";
-    const itemId = colorId && size ? `${product.id}-${colorId}-${size}` : (product.id || product.name.toLowerCase().replace(/\s+/g, "-"));
-
-    const sizeLabel = size ? `UK ${size}` : "";
-    const formattedSubtitle = size && !product.subtitle.includes("UK")
-      ? `${product.subtitle} · ${sizeLabel}`
-      : product.subtitle;
-
-    addItem({
-      id: itemId,
-      name: product.name,
-      subtitle: formattedSubtitle,
-      price: numericPrice,
-      formattedPrice,
-      image: product.image,
-      imageAlt: product.imageAlt,
-    });
-
-    toast.success(`${product.name} added to cart`);
-    setIsAdded(true);
-    setTimeout(() => setIsAdded(false), 1200);
+    openSizeDrawer(product);
   };
 
 
@@ -91,10 +69,21 @@ export function BaseProductCard({
             alt={product.imageAlt}
             width={110}
             height={110}
-            className="object-contain p-1.5 sm:p-2 transition-transform duration-300 group-hover:scale-105"
+            className={`object-contain p-1.5 sm:p-2 transition-opacity duration-300 ${
+              product.hoverImage ? "group-hover:opacity-0" : ""
+            }`}
           />
+          {product.hoverImage && (
+            <Image
+              src={product.hoverImage}
+              alt={product.imageAlt}
+              width={110}
+              height={110}
+              className="absolute object-contain p-1.5 sm:p-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            />
+          )}
         </Link>
- 
+
         <Link href={productUrl} className="flex-1 min-w-0 pr-1 sm:pr-2 cursor-pointer">
           <h4 className="text-responsive-lg font-semibold text-black tracking-tight line-clamp-1 hover:underline">
             {product.name}
@@ -106,7 +95,7 @@ export function BaseProductCard({
             {formattedPrice}
           </p>
         </Link>
- 
+
         <div className="shrink-0 flex items-center justify-end w-[72px] min-[375px]:w-[78px] sm:w-[85px] md:w-[90px] xl:w-[100px]">
           <AddButton
             isAdded={isAdded}
@@ -153,8 +142,20 @@ export function BaseProductCard({
               width={320}
               height={220}
               sizes="(max-width: 640px) 240px, 300px"
-              className="max-h-full w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              className={`max-h-full w-auto object-contain transition-opacity duration-300 ${
+                product.hoverImage ? "group-hover:opacity-0" : ""
+              }`}
             />
+            {product.hoverImage && (
+              <Image
+                src={product.hoverImage}
+                alt={product.imageAlt}
+                width={320}
+                height={220}
+                sizes="(max-width: 640px) 240px, 300px"
+                className="absolute max-h-full w-auto object-contain opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              />
+            )}
           </div>
 
           <button
@@ -203,15 +204,27 @@ export function BaseProductCard({
         </div>
       )}
 
-      <Link href={productUrl} className="z-[1] col-start-1 row-start-1 h-full w-full">
+      <Link href={productUrl} className="z-[1] col-start-1 row-start-1 h-full w-full relative overflow-hidden">
         <Image
           src={product.image || "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"}
           alt={product.imageAlt}
           width={440}
           height={290}
           sizes="(max-width: 639px) 76vw, (max-width: 767px) 46vw, (max-width: 1023px) 32vw, 25vw"
-          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          className={`h-full w-full object-cover transition-opacity duration-300 ${
+            product.hoverImage ? "group-hover:opacity-0" : ""
+          }`}
         />
+        {product.hoverImage && (
+          <Image
+            src={product.hoverImage}
+            alt={product.imageAlt}
+            width={440}
+            height={290}
+            sizes="(max-width: 639px) 76vw, (max-width: 767px) 46vw, (max-width: 1023px) 32vw, 25vw"
+            className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          />
+        )}
       </Link>
 
       <AddButton
