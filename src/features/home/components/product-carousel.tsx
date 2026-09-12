@@ -9,12 +9,13 @@ import type { Swiper as SwiperClass } from "swiper";
 import "swiper/css";
 
 import { ProductCard } from "@/features/home/components/product-card";
-import type { Product } from "@/features/home/data/trending-products";
+import type { BaseProduct } from "@/types/product";
 
 type ProductCarouselProps = {
   heading: string;
+  subtitle?: string;
   headingId: string;
-  products: readonly Product[];
+  products: readonly BaseProduct[];
   showGenderFilter?: boolean;
 };
 
@@ -23,6 +24,7 @@ const scrollButtonClassName =
 
 export function ProductCarousel({
   heading,
+  subtitle,
   headingId,
   products,
   showGenderFilter = false,
@@ -45,6 +47,10 @@ export function ProductCarousel({
     }
   }, [products, swiperRef]);
 
+  if (!products || products.length === 0) {
+    return null;
+  }
+
   return (
     <section
       className="bg-surface py-10 w-full overflow-hidden lg:py-12"
@@ -52,12 +58,19 @@ export function ProductCarousel({
     >
       <div className="w-full px-5 sm:px-8 lg:px-11">
         <div className="mb-4 min-[375px]:mb-5 sm:mb-6 flex flex-col gap-3 min-[425px]:flex-row min-[425px]:items-center min-[425px]:justify-between sm:gap-4">
-          <h2
-            id={headingId}
-            className="text-[20px] min-[375px]:text-[22px] sm:text-[28px] md:text-[32px] lg:text-[34px] leading-tight font-semibold tracking-[-0.02em] text-foreground"
-          >
-            {heading}
-          </h2>
+          <div>
+            <h2
+              id={headingId}
+              className="text-[20px] min-[375px]:text-[22px] sm:text-[28px] md:text-[32px] lg:text-[34px] leading-tight font-semibold tracking-[-0.02em] text-foreground"
+            >
+              {heading}
+            </h2>
+            {subtitle && (
+              <p className="mt-1 text-sm sm:text-[15px] text-gray-500 font-normal">
+                {subtitle}
+              </p>
+            )}
+          </div>
 
           {showGenderFilter ? (
             <div className="flex shrink-0 items-center gap-2 sm:gap-2.5" aria-label="Filter products by gender">

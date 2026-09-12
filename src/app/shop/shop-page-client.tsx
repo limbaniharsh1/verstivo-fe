@@ -86,6 +86,7 @@ export default function ShopPageClient() {
       defaultSize,
       badge,
       sizes,
+      stockBySize: selectedVariant?.stockBySize,
     };
   }) as any[];
 

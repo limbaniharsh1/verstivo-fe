@@ -46,6 +46,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         const mappedItems: CartItem[] = backendItems.map((item: any) => {
           const sizeLabel = item.size ? `UK ${item.size}` : "";
           const subtitle = item.colorName ? `${item.colorName} · ${sizeLabel}` : sizeLabel;
+          const isItemAvailable = item.isAvailable ?? ((item.stock ?? 1) > 0);
+          const hasSufficient = item.hasSufficientStock ?? (isItemAvailable && (item.stock ?? 0) >= item.quantity);
           return {
             product: {
               id: `${item.productId}-${item.colorId}-${item.size}`,
@@ -59,6 +61,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
               image: item.image,
               imageAlt: item.name || item.product?.name || "",
               sizes: item.sizes || [],
+              stock: item.stock,
+              isAvailable: isItemAvailable,
+              hasSufficientStock: hasSufficient,
             },
             quantity: item.quantity,
           };
@@ -144,6 +149,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         const mappedItems: CartItem[] = backendItems.map((item: any) => {
           const sizeLabel = item.size ? `UK ${item.size}` : "";
           const subtitle = item.colorName ? `${item.colorName} · ${sizeLabel}` : sizeLabel;
+          const isItemAvailable = item.isAvailable ?? ((item.stock ?? 1) > 0);
+          const hasSufficient = item.hasSufficientStock ?? (isItemAvailable && (item.stock ?? 0) >= item.quantity);
           return {
             product: {
               id: `${item.productId}-${item.colorId}-${item.size}`,
@@ -157,6 +164,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
               image: item.image,
               imageAlt: item.name || item.product?.name || "",
               sizes: item.sizes || [],
+              stock: item.stock,
+              isAvailable: isItemAvailable,
+              hasSufficientStock: hasSufficient,
             },
             quantity: item.quantity,
           };
@@ -258,7 +268,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, [items]);
 
   const subtotal = useMemo(() => {
-    return items.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
+    return items.reduce((acc, item) => {
+      const isAvailable = item.product.isAvailable ?? ((item.product.stock ?? 1) > 0);
+      const hasSufficient = item.product.hasSufficientStock ?? (isAvailable && (item.product.stock ?? 0) >= item.quantity);
+      if (!isAvailable || !hasSufficient) return acc;
+      return acc + item.product.price * item.quantity;
+    }, 0);
   }, [items]);
 
   const formattedSubtotal = useMemo(() => {

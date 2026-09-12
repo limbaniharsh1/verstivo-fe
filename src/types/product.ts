@@ -23,4 +23,6 @@ export interface BaseProduct {
   defaultColorId?: string;
   defaultSize?: number;
   sizes?: number[] | string[];
+  stockBySize?: { size: number; stock: number }[];
 }
+

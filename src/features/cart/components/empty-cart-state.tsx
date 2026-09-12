@@ -66,6 +66,7 @@ export function EmptyCartState() {
       defaultColorId,
       defaultSize,
       sizes: sizesList,
+      stockBySize: prod.colorVariants?.[0]?.stockBySize,
     };
   });
 

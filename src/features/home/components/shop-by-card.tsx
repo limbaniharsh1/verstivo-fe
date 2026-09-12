@@ -7,6 +7,7 @@ type ShopByCardProps = {
   imageAlt: string;
   title?: string;
   subtitle?: string;
+  buttonText?: string;
 };
 
 export function ShopByCard({
@@ -15,6 +16,7 @@ export function ShopByCard({
   imageAlt,
   title = "EXPLORE BIRKO-FLOR ®",
   subtitle = "DURABLE, EASY-CARE STYLES WITH EVERYDAY COMFORT.",
+  buttonText = "Shop Now",
 }: ShopByCardProps) {
   return (
     <article className="w-full">
@@ -36,12 +38,14 @@ export function ShopByCard({
           <h3 className="text-responsive-lg font-bold text-foreground leading-tight tracking-tight pt-1.5 sm:pt-2.5 xl:pt-4">
             {title}
           </h3>
-          <p className="text-responsive-subtitle font-medium leading-normal uppercase text-muted tracking-wide max-w-[280px] pt-0.5 3xl:pt-1">
-            {subtitle}
-          </p>
+          {subtitle && (
+            <p className="text-responsive-subtitle font-medium leading-normal uppercase text-muted tracking-wide max-w-[280px] pt-0.5 3xl:pt-1">
+              {subtitle}
+            </p>
+          )}
           <div className="mt-2.5 xl:mt-4 3xl:mt-5">
             <span className="inline-flex items-center justify-center rounded-full bg-black px-5 3xl:px-6 py-2 sm:py-2.5 3xl:py-3 text-responsive-lg !font-normal text-white border border-transparent transition-all duration-300 ease-in-out hover:bg-white hover:text-black hover:border-border hover:shadow-none shadow-2xs">
-              Shop Now
+              {buttonText}
             </span>
           </div>
         </div>
@@ -49,5 +53,3 @@ export function ShopByCard({
     </article>
   );
 }
-
-

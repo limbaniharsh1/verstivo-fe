@@ -1,53 +1,99 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Plus } from "lucide-react";
 import { toast } from "sonner";
 import { AddressDrawer, type AddressData } from "./address-drawer";
 import type { AddressSchemaType } from "../schemas/account-schemas";
+import { apiClient } from "@/lib/api-client";
+import { useAuth } from "@/components/providers/auth-context";
+
+interface BackendAddress {
+  _id: string;
+  fullName: string;
+  phone: string;
+  email: string;
+  addressLine1: string;
+  addressLine2?: string;
+  city: string;
+  state: string;
+  postalCode: string;
+  country: string;
+  isDefault: boolean;
+}
 
 export function ShippingAddressTab() {
-  const [addresses, setAddresses] = useState<AddressData[]>([
-    {
-      id: "addr-1",
-      isDefault: true,
-      firstName: "User",
-      lastName: "Name",
-      address1: "Katargam Main Road Opp C- Complex, Near Ram Temple, Katargam",
-      city: "Surat",
-      province: "GJ",
-      postalCode: "395004",
-      country: "India",
-      phone: "+919913240668",
-    },
-    {
-      id: "addr-2",
-      isDefault: false,
-      firstName: "User",
-      lastName: "Name",
-      address1: "Katargam Main Road Opp C- Complex, Near Ram Temple, Katargam",
-      city: "Surat",
-      province: "GJ",
-      postalCode: "395004",
-      country: "India",
-      phone: "+919913240668",
-    },
-    {
-      id: "addr-3",
-      isDefault: false,
-      firstName: "User",
-      lastName: "Name",
-      address1: "Katargam Main Road Opp C- Complex, Near Ram Temple, Katargam",
-      city: "Surat",
-      province: "GJ",
-      postalCode: "395004",
-      country: "India",
-      phone: "+919913240668",
-    },
-  ]);
-
+  const { user } = useAuth();
+  const [addresses, setAddresses] = useState<AddressData[]>([]);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [editingAddress, setEditingAddress] = useState<AddressData | null>(null);
+
+  const fetchAddresses = useCallback(async () => {
+    try {
+      const res = await apiClient.get<{ status: number; data: BackendAddress[] }>("/addresses");
+      if (res.status === 200 && Array.isArray(res.data)) {
+        const mapped: AddressData[] = res.data.map((addr: BackendAddress) => {
+          const names = addr.fullName.trim().split(" ");
+          const firstName = names[0] || "";
+          const lastName = names.slice(1).join(" ") || "";
+          return {
+            id: addr._id,
+            isDefault: addr.isDefault,
+            firstName,
+            lastName,
+            address1: addr.addressLine1,
+            address2: addr.addressLine2,
+            city: addr.city,
+            province: addr.state,
+            postalCode: addr.postalCode,
+            country: addr.country,
+            phone: addr.phone,
+          };
+        });
+        setAddresses(mapped);
+      }
+    } catch (err) {
+      console.error("Failed to load addresses:", err);
+    }
+  }, []);
+
+  useEffect(() => {
+    let isMounted = true;
+    const load = async () => {
+      try {
+        const res = await apiClient.get<{ status: number; data: BackendAddress[] }>("/addresses");
+        if (isMounted && res.status === 200 && Array.isArray(res.data)) {
+          const mapped: AddressData[] = res.data.map((addr: BackendAddress) => {
+            const names = addr.fullName.trim().split(" ");
+            const firstName = names[0] || "";
+            const lastName = names.slice(1).join(" ") || "";
+            return {
+              id: addr._id,
+              isDefault: addr.isDefault,
+              firstName,
+              lastName,
+              address1: addr.addressLine1,
+              address2: addr.addressLine2,
+              city: addr.city,
+              province: addr.state,
+              postalCode: addr.postalCode,
+              country: addr.country,
+              phone: addr.phone,
+            };
+          });
+          setAddresses(mapped);
+        }
+      } catch (err) {
+        console.error("Failed to load addresses:", err);
+      }
+    };
+
+    load();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const handleOpenAdd = () => {
     setEditingAddress(null);
@@ -59,61 +105,53 @@ export function ShippingAddressTab() {
     setIsDrawerOpen(true);
   };
 
-  const handleDelete = (id: string) => {
-    setAddresses((prev) => prev.filter((a) => a.id !== id));
-    toast.success("Address removed successfully");
+  const handleDelete = async (id: string) => {
+    try {
+      const res = await apiClient.delete<{ status: number; message: string }>(`/addresses/${id}`);
+      if (res.status === 200) {
+        setAddresses((prev) => prev.filter((a) => a.id !== id));
+        toast.success("Address removed successfully");
+      }
+    } catch (err: unknown) {
+      const message = (err as { response?: { data?: { message?: string } } })?.response?.data?.message || "Failed to delete address";
+      toast.error(message);
+    }
   };
 
-  const handleSaveAddress = (data: AddressSchemaType, id?: string) => {
-    if (id) {
-      // Update existing address
-      setAddresses((prev) =>
-        prev.map((addr) => {
-          if (addr.id === id) {
-            return {
-              ...addr,
-              firstName: data.firstName,
-              lastName: data.lastName,
-              address1: data.address1,
-              address2: data.address2,
-              city: data.city,
-              country: data.country,
-              province: data.province,
-              postalCode: data.postalCode,
-              phone: data.phone,
-              isDefault: data.setAsDefault ? true : addr.isDefault,
-            };
-          }
-          return data.setAsDefault ? { ...addr, isDefault: false } : addr;
-        })
-      );
-      toast.success("Address updated successfully!");
-    } else {
-      // Add new address
-      const newAddress: AddressData = {
-        id: `addr-${Date.now()}`,
-        isDefault: Boolean(data.setAsDefault || addresses.length === 0),
-        firstName: data.firstName,
-        lastName: data.lastName,
-        address1: data.address1,
-        address2: data.address2,
-        city: data.city,
-        country: data.country,
-        province: data.province,
-        postalCode: data.postalCode,
-        phone: data.phone,
-      };
+  const handleSaveAddress = async (data: AddressSchemaType, id?: string) => {
+    const fullName = `${data.firstName} ${data.lastName}`.trim();
+    const payload = {
+      fullName,
+      phone: data.phone,
+      email: user?.email || "customer@verstivo.com",
+      addressLine1: data.address1,
+      addressLine2: data.address2 || "",
+      city: data.city,
+      state: data.province,
+      postalCode: data.postalCode,
+      country: data.country,
+      isDefault: Boolean(data.setAsDefault),
+    };
 
-      setAddresses((prev) => {
-        if (data.setAsDefault) {
-          return [...prev.map((a) => ({ ...a, isDefault: false })), newAddress];
+    try {
+      if (id) {
+        const res = await apiClient.put<{ status: number; data: BackendAddress }>(`/addresses/${id}`, payload);
+        if (res.status === 200) {
+          toast.success("Address updated successfully!");
+          await fetchAddresses();
         }
-        return [...prev, newAddress];
-      });
-      toast.success("New address added successfully!");
+      } else {
+        const res = await apiClient.post<{ status: number; data: BackendAddress }>("/addresses", payload);
+        if (res.status === 201) {
+          toast.success("New address added successfully!");
+          await fetchAddresses();
+        }
+      }
+      setIsDrawerOpen(false);
+    } catch (err: unknown) {
+      const message = (err as { response?: { data?: { message?: string } } })?.response?.data?.message || "Failed to save address";
+      toast.error(message);
     }
-
-    setIsDrawerOpen(false);
   };
 
   return (

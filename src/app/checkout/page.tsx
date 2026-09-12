@@ -1,120 +1,213 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/features/cart/context/cart-context';
+import { useAuth } from '@/components/providers/auth-context';
 import { apiClient } from '@/lib/api-client';
 import { toast } from 'sonner';
-import useRazorpay from "react-razorpay";
+import { useRazorpay, RazorpayOrderOptions } from "react-razorpay";
+import { initiateCheckout, verifyPayment } from '@/features/checkout/services/checkout.service';
+import { CartItem } from '@/features/cart/types/cart';
+import { UserAddress } from '@/features/checkout/types/checkout';
+
+interface ApiAddressResponse {
+  status: number;
+  data: UserAddress[];
+  message?: string;
+}
+
+interface ApiSingleAddressResponse {
+  status: number;
+  data: UserAddress;
+  message?: string;
+}
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { cart, isLoggedIn, fetchCart } = useCart();
-  const [addresses, setAddresses] = useState<any[]>([]);
+  const { items, subtotal: cartSubtotal, clearCart } = useCart();
+  const { user, isLoading: isAuthLoading } = useAuth();
+  const isLoggedIn = !!user;
+  const [addresses, setAddresses] = useState<UserAddress[]>([]);
   const [selectedAddress, setSelectedAddress] = useState<string>('');
+  const [paymentMethod, setPaymentMethod] = useState<'PREPAID' | 'COD'>('PREPAID');
   const [isProcessing, setIsProcessing] = useState(false);
   const [newAddress, setNewAddress] = useState({
     fullName: '', phone: '', email: '', addressLine1: '', city: '', state: '', postalCode: '', country: 'India'
   });
   const [showAddressForm, setShowAddressForm] = useState(false);
-  const [Razorpay] = useRazorpay();
+  const { Razorpay } = useRazorpay();
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      loadAddresses();
-    } else {
-      router.push('/account?mode=login&redirect=/checkout');
-    }
-  }, [isLoggedIn, router]);
-
-  const loadAddresses = async () => {
+  const loadAddresses = useCallback(async () => {
     try {
-      const res = await apiClient.get<any>('/addresses');
-      if (res.status === 200 && res.data) {
+      const res = await apiClient.get<ApiAddressResponse>('/addresses');
+      if (res.status === 200 && Array.isArray(res.data)) {
         setAddresses(res.data);
-        const defaultAddr = res.data.find((a: any) => a.isDefault) || res.data[0];
+        const defaultAddr = res.data.find((a) => a.isDefault) || res.data[0];
         if (defaultAddr) setSelectedAddress(defaultAddr._id);
       }
     } catch (error) {
       console.error('Failed to load addresses:', error);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (isAuthLoading) return;
+    if (!isLoggedIn) {
+      router.push('/account?mode=login&redirect=/checkout');
+      return;
+    }
+
+    let isMounted = true;
+    const fetchAddresses = async () => {
+      try {
+        const res = await apiClient.get<ApiAddressResponse>('/addresses');
+        if (isMounted && res.status === 200 && Array.isArray(res.data)) {
+          setAddresses(res.data);
+          const defaultAddr = res.data.find((a) => a.isDefault) || res.data[0];
+          if (defaultAddr) setSelectedAddress(defaultAddr._id);
+        }
+      } catch (error) {
+        console.error('Failed to load addresses:', error);
+      }
+    };
+
+    fetchAddresses();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [isLoggedIn, isAuthLoading, router]);
 
   const handleAddAddress = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await apiClient.post<any>('/addresses', newAddress);
+      const res = await apiClient.post<ApiSingleAddressResponse>('/addresses', newAddress);
       if (res.status === 201 && res.data) {
         toast.success('Address added');
         setShowAddressForm(false);
-        loadAddresses();
+        await loadAddresses();
       }
-    } catch (err: any) {
-      toast.error(err.response?.data?.message || 'Failed to add address');
+    } catch (err: unknown) {
+      const errorMsg = err instanceof Error ? err.message : 'Failed to add address';
+      toast.error(errorMsg);
     }
   };
 
+  // Client-side display-only preview values based on the cart subtotal
+  const previewPayNow = paymentMethod === 'COD' ? Math.floor(cartSubtotal / 2) : cartSubtotal;
+  const previewPayOnDelivery = paymentMethod === 'COD' ? cartSubtotal - previewPayNow : 0;
+
   const handleProceedToPayment = async () => {
+    // 1. Guard against double-submission
+    if (isProcessing) return;
+
+    // 2. Validate selected address and cart items
     if (!selectedAddress) {
       toast.error('Please select an address');
       return;
     }
 
+    if (!items || items.length === 0) {
+      toast.error('Your cart is empty');
+      return;
+    }
+
+    const hasAvailableItems = items.some(
+      (item) => item.product.isAvailable ?? ((item.product.stock ?? 1) > 0)
+    );
+
+    if (!hasAvailableItems) {
+      toast.error('All items in your cart are currently out of stock');
+      return;
+    }
+
     setIsProcessing(true);
+
     try {
-      // 1. Create order on backend
-      const res = await apiClient.post<any>('/orders/checkout', { addressId: selectedAddress });
-      
-      if (res.status === 200 && res.data?.razorpayOrderId) {
-        const { razorpayOrderId, amount, currency } = res.data;
+      // 3. Initiate checkout via checkout service (backend authoritative calculation and split)
+      const res = await initiateCheckout(selectedAddress, paymentMethod);
 
-        // 2. Open Razorpay Modal
-        const options = {
-          key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
-          amount: amount,
-          currency: currency,
-          name: "Verstivo",
-          description: "Purchase Order",
-          order_id: razorpayOrderId,
-          handler: async function (response: any) {
-            // 3. Verify Payment
-            try {
-              const verifyRes = await apiClient.post('/orders/verify', {
-                razorpay_order_id: response.razorpay_order_id,
-                razorpay_payment_id: response.razorpay_payment_id,
-                razorpay_signature: response.razorpay_signature,
-              });
-
-              if (verifyRes.status === 200) {
-                toast.success("Payment successful!");
-                await fetchCart(); // refresh to empty cart
-                router.push('/checkout/success');
-              }
-            } catch (err: any) {
-              toast.error(err.response?.data?.message || 'Payment verification failed');
-            }
-          },
-          prefill: {
-            name: addresses.find(a => a._id === selectedAddress)?.fullName || "",
-            email: addresses.find(a => a._id === selectedAddress)?.email || "",
-            contact: addresses.find(a => a._id === selectedAddress)?.phone || "",
-          },
-          theme: {
-            color: "#000000",
-          },
-        };
-
-        const rzp = new Razorpay(options);
-        
-        rzp.on("payment.failed", function (response: any) {
-          toast.error(response.error.description || 'Payment failed');
-        });
-
-        rzp.open();
+      if (res.status !== 200 || !res.data?.razorpayOrderId) {
+        throw new Error(res.message || 'Failed to initiate checkout');
       }
-    } catch (err: any) {
-      toast.error(err.response?.data?.message || 'Checkout failed');
-    } finally {
+
+      const { orderId, razorpayOrderId, amount, currency, keyId } = res.data;
+
+      // 4. Validate backend keyId
+      if (!keyId) {
+        throw new Error('Payment gateway configuration error: keyId is missing from server');
+      }
+
+      const selectedAddrObj = addresses.find(a => a._id === selectedAddress);
+
+      // 5. Configure Razorpay modal options using backend-returned authoritative amount
+      const options: RazorpayOrderOptions = {
+        key: keyId,
+        amount: amount, // in paise, authoritative amount from backend
+        currency: (currency || 'INR') as RazorpayOrderOptions['currency'],
+        name: 'Verstivo',
+        description: paymentMethod === 'COD' ? 'Advance Payment (50%)' : 'Prepaid Order Payment',
+        order_id: razorpayOrderId,
+        handler: async function (response) {
+          try {
+            // 6. Server-side payment verification
+            const verifyRes = await verifyPayment({
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+            });
+
+            if (verifyRes.status === 200) {
+              toast.success(
+                paymentMethod === 'COD'
+                  ? 'Advance payment successful! Your order has been confirmed.'
+                  : 'Payment successful!'
+              );
+              // 7. Synchronize local cart state (backend already cleared server cart)
+              await clearCart();
+              const finalOrderId = verifyRes.data?.orderId || orderId;
+              router.push(`/checkout/success?orderId=${finalOrderId}`);
+            } else {
+              throw new Error(verifyRes.message || 'Payment verification failed');
+            }
+          } catch (verifyErr: unknown) {
+            console.error('Payment verification error:', verifyErr);
+            const verifyMsg = verifyErr instanceof Error ? verifyErr.message : 'Payment verification failed. Please contact support.';
+            toast.error(verifyMsg);
+          } finally {
+            setIsProcessing(false);
+          }
+        },
+        modal: {
+          ondismiss: function () {
+            setIsProcessing(false);
+            toast.info("Payment cancelled. You can retry when you're ready.");
+          },
+        },
+        prefill: {
+          name: selectedAddrObj?.fullName || '',
+          email: selectedAddrObj?.email || '',
+          contact: selectedAddrObj?.phone || '',
+        },
+        theme: {
+          color: '#000000',
+        },
+      };
+
+      const rzp = new Razorpay(options);
+
+      rzp.on('payment.failed', function (failResponse) {
+        setIsProcessing(false);
+        const description = failResponse.error?.description || 'Payment failed. Please try again.';
+        toast.error(description);
+      });
+
+      rzp.open();
+    } catch (err: unknown) {
+      console.error('Checkout error:', err);
+      const errMsg = err instanceof Error ? err.message : 'Checkout failed';
+      toast.error(errMsg);
       setIsProcessing(false);
     }
   };
@@ -172,29 +265,99 @@ export default function CheckoutPage() {
           )}
         </div>
 
+        {/* Payment Method Selector */}
+        <div className="border-t pt-8">
+          <h2 className="text-xl font-semibold mb-4">Select Payment Method</h2>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div 
+              onClick={() => setPaymentMethod('PREPAID')}
+              className={`p-4 border rounded-lg cursor-pointer transition-all ${paymentMethod === 'PREPAID' ? 'border-black bg-gray-50 ring-1 ring-black' : 'border-gray-200 hover:border-gray-300'}`}
+            >
+              <div className="flex items-center justify-between mb-2">
+                <span className="font-semibold text-base">Prepaid (Online)</span>
+                <input 
+                  type="radio" 
+                  name="paymentMethod" 
+                  checked={paymentMethod === 'PREPAID'} 
+                  onChange={() => setPaymentMethod('PREPAID')}
+                  className="accent-black"
+                />
+              </div>
+              <p className="text-sm text-gray-600">Pay 100% online now via Razorpay (UPI, Cards, Netbanking).</p>
+            </div>
+
+            <div 
+              onClick={() => setPaymentMethod('COD')}
+              className={`p-4 border rounded-lg cursor-pointer transition-all ${paymentMethod === 'COD' ? 'border-black bg-gray-50 ring-1 ring-black' : 'border-gray-200 hover:border-gray-300'}`}
+            >
+              <div className="flex items-center justify-between mb-2">
+                <span className="font-semibold text-base">Cash on Delivery (COD)</span>
+                <input 
+                  type="radio" 
+                  name="paymentMethod" 
+                  checked={paymentMethod === 'COD'} 
+                  onChange={() => setPaymentMethod('COD')}
+                  className="accent-black"
+                />
+              </div>
+              <p className="text-sm text-gray-600">Pay 50% advance online now via Razorpay. Pay remaining 50% on delivery.</p>
+            </div>
+          </div>
+        </div>
+
         <div className="border-t pt-8">
           <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
           <div className="space-y-4 mb-6">
-            {cart?.items.map(item => (
-              <div key={item.productId} className="flex justify-between text-sm">
-                <span>{item.quantity}x {item.name} ({item.size})</span>
-                <span>₹{(item.price * item.quantity).toLocaleString()}</span>
-              </div>
-            ))}
-            <div className="flex justify-between font-bold border-t pt-4">
-              <span>Total</span>
-              <span>₹{cart?.summary.subtotal.toLocaleString()}</span>
-            </div>
+            {items.map((item: CartItem) => {
+              const isAvailable = item.product.isAvailable ?? ((item.product.stock ?? 1) > 0);
+              return (
+                <div key={item.product.id} className={`flex justify-between text-sm ${!isAvailable ? "text-gray-400 opacity-60" : ""}`}>
+                  <span>
+                    {item.quantity}x {item.product.name} {item.product.size ? `(${item.product.size})` : ''}
+                    {!isAvailable && <span className="ml-1 text-xs text-red-500 font-semibold">(Out of Stock)</span>}
+                  </span>
+                  <span className={!isAvailable ? "line-through text-gray-400" : ""}>
+                    ₹{(item.product.price * item.quantity).toLocaleString()}
+                  </span>
+                </div>
+              );
+            })}
           </div>
-          <button 
-            onClick={handleProceedToPayment}
-            disabled={!selectedAddress || isProcessing || !cart?.items.length}
-            className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 disabled:opacity-50"
-          >
-            {isProcessing ? 'Processing...' : 'Proceed to Payment (Razorpay)'}
-          </button>
+
+            <div className="border-t pt-4 space-y-2">
+              <div className="flex justify-between font-medium text-gray-700">
+                <span>Order Total</span>
+                <span>₹{cartSubtotal.toLocaleString()}</span>
+              </div>
+
+              {paymentMethod === 'COD' ? (
+                <>
+                  <div className="flex justify-between text-sm font-semibold text-black">
+                    <span>Pay Now (50% Online Advance)</span>
+                    <span>₹{previewPayNow.toLocaleString()}</span>
+                  </div>
+                  <div className="flex justify-between text-sm text-gray-600">
+                    <span>Pay on Delivery (COD Remaining)</span>
+                    <span>₹{previewPayOnDelivery.toLocaleString()}</span>
+                  </div>
+                </>
+              ) : (
+                <div className="flex justify-between text-sm font-semibold text-black">
+                  <span>Pay Now (100% Online)</span>
+                  <span>₹{cartSubtotal.toLocaleString()}</span>
+                </div>
+              )}
+            </div>
+
+            <button 
+              onClick={handleProceedToPayment}
+              disabled={!selectedAddress || isProcessing || !items.length}
+              className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 disabled:opacity-50 transition-colors mt-6"
+            >
+              {isProcessing ? 'Processing...' : paymentMethod === 'COD' ? `Pay ₹${previewPayNow.toLocaleString()} Advance (Razorpay)` : `Pay ₹${cartSubtotal.toLocaleString()} (Razorpay)`}
+            </button>
+          </div>
         </div>
       </div>
-    </div>
   );
 }

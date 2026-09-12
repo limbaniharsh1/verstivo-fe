@@ -1,13 +1,13 @@
 import { PromoCard } from "@/features/home/components/promo-card";
-import { PromotionalSplitCard } from "@/types/homepage";
+import { CollectionCardItem } from "@/types/homepage";
 
-interface PromotionalSplitProps {
-  cards?: PromotionalSplitCard[];
+interface CollectionCardsProps {
+  cards?: CollectionCardItem[];
 }
 
 export const DEFAULT_FALLBACK_IMAGE = "/d621727966d80500cb8ab5b8dfba5627e47f588b.png";
 
-export function PromotionalSplit({ cards }: PromotionalSplitProps) {
+export function CollectionCards({ cards }: CollectionCardsProps) {
   if (!cards || cards.length === 0) {
     return null;
   }
@@ -18,18 +18,18 @@ export function PromotionalSplit({ cards }: PromotionalSplitProps) {
   return (
     <section
       className={`grid gap-1 bg-surface ${gridColsClass}`}
-      aria-label="Featured promotions"
+      aria-label="Featured collections"
     >
       {displayCards.map((card, index) => {
-        const title = card.title;
+        const title = card.title || card.name;
         const description = card.description || "";
-        const href = card.button?.redirectUrl || "/products";
+        const href = card.button?.redirectUrl || "";
         const linkLabel = card.button?.text || "Discover";
         const imageSrc = card.image?.url || DEFAULT_FALLBACK_IMAGE;
 
         return (
           <PromoCard
-            key={index}
+            key={card.id || index}
             title={title}
             description={description}
             href={href}

@@ -1,37 +1,16 @@
 import { ShopByCard } from "@/features/home/components/shop-by-card";
+import { ShopByProductItem } from "@/types/homepage";
 
-const SHOP_BY_ITEMS = [
-  {
-    href: "/men",
-    imageSrc: "/assets/shopBy/94994ef23d31981c4b6faf2f4a52ce2afcfc8c7c.png",
-    imageAlt: "Person reading while wearing brown thong sandals",
-    title: "EXPLORE BIRKO-FLOR ®",
-    subtitle: "DURABLE, EASY-CARE STYLES WITH EVERYDAY COMFORT.",
-  },
-  {
-    href: "/women",
-    imageSrc: "/assets/shopBy/d2f8c92d626beeba2153a7ff588daabdadff7cfe.png",
-    imageAlt: "Person wearing red triple-strap sandals",
-    title: "EXPLORE BIRKO-FLOR ®",
-    subtitle: "DURABLE, EASY-CARE STYLES WITH EVERYDAY COMFORT.",
-  },
-  {
-    href: "/clogs",
-    imageSrc: "/assets/shopBy/15525abe1aa2ecbce135b2687b695b356ac8a1cb.png",
-    imageAlt: "Person holding a pair of taupe clogs",
-    title: "EXPLORE BIRKO-FLOR ®",
-    subtitle: "DURABLE, EASY-CARE STYLES WITH EVERYDAY COMFORT.",
-  },
-  {
-    href: "/sandals",
-    imageSrc: "/assets/shopBy/95f39fa856f19962e5f1c423485eeead5ff6745a.png",
-    imageAlt: "Person wearing black buckle sandals",
-    title: "EXPLORE BIRKO-FLOR ®",
-    subtitle: "DURABLE, EASY-CARE STYLES WITH EVERYDAY COMFORT.",
-  },
-] as const;
+interface ShopByProductProps {
+  title?: string;
+  items?: ShopByProductItem[];
+}
 
-export function ShopByProduct() {
+export function ShopByProduct({ title = "Shop by Product", items }: ShopByProductProps) {
+  if (!items || items.length === 0) {
+    return null;
+  }
+
   return (
     <section
       className="bg-surface py-8 lg:py-14 text-foreground"
@@ -42,16 +21,30 @@ export function ShopByProduct() {
           id="shop-by-product-heading"
           className="mb-5 sm:mb-6 md:mb-8 text-left text-[22px] min-[375px]:text-[24px] sm:text-[30px] md:text-[32px] lg:text-[36px] font-semibold tracking-[-0.02em]"
         >
-          Shop by Product
+          {title}
         </h2>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-          {SHOP_BY_ITEMS.map((item) => (
-            <ShopByCard key={item.href} {...item} />
-          ))}
+          {items.map((item, index) => {
+            const href = item.button?.redirectUrl || "/products";
+            const imageSrc = item.image?.url || "";
+            const imageAlt = item.image?.alt || item.title || "Product category";
+            const buttonText = item.button?.text || "Shop Now";
+
+            return (
+              <ShopByCard
+                key={index}
+                href={href}
+                imageSrc={imageSrc}
+                imageAlt={imageAlt}
+                title={item.title}
+                subtitle={item.subtitle}
+                buttonText={buttonText}
+              />
+            );
+          })}
         </div>
       </div>
     </section>
   );
 }
-

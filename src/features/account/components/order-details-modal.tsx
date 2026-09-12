@@ -3,22 +3,40 @@
 import React from "react";
 import { X } from "lucide-react";
 
+export interface OrderItemDetail {
+  id: string;
+  title: string;
+  subtitle: string;
+  price: string;
+  quantity: number;
+  image: string;
+}
+
 export interface OrderDetailsData {
   orderNumber: string;
   orderDate: string;
   paymentMethod: {
-    brand: "VISA" | "MASTERCARD" | "AMEX";
+    brand: string;
     last4: string;
   };
   address: {
     name: string;
     line1: string;
+    line2?: string;
     cityStateZip: string;
+    country?: string;
   };
   deliveryMethod: string;
   subtotal: string;
   shipping: string;
   total: string;
+  paymentBreakdown?: {
+    isCodPartiallyPaid?: boolean;
+    isPrepaidPaid?: boolean;
+    paidAmountFormatted: string;
+    dueAmountFormatted?: string;
+  };
+  items?: OrderItemDetail[];
 }
 
 interface OrderDetailsModalProps {
@@ -94,11 +112,13 @@ export function OrderDetailsModal({ isOpen, onClose, order }: OrderDetailsModalP
             <h4 className="font-medium mb-2 text-responsive-subtitle">
               Address
             </h4>
-            <p className="text-xs text-gray-custom leading-tight font-normal text-responsive-subtitle">
+            <div className="text-xs text-gray-custom leading-normal font-normal text-responsive-subtitle flex flex-col gap-0.5">
               <span>{order.address.name}</span>
               <span>{order.address.line1}</span>
+              {order.address.line2 ? <span>{order.address.line2}</span> : null}
               <span>{order.address.cityStateZip}</span>
-            </p>
+              {order.address.country ? <span>{order.address.country}</span> : null}
+            </div>
           </div>
 
           {/* Delivery Method */}
@@ -112,7 +132,51 @@ export function OrderDetailsModal({ isOpen, onClose, order }: OrderDetailsModalP
           </div>
         </div>
 
-        {/* Modal Body - Section 2: Pricing Summary */}
+        {/* Modal Body - Section 2: Order Items (if provided) */}
+        {order.items && order.items.length > 0 && (
+          <div className="p-6 sm:p-7 border-b border-slate-200">
+            <h4 className="font-medium mb-4 text-responsive-subtitle">
+              Order Items
+            </h4>
+            <div className="space-y-4 max-h-[260px] overflow-y-auto pr-1">
+              {order.items.map((item) => (
+                <div key={item.id} className="flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-3.5">
+                    <div className="relative w-16 h-16 sm:w-18 sm:h-18 bg-[#F8F8F8] shrink-0 border border-slate-100 p-1.5 overflow-hidden flex items-center justify-center">
+                      <span className="absolute top-1 right-1 w-4 h-4 bg-black text-white text-[10px] font-semibold rounded-xs flex items-center justify-center z-10">
+                        {item.quantity}
+                      </span>
+                      <img
+                        src={item.image || "/assets/images/florida-soft-footbed.png"}
+                        alt={item.title}
+                        className="w-full h-full object-contain"
+                        onError={(e) => {
+                          const target = e.currentTarget;
+                          if (target.src !== "/assets/images/florida-soft-footbed.png") {
+                            target.src = "/assets/images/florida-soft-footbed.png";
+                          }
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <h5 className="text-sm font-semibold text-black leading-snug">
+                        {item.title}
+                      </h5>
+                      <p className="text-xs text-slate-500 uppercase tracking-tight mt-0.5">
+                        {item.subtitle}
+                      </p>
+                    </div>
+                  </div>
+                  <span className="text-sm font-semibold text-black shrink-0">
+                    {item.price}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Modal Body - Section 3: Pricing Summary */}
         <div className="p-6 sm:p-8">
           <div className="max-w-[340px] ml-auto space-y-3">
             {/* Subtotal */}
@@ -141,6 +205,33 @@ export function OrderDetailsModal({ isOpen, onClose, order }: OrderDetailsModalP
                 {order.total}
               </span>
             </div>
+
+            {/* Payment Breakdown */}
+            {order.paymentBreakdown?.isCodPartiallyPaid && (
+              <div className="pt-3 border-t border-slate-200 space-y-1.5 text-xs sm:text-sm">
+                <div className="flex items-center justify-between text-slate-600">
+                  <span>Paid Online</span>
+                  <span className="font-medium text-emerald-600">
+                    {order.paymentBreakdown.paidAmountFormatted}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between text-slate-900 font-medium">
+                  <span>Due on Delivery (COD)</span>
+                  <span className="font-semibold text-amber-700">
+                    {order.paymentBreakdown.dueAmountFormatted}
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {order.paymentBreakdown?.isPrepaidPaid && (
+              <div className="pt-3 border-t border-slate-200 flex items-center justify-between text-xs sm:text-sm">
+                <span className="text-slate-600">Payment</span>
+                <span className="font-medium text-emerald-600">
+                  Paid in Full ({order.paymentBreakdown.paidAmountFormatted})
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </div>

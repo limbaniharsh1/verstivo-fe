@@ -49,15 +49,47 @@ export function SizeSelectionDrawer({
     </div>
   );
 
+  // Helper to extract numeric size from size string/number
+  const getNumericSize = (sz: string | number): number => {
+    if (typeof sz === "number") return sz;
+    const match = String(sz).match(/\d+(\.\d+)?/);
+    return match ? Number(match[0]) : 0;
+  };
+
+  // Check stock for a given size option
+  const getSizeStock = (sz: string | number): number | null => {
+    if (!product.stockBySize || product.stockBySize.length === 0) {
+      return null; // Unknown stock, treat as available
+    }
+    const num = getNumericSize(sz);
+    const item = product.stockBySize.find((s) => s.size === num);
+    return item ? (item.stock ?? 0) : 0;
+  };
+
+  const isSizeOutOfStock = (sz: string | number): boolean => {
+    const stock = getSizeStock(sz);
+    return stock !== null && stock <= 0;
+  };
+
+  // Determine if all available sizes are out of stock
+  const allSizesOutOfStock =
+    availableSizes.length > 0 &&
+    product.stockBySize &&
+    product.stockBySize.length > 0 &&
+    availableSizes.every((sz) => isSizeOutOfStock(sz));
+
+  const selectedSizeOutOfStock =
+    selectedSizeIndex !== null && isSizeOutOfStock(availableSizes[selectedSizeIndex]);
+
+  const isOutOfStock = allSizesOutOfStock || selectedSizeOutOfStock;
+
   const handleConfirm = async () => {
-    if (selectedSizeIndex === null) return;
+    if (selectedSizeIndex === null || isOutOfStock) return;
     
     setIsAdding(true);
     try {
       const selectedSizeOption = availableSizes[selectedSizeIndex];
-      const sizeStr = typeof selectedSizeOption === "string" ? selectedSizeOption : `UK ${selectedSizeOption}`;
-      const match = sizeStr.match(/\d+(\.\d+)?/);
-      const sizeNum = match ? Number(match[0]) : 4;
+      const sizeNum = getNumericSize(selectedSizeOption) || 4;
 
       const colorId = product.defaultColorId || "";
       // Use :: to safely separate ID parts
@@ -98,6 +130,19 @@ export function SizeSelectionDrawer({
       setQuantity(1);
     }, 300);
   };
+
+  // Determine footer button label and state
+  const isButtonDisabled =
+    selectedSizeIndex === null || isAdding || isOutOfStock;
+
+  let buttonText = "Select size";
+  if (isAdding) {
+    buttonText = "Adding...";
+  } else if (allSizesOutOfStock || selectedSizeOutOfStock) {
+    buttonText = "Out of stock";
+  } else if (selectedSizeIndex !== null) {
+    buttonText = "Select size";
+  }
 
   return (
     <Drawer
@@ -180,18 +225,26 @@ export function SizeSelectionDrawer({
               {availableSizes.length > 0 ? availableSizes.map((sz, idx) => {
                 const isSelected = selectedSizeIndex === idx;
                 const label = formatSizeLabel(sz);
+                const outOfStock = isSizeOutOfStock(sz);
+
                 return (
                   <button
                     key={idx}
                     type="button"
                     onClick={() => setSelectedSizeIndex(idx)}
-                    className={`h-9 sm:h-10 px-1 flex items-center justify-center rounded-[6px] text-[11px] min-[360px]:text-[11.5px] sm:text-[12px] tracking-tight transition-all cursor-pointer text-center leading-tight whitespace-nowrap ${
-                      isSelected
+                    className={`relative h-9 sm:h-10 px-1 flex items-center justify-center rounded-[6px] text-[11px] min-[360px]:text-[11.5px] sm:text-[12px] tracking-tight transition-all cursor-pointer text-center leading-tight whitespace-nowrap overflow-hidden ${
+                      outOfStock
+                        ? isSelected
+                          ? "border border-neutral-400 bg-neutral-100 text-neutral-400 font-medium"
+                          : "border border-dashed border-neutral-300 bg-neutral-50/80 text-neutral-400 font-normal hover:border-neutral-400"
+                        : isSelected
                         ? "border border-black text-black font-semibold shadow-2xs bg-transparent"
                         : "border border-neutral-200 text-neutral-500 font-normal hover:border-black hover:text-black bg-transparent"
                     }`}
                   >
-                    {label}
+                    <span className={outOfStock ? "line-through decoration-neutral-400" : ""}>
+                      {label}
+                    </span>
                   </button>
                 );
               }) : (
@@ -208,14 +261,16 @@ export function SizeSelectionDrawer({
           <button
             type="button"
             onClick={handleConfirm}
-            disabled={selectedSizeIndex === null || isAdding}
+            disabled={isButtonDisabled}
             className={`w-full h-11 sm:h-12 rounded-full text-white font-semibold text-[14px] sm:text-[15px] flex items-center justify-center transition-all shadow-xs ${
-              selectedSizeIndex === null || isAdding
-                ? "bg-[#b2b5f7] opacity-50 cursor-not-allowed"
+              isButtonDisabled
+                ? isOutOfStock
+                  ? "bg-neutral-300 text-neutral-500 cursor-not-allowed"
+                  : "bg-[#b2b5f7] opacity-50 cursor-not-allowed"
                 : "bg-primary hover:bg-primary-hover active:scale-[0.99] cursor-pointer"
             }`}
           >
-            {isAdding ? "Adding..." : "Select size"}
+            {buttonText}
           </button>
         </div>
       </div>

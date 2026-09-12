@@ -10,6 +10,9 @@ export interface ProductItem {
   image: string;
   imageAlt: string;
   sizes?: number[];
+  stock?: number;
+  isAvailable?: boolean;
+  hasSufficientStock?: boolean;
 }
 
 export interface CartItem {

@@ -77,8 +77,13 @@ export function CartItemCard({ item }: CartItemCardProps) {
   };
   const currentSizeNum = getCurrentSizeNum();
 
+  const isAvailable = product.isAvailable ?? ((product.stock ?? 1) > 0);
+  const stockCount = product.stock ?? 0;
+  const isInsufficientStock = isAvailable && quantity > stockCount;
+  const isEligible = isAvailable && !isInsufficientStock;
+
   return (
-    <div className="py-3.5 sm:py-4 border-b border-neutral-200/80 last:border-b-0 space-y-3">
+    <div className={`py-3.5 sm:py-4 border-b border-neutral-200/80 last:border-b-0 space-y-3 transition-opacity ${!isEligible ? "opacity-85" : ""}`}>
       {/* Top Part: Product Image + Info */}
       <div className="flex gap-3 sm:gap-4">
         {/* Product Image */}
@@ -88,8 +93,15 @@ export function CartItemCard({ item }: CartItemCardProps) {
             alt={product.imageAlt}
             width={100}
             height={100}
-            className="w-full h-full object-contain"
+            className={`w-full h-full object-contain ${!isEligible ? "grayscale-[30%]" : ""}`}
           />
+          {!isAvailable && (
+            <div className="absolute inset-0 bg-white/40 flex items-center justify-center">
+              <span className="bg-neutral-900 text-white text-[9px] font-bold px-1.5 py-0.5 rounded tracking-wide uppercase">
+                Out of Stock
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Info & Quantity */}
@@ -105,6 +117,17 @@ export function CartItemCard({ item }: CartItemCardProps) {
               {product.subtitle}
             </p>
 
+            {/* Out of Stock notice banner */}
+            {!isAvailable ? (
+              <div className="mt-1 inline-flex items-center gap-1.5 text-[11px] font-medium text-red-600 bg-red-50 border border-red-200/60 px-2 py-0.5 rounded">
+                <span>Currently out of stock · Not included in total</span>
+              </div>
+            ) : isInsufficientStock ? (
+              <div className="mt-1 inline-flex items-center gap-1.5 text-[11px] font-medium text-amber-700 bg-amber-50 border border-amber-200/70 px-2 py-0.5 rounded">
+                <span>Only {stockCount} available. Please reduce the quantity.</span>
+              </div>
+            ) : null}
+
             {/* Price & Delete Button */}
             <div className="flex items-center justify-between mt-1 sm:mt-1.5">
               <div className="flex items-baseline gap-1.5 sm:gap-2">
@@ -113,7 +136,7 @@ export function CartItemCard({ item }: CartItemCardProps) {
                     {formattedOriginalTotal}
                   </span>
                 )}
-                <span className="text-responsive-lg font-bold text-primary">
+                <span className={`text-responsive-lg font-bold ${!isEligible ? "text-neutral-400 line-through font-normal" : "text-primary"}`}>
                   {formattedItemTotal}
                 </span>
               </div>
@@ -130,22 +153,24 @@ export function CartItemCard({ item }: CartItemCardProps) {
           </div>
 
           {/* Segmented Pill Quantity Controller */}
-          <div className="mt-2 sm:mt-2.5 inline-flex items-center w-fit self-start shrink-0 border border-neutral-300 rounded-full bg-white overflow-hidden">
+          <div className={`mt-2 sm:mt-2.5 inline-flex items-center w-fit self-start shrink-0 border border-neutral-300 rounded-full bg-white overflow-hidden ${!isAvailable ? "opacity-50 pointer-events-none" : ""}`}>
             <button
               type="button"
               onClick={() => updateQuantity(product.id, quantity - 1)}
-              className="w-7 h-7 sm:w-[34px] sm:h-8 shrink-0 flex items-center justify-center text-black hover:bg-neutral-100 transition-colors cursor-pointer border-r border-neutral-200"
+              disabled={!isAvailable}
+              className="w-7 h-7 sm:w-[34px] sm:h-8 shrink-0 flex items-center justify-center text-black hover:bg-neutral-100 transition-colors cursor-pointer border-r border-neutral-200 disabled:cursor-not-allowed"
               aria-label="Decrease quantity"
             >
               <Minus size={13} strokeWidth={2} />
             </button>
-            <span className="w-7 h-7 sm:w-[34px] sm:h-8 shrink-0 flex items-center justify-center font-medium text-black text-[12px] sm:text-[13px] border-r border-neutral-200">
+            <span className={`w-7 h-7 sm:w-[34px] sm:h-8 shrink-0 flex items-center justify-center font-medium text-[12px] sm:text-[13px] border-r border-neutral-200 ${isInsufficientStock ? "text-amber-700 bg-amber-50" : "text-black"}`}>
               {quantity}
             </span>
             <button
               type="button"
               onClick={() => updateQuantity(product.id, quantity + 1)}
-              className="w-7 h-7 sm:w-[34px] sm:h-8 shrink-0 flex items-center justify-center text-black hover:bg-neutral-100 transition-colors cursor-pointer"
+              disabled={!isAvailable || quantity >= stockCount}
+              className="w-7 h-7 sm:w-[34px] sm:h-8 shrink-0 flex items-center justify-center text-black hover:bg-neutral-100 transition-colors cursor-pointer disabled:cursor-not-allowed disabled:opacity-40"
               aria-label="Increase quantity"
             >
               <Plus size={13} strokeWidth={2} />

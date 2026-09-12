@@ -227,6 +227,10 @@ export function ProductInfo({
         <div className="grid grid-cols-2 min-[380px]:grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-1.5 min-[360px]:gap-2 sm:gap-2.5 mt-2.5 sm:mt-3">
           {product.sizes.map((size, index) => {
             const isSelected = selectedSize === `${size}-${index}`;
+            const num = getNumericSize(size);
+            const stockEntry = activeColorObj?.stockBySize?.find((s) => s.size === num);
+            const isOutOfStock = stockEntry ? (stockEntry.stock ?? 0) <= 0 : false;
+
             return (
               <button
                 key={`${size}-${index}`}
@@ -235,12 +239,19 @@ export function ProductInfo({
                   setSelectedSize(`${size}-${index}`);
                   setSizeError(false);
                 }}
-                className={`flex h-9.5 sm:h-[42px] items-center justify-center rounded-lg border text-[11px] min-[360px]:text-[11.5px] sm:text-[12.5px] lg:text-sm font-semibold transition-all cursor-pointer px-2 whitespace-nowrap bg-[#ffffff] ${isSelected
-                    ? "border-black text-black"
-                    : "border-border text-neutral-500 hover:border-black hover:text-black"
-                  }`}
+                className={`relative flex h-9.5 sm:h-[42px] items-center justify-center rounded-lg border text-[11px] min-[360px]:text-[11.5px] sm:text-[12.5px] lg:text-sm font-semibold transition-all cursor-pointer px-2 whitespace-nowrap overflow-hidden ${
+                  isOutOfStock
+                    ? isSelected
+                      ? "border-neutral-400 bg-neutral-100 text-neutral-400"
+                      : "border-neutral-300 border-dashed bg-neutral-50/80 text-neutral-400 hover:border-neutral-400"
+                    : isSelected
+                    ? "border-black text-black bg-[#ffffff]"
+                    : "border-border text-neutral-500 hover:border-black hover:text-black bg-[#ffffff]"
+                }`}
               >
-                {size}
+                <span className={isOutOfStock ? "line-through decoration-neutral-400" : ""}>
+                  {size}
+                </span>
               </button>
             );
           })}
@@ -278,13 +289,46 @@ export function ProductInfo({
         </div>
 
         {/* Primary Action Button */}
-        <button
-          type="button"
-          onClick={handleAddToCart}
-          className="flex h-10 sm:h-11 flex-1 min-w-[130px] items-center justify-center rounded-full bg-primary hover:bg-primary-hover active:scale-[0.99] text-white font-semibold text-[13px] sm:text-[14.5px] transition-all cursor-pointer shadow-sm"
-        >
-          {selectedSize ? "Add to Cart" : "Select Size"}
-        </button>
+        {(() => {
+          const selectedStockEntry = activeColorObj?.stockBySize?.find((s) => s.size === numericSize);
+          const isSelectedOutOfStock = selectedSize && selectedStockEntry ? (selectedStockEntry.stock ?? 0) <= 0 : false;
+          const allSizesOutOfStock =
+            product.sizes.length > 0 &&
+            activeColorObj?.stockBySize &&
+            activeColorObj.stockBySize.length > 0 &&
+            product.sizes.every((s) => {
+              const n = getNumericSize(s);
+              const match = activeColorObj.stockBySize?.find((entry) => entry.size === n);
+              return match ? (match.stock ?? 0) <= 0 : false;
+            });
+
+          const isOutOfStock = isSelectedOutOfStock || allSizesOutOfStock;
+          const isDisabled = !selectedSize || isOutOfStock;
+
+          let btnText = "Select Size";
+          if (isOutOfStock) {
+            btnText = "Out of Stock";
+          } else if (selectedSize) {
+            btnText = "Add to Cart";
+          }
+
+          return (
+            <button
+              type="button"
+              onClick={handleAddToCart}
+              disabled={isDisabled}
+              className={`flex h-10 sm:h-11 flex-1 min-w-[130px] items-center justify-center rounded-full font-semibold text-[13px] sm:text-[14.5px] transition-all shadow-sm ${
+                isDisabled
+                  ? isOutOfStock
+                    ? "bg-neutral-300 text-neutral-500 cursor-not-allowed"
+                    : "bg-[#b2b5f7] opacity-50 cursor-not-allowed text-white"
+                  : "bg-primary hover:bg-primary-hover active:scale-[0.99] text-white cursor-pointer"
+              }`}
+            >
+              {btnText}
+            </button>
+          );
+        })()}
 
         {/* Wishlist Button */}
         <button
