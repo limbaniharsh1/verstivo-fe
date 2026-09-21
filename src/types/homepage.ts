@@ -79,6 +79,7 @@ export interface SocialGalleryItem {
   mediaAlt?: string;
   redirectUrl?: string;
   productReference?: {
+    productId?: string;
     title?: string;
     subtitle?: string;
     price?: string;
